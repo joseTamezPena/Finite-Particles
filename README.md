@@ -54,7 +54,7 @@ This force generalizes Coulomb’s law by incorporating velocity-dependent effec
 
 ## Mass and Inertia
 
-The **inertia** (mass) of a finite-sized particle is proportional to its radius. For charged particles, the mass is related to the **electrostatic stored energy** divided by ( c\^2 ):\
+The **inertia** (mass) of a finite-sized particle is proportional to its radius. For charged particles, the mass is related to the **electrostatic stored energy** divided by ( c\^2 ):
 
 $$ m \propto \frac{\text{Electrostatic energy}}{c^2}.$$
 
