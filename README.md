@@ -1,43 +1,71 @@
-# Finite Particles
+# Finite-Sized Particle Interaction Model
 
-This repository contains the functions associated with a model of particle-particle interaction.
+This repository presents a novel model of particle-particle interactions, demonstrating how **electrostatic**, **magnetic**, and **gravitational forces** emerge from a Galilean framework of finite-sized particles emitting and absorbing **vector corpuscles**. The model challenges conventional physics by proposing that these forces arise from corpuscle exchanges, potentially eliminating the need for dark matter in explaining galactic rotation curves.
 
-The basic assumption is that there are finite-sized particles responsible of absorbing and emitting vector corpuscles. Each corpuscle has position $\mathbf{x_c}$, orientation, $\mathbf{o_c}$, and velocity, $\mathbf{v_c}$.The velocities of the corpuscles follows the Galilean relativity:
+## Model Overview
 
-$$
-\mathbf{v_c}=\mathbf{v_p}+\mathbf{c};
-$$
+The model assumes a universe filled with **vector corpuscles**—hypothetical entities carrying position, velocity, and orientation—that mediate interactions between finite-sized particles. Each corpuscle is characterized by:
 
-where $\mathbf{v_p}$ is the finite particle velocity vector and $\mathbf{c}$ is a vector traveling a the speed of light $c$
+-   **Position**: $\mathbf{x_c}$,
 
-There are two basic finite-particles:
+-   **Velocity**: $\mathbf{v_c}$,
 
--   The positive, $\mathbf{p^+}$, continuously emits $q$ corpuscles per second whose orientations parallel to the corpuscle velocity. i.e., 
+-   **Orientation**: $\mathbf{o_c}$ a unit vector.
 
-$$\mathbf{o_c} \cdot \mathbf{c} = c$$
+The corpuscle velocity follows **Galilean relativity**:\
 
--   The negative, $\mathbf{p^-}$, continuously emits $q$ corpuscles per second whose orientation is anti-parallel to the corpuscle velocity. i.e.,
+$$ \mathbf{v_c} = \mathbf{v_p} + \mathbf{c},$$
 
-$$\mathbf{o_c} \cdot \mathbf{c} = -c$$
+where$\mathbf{v_p}$ is the velocity of the emitting particle, and $\mathbf{c}$ is a vector with magnitude equal to the speed of light $c$.
 
-It is assumed that the universe if filled with corpuscles that are continuously absorbed by the finite-sized particles. The absorption process will create an action that will change the particle velocity proportional to the corpuscular density, velocity and orientation.
+## Finite-Sized Particles
 
-$\mathbf{p^+}$, action is in direction of the absorbed corpuscle orientation, while
+The model defines two types of particles, each emitting $q$ corpuscles per second:
 
-$\mathbf{p^-}$, action is in opposite direction to the absorbed corpuscle orientation.
+-   **Positive particles** $\mathbf{p^+}$ : Emit corpuscles with orientation **parallel** to their velocity:
 
-## The Electrostatic Force
+$$ \mathbf{o_c} \cdot \mathbf{c} = c.$$
 
-The net force between two particles:
+-   **Negative particles** $\mathbf{p^-}$ : Emit corpuscles with orientation **anti-parallel** to their velocity:
 
-$$
-f = (k q_1 q_2)/(4 π r^2)(|c + v_1|/c) ((c \cdot (c + v_1 - v_2))/|c + v_1 - v_2|))^2
-$$
+$$ \mathbf{o_c} \cdot \mathbf{c} = -c.$$
 
-For electric charges. k is the Coulomb constant, $q_1$ and $q_2$ are the elementary charges of the electron, i.e., e, $v_1$ and $v_2$ are the velocities of the interacting particles, and $r$ is the distance between the two particles.
+Particles also **absorb** corpuscles from the surrounding medium. The absorption process generates an **action** that alters the particle's velocity based on the corpuscles' density, velocity, and orientation:
 
-## The Mass
+-   For $\mathbf{p^+}$ , the action aligns with the absorbed corpuscle’s orientation.
 
-The inertia (mass) of finite-sized particles is proportional to the
+-   For $\mathbf{p^-}$ , the action opposes the absorbed corpuscle’s orientation.
 
-##    
+## Electrostatic Force
+
+The net force between two particles with charges $q_1$ and $q_2$ (electron charges $e$ separated by distance $r$) is:\
+
+$$ \mathbf{f_2} = \frac{k q_1 q_2}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_1}\|}{c}   \frac{\mathbf{c} \cdot ( \mathbf{c} + \mathbf{v_1} - \mathbf{v_2} )}{\|\mathbf{c} + \mathbf{v_1} - \mathbf{v_2}\|} \right)^2 \hat{o_1},$$
+
+where:
+
+-   $k$: Coulomb constant,
+
+-   $\mathbf{v_1}, \mathbf{v_2}$: Velocities of the two particles,
+
+-   $\hat{o_1}$: Unit vector of the corpuscle orientation
+
+This force generalizes Coulomb’s law by incorporating velocity-dependent effects.
+
+## Mass and Inertia
+
+The **inertia** (mass) of a finite-sized particle is proportional to its radius. For charged particles, the mass is related to the **electrostatic stored energy** divided by ( c\^2 ):\
+
+$$ m \propto \frac{\text{Electrostatic energy}}{c^2}.$$
+
+## Magnetic Force
+
+The **magnetic force** emerges from interactions between **neutral currents** (e.g., moving neutral particles) and charged particles, driven by the exchange of corpuscles with specific orientations.
+
+## Gravitational Force
+
+**Gravity** arises as a net attractive force between **neutral composite particles** (e.g., atoms with a positively charged nucleus and a negatively charged shell). The slight difference in velocity distributions between positive and negative charges results in a small but consistent attraction.
+
+## Galactic Rotation Curves
+
+The velocity-dependent nature of the gravitational force implies that **"hot" ionized particles** (with high velocities) behave differently from **"cold" neutral particles**. This difference accounts for the observed **flattening of galactic rotation curves**, potentially eliminating the need for dark matter in this model. Simulations in this repository demonstrate how these effects align with observed galactic dynamics.
