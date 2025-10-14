@@ -12,11 +12,11 @@ The model assumes a universe filled with **vector corpuscles**—hypothetical en
 
 -   **Orientation**: $\mathbf{o_c}$ a unit vector.
 
-The corpuscle velocity follows **Galilean relativity**:\
+The corpuscle velocity follows **Galilean relativity**:
 
 $$ \mathbf{v_c} = \mathbf{v_p} + \mathbf{c},$$
 
-where$\mathbf{v_p}$ is the velocity of the emitting particle, and $\mathbf{c}$ is a vector with magnitude equal to the speed of light $c$.
+where $\mathbf{v_p}$ is the velocity of the emitting particle, and $\mathbf{c}$ is a vector with magnitude equal to the speed of light $c$.
 
 ## Finite-Sized Particles
 
@@ -38,7 +38,7 @@ Particles also **absorb** corpuscles from the surrounding medium. The absorption
 
 ## Electrostatic Force
 
-The net force between two particles with charges $q_1$ and $q_2$ (electron charges $e$ separated by distance $r$) is:
+The net force between two particles with charges $q_1$ and $q_2$ (e.g., electron charges $e$ separated by distance $r$) is:
 
 $$ \mathbf{f_2} = \frac{k q_1 q_2}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_1}\|}{c}  \left( \frac{\mathbf{c} \cdot ( \mathbf{c} + \mathbf{v_1} - \mathbf{v_2} )}{\|\mathbf{c} + \mathbf{v_1} - \mathbf{v_2}\|} \right)^2 \hat{o_1},$$
 
