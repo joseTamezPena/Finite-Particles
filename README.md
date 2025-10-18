@@ -1,6 +1,6 @@
 # Finite-Sized Particle Interaction Model
 
-This repository presents a novel model of particle-particle interactions, demonstrating how **electrostatic**, **magnetic**, and **gravitational forces** emerge from a Galilean framework of finite-sized particles emitting and absorbing **vector corpuscles**. The model challenges conventional physics by proposing that these forces arise from corpuscle exchanges, potentially eliminating the need for dark matter in explaining galactic rotation curves.
+This repository is a work in progress and contains the MATLAB scrips of a novel model of particle-particle interactions, demonstrating how **electrostatic**, **magnetic**, and **gravitational forces** emerge from a Galilean framework of finite-sized particles emitting and absorbing **vector corpuscles**. The model challenges conventional physics by proposing that these forces arise from corpuscle exchanges, potentially eliminating the need for dark matter in explaining galactic rotation curves.
 
 ## Model Overview
 
@@ -48,7 +48,9 @@ where:
 
 -   $k$: Coulomb constant,
 
--   $\mathbf{v_1}, \mathbf{v_2}$: Velocities of the two particles,
+-   $\mathbf{v_1}, \mathbf{v_2}$: Velocities of the two particles:
+
+    -    $\mathbf{v_1}$ is an emitting particle. $\mathbf{v_2}$ the absorbing particle
 
 -   $\hat{o_1}$: Unit vector of the corpuscle orientation
 
@@ -56,9 +58,11 @@ This force generalizes Coulomb’s law by incorporating velocity-dependent effec
 
 ## Mass and Inertia
 
-The mass of particles in a direct consecuense of the finite-sized particle model. The **inertia** (mass) of a finite-sized particle is proportional to its radius. For charged particles, the mass is related to the **electrostatic stored energy** divided by ( c\^2 ):
+Inertia is implicit in the model, and the mass of particles in a direct consecuense of the finite-sized particle model. The inertial mass of a finite-sized particle is proportional to its radius and charge distribution. For charged particles, the mass is related to the **electrostatic stored energy** divided by ( c\^2 ):
 
 $$ m \propto \frac{\text{Electrostatic energy}}{c^2}.$$
+
+The Mass folder derives the E=mc\^2 formula.
 
 ## Magnetic Force
 
@@ -66,11 +70,11 @@ The **magnetic force** and the **vacuum magnetic permeability** emerge from int
 
 ## Gravitational Force
 
-**Gravity** arises as a net attractive force between **neutral composite particles** (e.g., atoms with a positively charged nucleus and a negatively charged shell). The slight difference in velocity distributions between positive and negative charges results in a small but consistent attraction. The equations of interaction are derived in the GravityForce/SteadySate folder
+**Gravity** arises as a net attractive force between **neutral composite particles** (e.g., atoms with a positively charged nucleus and a negatively charged shell). The slight difference in stocastic velocity distributions between positive and negative charges results in an expected and small attraction. The equations of interaction are derived in the GravityForce/SteadySate folder
 
 ## Galactic Rotation Curves
 
-The velocity-dependent nature of the gravitational force implies that **"hot" ionized particles** in neutral plasma (with high velocities) behave differently from **"cold" neutral particles**. This difference accounts for the observed **flattening of galactic rotation curves**, potentially eliminating the need for dark matter in this model. Simulations in this repository demonstrate how these effects align with observed galactic dynamics. The results of fitting observed rotation curves are in the Galaxies folder.
+The velocity-dependent nature of the gravitational force implies that **"hot" ionized particles** in neutral plasma (with high velocities) behave differently from **"cold" neutral particles**. This difference accounts for the observed **flattening of galactic rotation curves**, potentially eliminating the need for dark matter in this model. Simulations in this repository demonstrate how these effects align with observed galactic dynamics. The results of fitting observed rotation curves of 22 SPARC galaxies and the local group are shocased in the Galaxies folder.
 
 ![M33 Rotation Curve](images/clipboard-1366545713.png){width="392"}
 
@@ -78,4 +82,4 @@ The velocity-dependent nature of the gravitational force implies that **"hot" io
 
 ![Rotation Curve](Galaxies/SPARC/DensityProfiles/NGC7331.jpg)
 
-This is a work in progress. Collaboration is welcome. Please send me comments, corrections and suggestions.
+Collaboration is welcome. Please send me comments, corrections and suggestions.
