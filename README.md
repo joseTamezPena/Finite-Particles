@@ -77,3 +77,5 @@ The velocity-dependent nature of the gravitational force implies that **"hot" io
 ![M33 Surface mass densities](images/clipboard-149743154.png){width="383"}
 
 ![Rotation Curve](Galaxies/SPARC/DensityProfiles/NGC7331.jpg)
+
+This is a work in progress. Collaboration is welcome. Please send me comments, corrections and suggestions.
