@@ -16,7 +16,7 @@ The corpuscle velocity follows **Galilean relativity**:
 
 $$ \mathbf{v_c} = \mathbf{v_p} + \mathbf{c},$$
 
-where $\mathbf{v_p}$ is the velocity of the emitting particle, and $\mathbf{c}$ is a vector with magnitude equal to the speed of light $c$.
+where $\mathbf{v_p}$ is the velocity of the emitting particle, and $\mathbf{c}$ is a vector with magnitude equal to the speed of light $c$. The orientation, $\mathbf{o_c}$, is defined at the moment the corpuscle is emitted by the particle.
 
 ## Finite-Sized Particles
 
@@ -52,7 +52,7 @@ where:
 
     -    $\mathbf{v_1}$ is an emitting particle. $\mathbf{v_2}$ the absorbing particle
 
--   $\hat{o_1}$: Unit vector of the corpuscle orientation
+-   $\hat{o_1}$: Unit vector of the source corpuscle orientation
 
 This force generalizes Coulomb’s law by incorporating velocity-dependent effects.
 
