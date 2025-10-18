@@ -76,7 +76,7 @@ The **magnetic force** and the **vacuum magnetic permeability** emerge from int
 
 ## Galactic Rotation Curves
 
-The velocity-dependent nature of the gravitational force implies that **"hot" ionized particles** in neutral plasma (with high velocities) behave differently from **"cold" neutral particles**. This difference accounts for the observed **flattening of galactic rotation curves**, potentially eliminating the need for dark matter in this model. Simulations in this repository demonstrate how these effects align with observed galactic dynamics. The results of fitting observed rotation curves of 22 SPARC galaxies and the local group are shocased in the Galaxies folder.
+The velocity-dependent nature of the gravitational force implies that **"hot" ionized particles** in neutral plasma (with high velocities) behave differently from **"cold" neutral particles**. This difference accounts for the observed **flattening of galactic rotation curves**, potentially eliminating the need for dark matter in this model. Simulations in this repository demonstrate how these effects align with observed galactic dynamics. The results of fitting observed rotation curves of 22 SPARC galaxies and the local group are showcased in the Galaxies folder.
 
 ![M33 Rotation Curve](images/clipboard-1366545713.png){width="392"}
 
@@ -84,7 +84,7 @@ The velocity-dependent nature of the gravitational force implies that **"hot" io
 
 ![Rotation Curve](Galaxies/SPARC/DensityProfiles/NGC7331.jpg)
 
-The evaluation of the 22 galaxies implies that there is no need for Dark mater:
+The evaluation of the 22 galaxies implies that there is no need for dark matter for the explanation of the rotation curves:
 
 ![](images/clipboard-4116685001.png)
 
