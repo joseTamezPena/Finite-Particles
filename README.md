@@ -30,7 +30,9 @@ $$ \mathbf{o_c} \cdot \mathbf{c} = c.$$
 
 $$ \mathbf{o_c} \cdot \mathbf{c} = -c.$$
 
-Particles also **absorb** corpuscles from the surrounding medium. The absorption process generates an **action** that alters the particle's velocity based on the corpuscles' density, velocity, and orientation:
+The emission of the corpuscles is isotropic, and at the speed of light $c$.
+
+Particles **absorb** the corpuscles from the surrounding medium. The absorption process generates an **action** that alters the particle's velocity based on the corpuscles' density, velocity, and orientation:
 
 -   For $\mathbf{p^+}$ , the action aligns with the absorbed corpuscle’s orientation.
 
@@ -38,7 +40,7 @@ Particles also **absorb** corpuscles from the surrounding medium. The absorption
 
 ## Electrostatic Force
 
-The net force between two particles with charges $q_1$ and $q_2$ (e.g., electron charges $e$ separated by distance $r$) is:
+The model predicts that the net force between two particles with charges $q_1$ and $q_2$ (e.g., electron charges $e$ separated by distance $r$) is:
 
 $$ \mathbf{f_2} = \frac{k q_1 q_2}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_1}\|}{c}  \left( \frac{\mathbf{c} \cdot ( \mathbf{c} + \mathbf{v_1} - \mathbf{v_2} )}{\|\mathbf{c}\| \|\mathbf{c} + \mathbf{v_1} - \mathbf{v_2}\|} \right)^2 \hat{o_1},$$
 
@@ -54,7 +56,7 @@ This force generalizes Coulomb’s law by incorporating velocity-dependent effec
 
 ## Mass and Inertia
 
-The **inertia** (mass) of a finite-sized particle is proportional to its radius. For charged particles, the mass is related to the **electrostatic stored energy** divided by ( c\^2 ):
+The mass of particles in a direct consecuense of the finite-sized particle model. The **inertia** (mass) of a finite-sized particle is proportional to its radius. For charged particles, the mass is related to the **electrostatic stored energy** divided by ( c\^2 ):
 
 $$ m \propto \frac{\text{Electrostatic energy}}{c^2}.$$
 
