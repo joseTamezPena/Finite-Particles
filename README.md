@@ -60,7 +60,7 @@ $$ m \propto \frac{\text{Electrostatic energy}}{c^2}.$$
 
 ## Magnetic Force
 
-The **magnetic force** emerges from interactions between **neutral currents** (e.g., moving neutral particles) and charged particles, driven by the exchange of corpuscles with specific orientations.
+The **magnetic force** and the **vacuum magnetic permeability** emerge from interactions between **neutral currents** (e.g., moving neutral particles) and moving charged particles , driven by the exchange of vector corpuscles.
 
 ## Gravitational Force
 
@@ -69,3 +69,9 @@ The **magnetic force** emerges from interactions between **neutral currents** (e
 ## Galactic Rotation Curves
 
 The velocity-dependent nature of the gravitational force implies that **"hot" ionized particles** in neutral plasma (with high velocities) behave differently from **"cold" neutral particles**. This difference accounts for the observed **flattening of galactic rotation curves**, potentially eliminating the need for dark matter in this model. Simulations in this repository demonstrate how these effects align with observed galactic dynamics.
+
+![M33 Rotation Curve](images/clipboard-1366545713.png){width="392"}
+
+![M33 Surface mass densities](images/clipboard-149743154.png){width="383"}
+
+![Rotation Curve](Galaxies/SPARC/DensityProfiles/NGC7331.jpg)
