@@ -40,7 +40,7 @@ Particles **absorb** the corpuscles from the surrounding medium. The absorption 
 
 ## Electrostatic Force
 
-The model predicts that the net force between two particles with charges $q_1$ and $q_2$ (e.g., electron charges $e$ separated by distance $r$) is:
+The model predicts that the net force between two particles with charges $q_1$ (Emitting) and $q_2$ (Absorbing) (e.g., electron charges $e$ separated by distance $r$ (at emitting-absorbing) is:
 
 $$ \mathbf{f_2} = \frac{k q_1 q_2}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_1}\|}{c}  \left( \frac{\mathbf{c} \cdot ( \mathbf{c} + \mathbf{v_1} - \mathbf{v_2} )}{\|\mathbf{c}\| \|\mathbf{c} + \mathbf{v_1} - \mathbf{v_2}\|} \right)^2 \hat{o_1},$$
 
@@ -66,11 +66,11 @@ The Mass folder derives the E=mc\^2 formula.
 
 ## Magnetic Force
 
-The **magnetic force** and the **vacuum magnetic permeability** emerge from interactions between **neutral currents** (e.g., moving neutral particles) and moving charged particles , driven by the exchange of vector corpuscles. Evidence is presented in the MagneticForce folder.
+The **magnetic force** and the **vacuum magnetic permeability** emerge from interactions between **neutral currents** (e.g., moving neutral particles) and moving charged particles , driven by the exchange of vector corpuscles. Evidence is presented in the MagneticForce folder for a current in a loop.
 
 ## Gravitational Force
 
-**Gravity** arises as a net attractive force between **neutral composite particles** (e.g., atoms with a positively charged nucleus and a negatively charged shell). The slight difference in stocastic velocity distributions between positive and negative charges results in an expected and small attraction. The equations of interaction are derived in the GravityForce/SteadySate folder
+**Gravity** arises as a net attractive force between **neutral composite particles** (e.g., atoms with a positively charged nucleus and a negatively charged shell). The slight difference in stocastic velocity distributions between positive and negative charges results in an Expected small attraction. The equations of interaction are derived in the GravityForce/SteadySate folder
 
 ## Galactic Rotation Curves
 
