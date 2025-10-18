@@ -62,15 +62,15 @@ $$ m \propto \frac{\text{Electrostatic energy}}{c^2}.$$
 
 ## Magnetic Force
 
-The **magnetic force** and the **vacuum magnetic permeability** emerge from interactions between **neutral currents** (e.g., moving neutral particles) and moving charged particles , driven by the exchange of vector corpuscles.
+The **magnetic force** and the **vacuum magnetic permeability** emerge from interactions between **neutral currents** (e.g., moving neutral particles) and moving charged particles , driven by the exchange of vector corpuscles. Evidence is presented in the MagneticForce folder.
 
 ## Gravitational Force
 
-**Gravity** arises as a net attractive force between **neutral composite particles** (e.g., atoms with a positively charged nucleus and a negatively charged shell). The slight difference in velocity distributions between positive and negative charges results in a small but consistent attraction.
+**Gravity** arises as a net attractive force between **neutral composite particles** (e.g., atoms with a positively charged nucleus and a negatively charged shell). The slight difference in velocity distributions between positive and negative charges results in a small but consistent attraction. The equations of interaction are derived in the GravityForce/SteadySate folder
 
 ## Galactic Rotation Curves
 
-The velocity-dependent nature of the gravitational force implies that **"hot" ionized particles** in neutral plasma (with high velocities) behave differently from **"cold" neutral particles**. This difference accounts for the observed **flattening of galactic rotation curves**, potentially eliminating the need for dark matter in this model. Simulations in this repository demonstrate how these effects align with observed galactic dynamics.
+The velocity-dependent nature of the gravitational force implies that **"hot" ionized particles** in neutral plasma (with high velocities) behave differently from **"cold" neutral particles**. This difference accounts for the observed **flattening of galactic rotation curves**, potentially eliminating the need for dark matter in this model. Simulations in this repository demonstrate how these effects align with observed galactic dynamics. The results of fitting observed rotation curves are in the Galaxies folder.
 
 ![M33 Rotation Curve](images/clipboard-1366545713.png){width="392"}
 
