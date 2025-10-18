@@ -40,7 +40,7 @@ Particles **absorb** the corpuscles from the surrounding medium. The absorption 
 
 ## Electrostatic Force
 
-The model predicts that the net force between two particles with charges $q_1$ (Emitting) and $q_2$ (Absorbing) (e.g., electron charges $e$ separated by distance $r$ (at emitting-absorbing) is:
+The model predicts that the net force $\mathbf{f_2}$ of the particle absorbing corpuscles $q_2$ (Absorbing) of an emitting charge $q_1$ (Emitting) and (e.g., electron charges $e$ separated by distance $r$ (at emitting-absorbing) is:
 
 $$ \mathbf{f_2} = \frac{k q_1 q_2}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_1}\|}{c}  \left( \frac{\mathbf{c} \cdot ( \mathbf{c} + \mathbf{v_1} - \mathbf{v_2} )}{\|\mathbf{c}\| \|\mathbf{c} + \mathbf{v_1} - \mathbf{v_2}\|} \right)^2 \hat{o_1},$$
 
@@ -48,17 +48,19 @@ where:
 
 -   $k$: Coulomb constant,
 
+-   $q$ is positive ($>0$) for $\mathbf{p^+}$ and negative ( $<0$) for $\mathbf{p^-}$
+
 -   $\mathbf{v_1}, \mathbf{v_2}$: Velocities of the two particles:
 
-    -    $\mathbf{v_1}$ is an emitting particle. $\mathbf{v_2}$ the absorbing particle
+    -   $\mathbf{v_1}$ is an emitting particle. $\mathbf{v_2}$ the absorbing particle
 
--   $\hat{o_1}$: Unit vector of the source corpuscle orientation
+-   $\hat{o_1}$: Unit vector of the corpuscle orientation at the time of its origin by the emitting particle.
 
 This force generalizes Coulomb’s law by incorporating velocity-dependent effects.
 
 ## Mass and Inertia
 
-Inertia is implicit in the model, and the mass of particles in a direct consecuense of the finite-sized particle model. The inertial mass of a finite-sized particle is proportional to its radius and charge distribution. For charged particles, the mass is related to the **electrostatic stored energy** divided by ( c\^2 ):
+Inertia is implicit in the model, and the mass of particles in a direct consequence of the finite-sized particle model. The inertial mass of a finite-sized particle is proportional to its radius and charge distribution. For charged particles, the mass is related to the **electrostatic stored energy** divided by ( c\^2 ):
 
 $$ m \propto \frac{\text{Electrostatic energy}}{c^2}.$$
 
@@ -81,5 +83,9 @@ The velocity-dependent nature of the gravitational force implies that **"hot" io
 ![M33 Surface mass densities](images/clipboard-149743154.png){width="383"}
 
 ![Rotation Curve](Galaxies/SPARC/DensityProfiles/NGC7331.jpg)
+
+The evaluation of the 22 galaxies implies that there is no need for Dark mater:
+
+![](images/clipboard-4116685001.png)
 
 Collaboration is welcome. Please send me comments, corrections and suggestions.
