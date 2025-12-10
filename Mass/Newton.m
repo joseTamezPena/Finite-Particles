@@ -47,7 +47,7 @@ mass = Force/a %[output:00977042]
 mass %[output:283dd844]
 syms tot_ets; % Total events We joint the emited:q_e and absorbed m_o
 mass = subs(mass,q_e*m_o,tot_ets) %[output:7202a2c5]
-mass = subs(mass,r_o,electron_radius) % Use the estimated electron radius %[output:1e9d2580]
+mass = subs(mass,r_o,electron_radius) % Use the estimated (observed) electron radius %[output:1e9d2580]
 mass = subs(mass,L_o,0.5*classical_electron_radius) % L_o is assumed half the classical electron radius %[output:1bf0037d]
 mass = subs(mass,c,speed_of_light) % Subs the speed of light %[output:68076807]
 % Solve for the number of interactions per second
