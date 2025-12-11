@@ -67,9 +67,36 @@ velocity based on the corpuscles' density, velocity, and orientation:
 
 ## Corpuscle Absorption Model
 
-The basic model of particle-particle interaction is based on a particle
-that emits corpuscles at a $q$ rate of corpuscles per second and a
-particle that absorb corpuscles at a $\mu$ rate of particles per second.
+Here I develop the action model of an receiver particle acting on
+corpuscles emitted by an independent particle. The basic model of
+particle-particle interaction is based on an universe filled with
+corpuscles and any particle that emits and absorbs corpuscles at a $q$
+rate of corpuscles per second. An emitting particle sends the corpuscles
+at the speed of light and any receiver particle absorb corpuscles at a
+$\mu$ rate of particles per second as long as the emitting corpuscle
+flow is inside the particle.
+
+The coordinate system in centered at the observer and I will use to
+describe how the corpuscle-particle interaction changes the receiver
+velocity from the observer point of view. The model development starts
+by assuming that there is a single moving emitting particle
+$\mathbf{p_e}$ and a single moving receiver particle $\mathbf{P_r}$. At
+emission time $t_o$ the emitting particle is at $\mathbf{x_e}(t_o)$
+moving with a relative velocity $\mathbf{v_e}(t_o)$ and emitted
+isotropic $q_e$ light speed corpuscles. At absorption time,
+$\mathbf{P_r}$ is at $\mathbf{x_r}(t)$ and moving at $\mathbf{v_r}(t)$.
+The density of corpuscles at the receiver is:
+
+$$
+\rho( \mathbf{x_r})= \frac{q_e}{4\pi (c \Delta t)^2 \| \mathbf{c}+\mathbf{v_e} \|}.
+$$
+
+Hence the flow is:
+
+$$
+\Phi( \mathbf{x_r})= \frac{q_e}{4\pi (c \Delta t)^2 \| \mathbf{c}+\mathbf{v_e} \|}
+( \mathbf{c}+\mathbf{v_e}-\mathbf{v_r} ) \hat{c}(t_o).
+$$
 
 ## Electrostatic Force
 
@@ -96,7 +123,8 @@ where:
     its origin by the emitting particle.
 
 -   $r$ is the distance traveled by the corpuscle form the emission
-    origen to it absorption.
+    origin to it absorption. i.e.,
+    $$ r=\| \mathbf{x_1}(t_o)-\mathbf{x_2}(t) \| $$
 
 This force generalizes Coulomb’s law by incorporating velocity-dependent
 effects.
