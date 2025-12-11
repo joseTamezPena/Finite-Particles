@@ -21,13 +21,13 @@ fprintf('Classical Electron Radius: %.5e m\n', classical_electron_radius); %[out
 % External field accting on a finite particle
 % Abs_int = Abs_ext
 
-% q_e emitted photons per second
-% m_o absorbed photons per second
+% q_e emitted corpuscles per second
+% m_o absorbed corpuscles per second
 % c speed of light
 % r_o particle size(radius)
 % L_o separation between two particle elements
 % a particle aceleration
-% Dt crossing time of light 
+% Dt time of flight: light from left to right element
 
 syms q_e m_o c r_o L_o a
 v = a*L_o/c %[output:7b314032]
@@ -53,7 +53,7 @@ mass = subs(mass,c,speed_of_light) % Subs the speed of light %[output:68076807]
 % Solve for the number of interactions per second
 tot_p_second = solve(mass==electron_mass) %[output:13fac332]
 vpa(tot_p_second) %[output:0545720b]
-fprintf('Estimated number of absorbed photons per second: %.5e\n', vpa(tot_p_second)); %[output:7258661e]
+fprintf('Estimated number of absorbed corpuscles per second: %.5e\n', vpa(tot_p_second)); %[output:7258661e]
 
 %%
 %[text] ## Interactions based on Coulomb's law
@@ -64,7 +64,28 @@ abscharge = tot_ets*r_o^3/(4*pi) % Based total absorbed between two electrons %[
 abscharge = subs(abscharge,r_o,electron_radius) % The electron size %[output:596c1116]
 
 Qtot_p_second = solve(ColumbsF==abscharge) %[output:1e21467c]
-fprintf('Estimated number of absorbed photons per second: %.5e \n', vpa(Qtot_p_second)) %[output:1833f1e8]
+fprintf('Estimated number of absorbed corpuscles per second: %.5e \n', vpa(Qtot_p_second)) %[output:1833f1e8]
+%%
+%[text] ## The Force of the Reference Frame
+%[text] The finite particle is moving a constant speed and aceleration in a reference frame.
+%[text] The reference is composed of a neutral particles and it will be modeled by an ring souranding the moving particle
+syms v Dt v_a c theta real positive
+assumeAlso (v+v_a < c)
+
+% The particle velocity
+v_p=[v+v_a,0,0] %[output:646e04c7]
+% The velocity of corpuscle leaving the ring
+c_r=c*[cos(theta), sin(theta), 0 ] %[output:15ba62fc]
+% The relative veolicty of the corpuscle arriving to the moving particle
+v_rel = c_r - v_p %[output:62f4bd70]
+% The cosine square between the corpuscle orientation and the relative
+% velocity
+cos2 = simplify(dot(v_rel,c_r)^2/(c^2*dot(v_rel,v_rel))) %[output:0a76b91e]
+% The vector anomality due to positive and negative charges
+net_anom_v = simplify(expand(cos2*c_r/c-cos2*c_r/c))  %[output:3b6b3d48]
+% The net force is zero from the reference frame
+%%
+
 
 %[appendix]{"version":"1.0"}
 %---
@@ -129,7 +150,7 @@ fprintf('Estimated number of absorbed photons per second: %.5e \n', vpa(Qtot_p_s
 %   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\text{2.8991591545042659355792865333043e+33}"}}
 %---
 %[output:7258661e]
-%   data: {"dataType":"text","outputData":{"text":"Estimated number of absorbed photons per second: 2.89916e+33\n","truncated":false}}
+%   data: {"dataType":"text","outputData":{"text":"Estimated number of absorbed corpuscles per second: 2.89916e+33\n","truncated":false}}
 %---
 %[output:38f85a59]
 %   data: {"dataType":"textualVariable","outputData":{"name":"ColumbsF","value":"2.3071e-28"}}
@@ -144,5 +165,20 @@ fprintf('Estimated number of absorbed photons per second: %.5e \n', vpa(Qtot_p_s
 %   data: {"dataType":"symbolic","outputData":{"name":"Qtot_p_second","value":"\\frac{1115634247822495060675773714820024906657636165618896484375\\,\\pi }{1208925819614629174706176}"}}
 %---
 %[output:1833f1e8]
-%   data: {"dataType":"text","outputData":{"text":"Estimated number of absorbed photons per second: 2.89916e+33 \n","truncated":false}}
+%   data: {"dataType":"text","outputData":{"text":"Estimated number of absorbed corpuscles per second: 2.89916e+33 \n","truncated":false}}
+%---
+%[output:646e04c7]
+%   data: {"dataType":"symbolic","outputData":{"name":"v_p","value":"\\left(\\begin{array}{ccc}\nv_a +v & 0 & 0\n\\end{array}\\right)"}}
+%---
+%[output:15ba62fc]
+%   data: {"dataType":"symbolic","outputData":{"name":"c_r","value":"\\left(\\begin{array}{ccc}\nc\\,\\cos \\left(\\theta \\right) & c\\,\\sin \\left(\\theta \\right) & 0\n\\end{array}\\right)"}}
+%---
+%[output:62f4bd70]
+%   data: {"dataType":"symbolic","outputData":{"name":"v_rel","value":"\\left(\\begin{array}{ccc}\nc\\,\\cos \\left(\\theta \\right)-v_a -v & c\\,\\sin \\left(\\theta \\right) & 0\n\\end{array}\\right)"}}
+%---
+%[output:0a76b91e]
+%   data: {"dataType":"symbolic","outputData":{"name":"cos2","value":"\\frac{{{\\left(v\\,\\cos \\left(\\theta \\right)-c+v_a \\,\\cos \\left(\\theta \\right)\\right)}}^2 }{{{\\left(v+v_a -c\\,\\cos \\left(\\theta \\right)\\right)}}^2 +c^2 \\,{\\sin \\left(\\theta \\right)}^2 }"}}
+%---
+%[output:3b6b3d48]
+%   data: {"dataType":"symbolic","outputData":{"name":"net_anom_v","value":"\\left(\\begin{array}{ccc}\n0 & 0 & 0\n\\end{array}\\right)"}}
 %---
