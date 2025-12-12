@@ -325,7 +325,7 @@ The presented corpuscular model correctly predict that the **vacuum
 magnetic permeability** $\mu_0$ and the electric constant are associated
 by:
 
-$\epsilon_0 =\frac{1}{c^2 \,\mu_0 }$
+$\epsilon_0 =\frac{1}{c^2 \mu_0 }$
 
 The evidence is presented in the Magnetic Force folder for a current in
 a loop yields the exact equation predicted by the Lorentz force of a
@@ -334,7 +334,7 @@ current $I$ and radius $R$:
 
 $$
 F_m=\left(\begin{array}{ccc}
-0 & -\frac{\textrm{I}\,Q \,\mu_0 \,v }{2\,R} & 0
+0 & -\frac{\textrm{I} Q \mu_0 v }{2 R} & 0
 \end{array}\right)
 $$
 
