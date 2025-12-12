@@ -92,8 +92,15 @@ The system under consideration comprises a single emitting particle
 $\mathbf{p_e}$ and a single receiver particle $\mathbf{P_r}$, both
 potentially in motion. At emission time $t_o$, the emitter occupies
 position $\mathbf{x_e}(t_o)$ with velocity $\mathbf{v_e}(t_o)$,
-radiating at rate $q_e$. At absorption time $t$, the receiver is at
-$\mathbf{x_r}(t)$ with velocity $\mathbf{v_r}(t)$.
+radiating at rate:
+
+$$
+q_e \propto r^3_p\rho_u\mu_e;
+$$
+
+where $\rho_u$ is the universal vacuum corpuscle density, $\mu_e$ the
+emission rate, and $r_p$ the particle radius. At absorption time $t$,
+the receiver is at $\mathbf{x_r}(t)$ with velocity $\mathbf{v_r}(t)$.
 
 ## Corpuscular Density and Flux
 
@@ -153,25 +160,27 @@ $$
 
 ## Momentum Transfer and Action
 
-Corpuscle absorption imparts momentum along the incident orientation.
-The rate of change of receiver momentum satisfies
+Corpuscle absorption imparts $\mathbf{c}$ momentum per absorption along
+the incident orientation. The rate of change of receiver momentum
+satisfies
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt} \propto \text{Abs}(\mathbf{x_r}, t, t_o) \left( \frac{[\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] \cdot \hat{\mathbf{o}}_e(t_o)}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|} \right) \hat{\mathbf{o}}_e(t_o).
+\frac{d (m \mathbf{v_r}(t))}{dt} \propto \text{Abs}(\mathbf{x_r}, t, t_o) \left( \frac{[\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] \cdot \mathbf{c}(t_o)}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|} \right) \hat{\mathbf{o}}_e(t_o).
 $$
 
 Consolidating terms yields the action expression
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt} \propto A r_p \frac{q_e \mu_r}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c^2} \left( \frac{\hat{\mathbf{o}}_e \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})}{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{\mathbf{o}}_e,
+\frac{d (m \mathbf{v_r}(t))}{dt} \propto A r_p \frac{q_e \mu}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c} \left( \frac{\hat{\mathbf{o}}_e \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})}{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{\mathbf{o}}_e,
 $$
 
 where arguments $(t, t_o)$ are implied for brevity.
 
-Assuming geometric scaling $A \propto r_p^2$, the action becomes
+Assuming geometric scaling $A \propto r_p^2$, and that the two particles
+are identical with $\mu_e=\mu$, the action becomes
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt} \propto r_p^3 \frac{q_e \mu_r}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c^2} \left( \frac{\hat{\mathbf{o}}_e \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})}{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{\mathbf{o}}_e.
+\frac{d (m \mathbf{v_r}(t))}{dt} \propto r_p^6 \frac{\rho_u \mu^2}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c} \left( \frac{\hat{\mathbf{o}}_e \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})}{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{\mathbf{o}}_e.
 $$
 
 ## Dimensional Consistency
@@ -179,23 +188,101 @@ $$
 -   Distance terms: $r^2$ [m²], $r_p^3$ [m³]
 -   Rates: $q_e$ [corpuscles s⁻¹], $\mu_r$ [s⁻¹]
 -   Velocities: $c, v$ [m s⁻¹]
+-   Densities: [corpuscles m⁻³]
 
 The rate of corpuscle absorption (corpuscles s⁻¹) conforms dimensionally
 to
 
 $$
-\text{corpuscles s}^{-1} \sim \text{m}^3 \cdot \frac{(\text{corpuscles s}^{-1}) \cdot (\text{s}^{-1})}{\text{m}^2} \cdot \frac{\text{m s}^{-1}}{(\text{m s}^{-1})^2},
+\text{corpuscles m s}^{-2} \sim \text{m}^6 \cdot \frac{(\text{corpuscles m}^{-3}) \cdot (\text{s}^{-2})}{\text{m}^2} \cdot \frac{\text{m s}^{-1}}{(\text{m s}^{-1})},
 $$
 
-confirming that the derived action is proportional to the absorption
-rate per unit time.
+confirming that the derived action is proportional to the particle
+acceleration.
+
+## Newton's First Law
+
+In the absence of a external corpuscle, $q_e=0$, the momentum equation
+reduces to:
+
+$$
+\frac{d (m \mathbf{v_r}(t))}{dt} = 0
+$$
+
+In other words there is no change in the momentum. i.e.
+
+"An object at rest stays at rest, and an object in motion stays in
+motion with the same speed and in the same direction, unless acted upon
+by an unbalanced external force."
+
+## Newton's Second Law 
+
+The momentum transferred and the absorbed should be in equilibrium.
+
+$$ \frac{d (m \mathbf{v_r}(t))}{dt}_{in}=\frac{d (m \mathbf{v_r}(t))}{dt}_{ext} \therefore \frac{d (m \mathbf{v_r}(t))}{dt}_{ext} = -\frac{d (m \mathbf{v_r}(t))}{dt}_{in} $$
+
+Here we derive the Newton's second law. First I'll assume that the
+absorbing particle is finite and composed by two absorbing/emitting
+elements separated by a distance $L$ aligned to the external flow of
+corpuscles. I'll assume that the internal elements have a radius
+$r_e=r_p/2$ the external force causes an small acceleration of the
+receiver particle. Therefore the front particle and the back particle at
+the time of action summation have a small velocity: $v_e=a \Delta_L t$;
+where $a$ is the instant acceleration due to the external action and
+$\Delta_L t=L/c$ is the amount of time required to travel the distance
+between the two particle elements.
+
+The internal change of momentum of the dual element particle is:
+
+$$
+\frac{d (m \mathbf{v_r}(t))}{dt}_{in} \propto  \frac{\rho_u r_p^6 \mu^2}{256 \pi L^2} \left[ \frac{(c + a{ \Delta_L t})}{c} - \frac{(c - a{ \Delta_L t})}{c} \right]\hat{\mathbf{o}}_e;
+$$ Substituting we get:
+
+$$
+\frac{d (m \mathbf{v_r}(t))}{dt}_{in} \propto  -\frac{\rho_u r_p^6 \mu^2}{256 \pi L} \left[ \frac{2a}{c^2} \right]\hat{\mathbf{o}}_e.
+$$
+
+Therefore:
+
+$$
+\frac{d (m \mathbf{v_r}(t))}{dt}_{ext} =  \frac{\rho_u r_p^6 \mu^2}{128 \pi L} \left[ \frac{1}{c^2} \right] a \hat{\mathbf{o}}_e.
+$$
+
+A close inspection of the equation it resembles: $F=ma$. And
+
+$$
+E_{in} \propto \frac{\rho_u r_p^6 \mu^2}{128 \pi L}=\frac{q^2}{16 \pi \epsilon_o L}
+$$
+
+is the internal stored electrostatic energy by the two charged elements
+with $q/2$ charge separated by a distance $L$. Hence the inertial mass
+is:
+
+$$
+m \propto E_{in}c^2.
+$$
+
+## Rate of emission-absorption
+
+The internal energy equation $E_{in}$ can be used to estimate the rate
+of corpuscles absorbed-emitted at any given time by real particles. I'll
+assume the electron charge $e = 1.602176634 \times 10^{-19}$ C, and
+radius $r_e=10^{-20}$m
+
+$$
+\rho_u r_p^6 \mu^2 \propto \frac{q^2}{\epsilon_o} \therefore \rho_u \mu^2 \propto \frac{e^2}{r_e^6 \epsilon_o} = 2.307 \times 10^{32} \text{ m}^{-3}\text{s}^{-2}
+$$
+
+This implies that an electron on average has $2.307 \times 10^{32}$
+corpuscular interactions per second squared per cubic meter
 
 ## Electrostatic Force
 
-The model predicts that the net force $\mathbf{f_2}$ of the particle
-absorbing corpuscles $q_2$ (Absorbing) of an emitting charge $q_1$
-(Emitting) and (e.g., electron charges $e$ separated by distance $r$ (at
-emitting-absorbing) is:
+The derived model can be described as a net electric force: $$
+\mathbf{f_2}=\frac{d (m \mathbf{v_r}(t))}{dt}
+$$of the particle absorbing corpuscles $q_2$ (Absorbing) of an emitting
+charge $q_1$ (Emitting) and (e.g., electron charges $e$ separated by
+distance $r$ (at emitting-absorbing) is:
 
 $$ \mathbf{f_2} = \frac{k q_1 q_2}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_1}\|}{\|c\|}  \left( \frac{\mathbf{c} \cdot ( \mathbf{c} + \mathbf{v_1} - \mathbf{v_2} )}{\|\mathbf{c}\| \|\mathbf{c} + \mathbf{v_1} - \mathbf{v_2}\|} \right)^2 \hat{o_1},$$
 
@@ -224,25 +311,26 @@ $$
 This force generalizes Coulomb’s law by incorporating velocity-dependent
 effects.
 
-## Mass and Inertia
-
-Inertia is implicit in the model, and the mass of particles in a direct
-consequence of the finite-sized particle model. The inertial mass of a
-finite-sized particle is proportional to its radius and charge
-distribution. For charged particles, the mass is related to the
-**electrostatic stored energy** divided by ( c\^2 ):
-
-$$ m \propto \frac{\text{Electrostatic energy}}{c^2}.$$
-
-The Mass folder derives the E=mc\^2 formula.
-
 ## Magnetic Force
 
 The **magnetic force** and the **vacuum magnetic permeability** emerge
-from interactions between **neutral currents** (e.g., moving neutral
-particles) and moving charged particles , driven by the exchange of
-vector corpuscles. Evidence is presented in the MagneticForce folder for
-a current in a loop.
+from interactions between **currents** (e.g., moving charged particles
+in a neutral cables) and moving charged particles.
+
+The presented corpuscular model correctly predict that the **vacuum
+magnetic permeability** $\mu_0$ and the electric constant are associated
+by:
+
+$\epsilon_0 =\frac{1}{c^2 \,\mu_0 }$
+
+The evidence is presented in the Magnetic Force folder for a current in
+a loop yields the exact equation predicted by the Lorentz force of a
+moving carged particle $Q$ in the center of a circular loop with current
+$I$ and radius $R$:
+
+$F_m=\left(\begin{array}{ccc}
+0 & -\frac{\textrm{I}\,Q \,\mu_o \,v_1 }{2\,R} & 0
+\end{array}\right)$
 
 ## Gravitational Force
 
