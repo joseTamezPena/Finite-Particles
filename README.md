@@ -67,13 +67,13 @@ velocity based on the corpuscles' density, velocity, and orientation:
 
 # Corpuscular Action Model for Particle–Particle Interaction
 
-I develop a mechanistic action model describing the interaction between
-a receiver particle and corpuscles emitted by an independent emitting
-particle. The model is grounded in a corpuscular paradigm, wherein the
-universe is permeated by discrete corpuscles propagated at the speed of
-light. Particles emit and absorb these corpuscles at characteristic
-rates, mediating momentum transfer analogous to a radiative exchange
-process.
+This section describes the mechanistic action model describing the
+interaction between a receiver particle and corpuscles emitted by an
+independent emitting particle. The model is grounded in a corpuscular
+paradigm, wherein the universe is permeated by discrete corpuscles
+propagated at the speed of light. Particles emit and absorb these
+corpuscles at characteristic rates, mediating momentum transfer
+analogous to a radiative exchange process.
 
 ## Model Foundations
 
@@ -135,7 +135,7 @@ $$
 
 ## Absorption Rate
 
-Absorption is modelled as proportional to the incident flux, the
+Absorption is modeled as proportional to the incident flux, the
 receiver's effective cross-sectional area
 $\mathbf{A} = A \hat{\mathbf{o}}_e$ (where $\hat{\mathbf{o}}_e$ defines
 the corpuscle orientation at emission), and absorption efficiency. The
@@ -325,12 +325,14 @@ $\epsilon_0 =\frac{1}{c^2 \,\mu_0 }$
 
 The evidence is presented in the Magnetic Force folder for a current in
 a loop yields the exact equation predicted by the Lorentz force of a
-moving carged particle $Q$ in the center of a circular loop with current
-$I$ and radius $R$:
+moving charged particle $Q$ in the center of a circular loop with
+current $I$ and radius $R$:
 
-$F_m=\left(\begin{array}{ccc}
-0 & -\frac{\textrm{I}\,Q \,\mu_o \,v_1 }{2\,R} & 0
-\end{array}\right)$
+$$
+F_m=\left(\begin{array}{ccc}
+0 & -\frac{\textrm{I}\,Q \,\mu_0 \,v }{2\,R} & 0
+\end{array}\right)
+$$
 
 ## Gravitational Force
 
