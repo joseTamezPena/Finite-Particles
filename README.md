@@ -76,27 +76,112 @@ at the speed of light and any receiver particle absorb corpuscles at a
 $\mu$ rate of particles per second as long as the emitting corpuscle
 flow is inside the particle.
 
-The coordinate system in centered at the observer and I will use to
-describe how the corpuscle-particle interaction changes the receiver
-velocity from the observer point of view. The model development starts
-by assuming that there is a single moving emitting particle
+The coordinate system is centered at the observer. This system will be
+used to describe how the corpuscle-particle interaction changes the
+receiver velocity from the observer point of view. The model development
+starts by assuming that there is a single moving emitting particle
 $\mathbf{p_e}$ and a single moving receiver particle $\mathbf{P_r}$. At
 emission time $t_o$ the emitting particle is at $\mathbf{x_e}(t_o)$
-moving with a relative velocity $\mathbf{v_e}(t_o)$ and emitted
+moving with a relative velocity $\mathbf{v_e}(t_o)$ and emitting
 isotropic $q_e$ light speed corpuscles. At absorption time,
 $\mathbf{P_r}$ is at $\mathbf{x_r}(t)$ and moving at $\mathbf{v_r}(t)$.
+
 The density of corpuscles at the receiver is:
 
 $$
-\rho( \mathbf{x_r})= \frac{q_e}{4\pi (c \Delta t)^2 \| \mathbf{c}+\mathbf{v_e} \|}.
+\rho( \mathbf{x_r,t,t_o})= \frac{q_e}{4\pi (c \Delta t)^2 \| \mathbf{c}(t_o)+\mathbf{v_e}(t_o) \|};
 $$
 
-Hence the flow is:
+where $\Delta t$ is the time interval it took the corpuscle to reach the
+receiver. The corpuscle will travel the distance
+$r(t,t_o)=\| \mathbf{X_r}(t)-\mathbf{X_e}(t_o)\|$ at the Galilean speed
+$v_c(t_o)=\| \mathbf{c}(t_o)+\mathbf{v_e}(t_o)\|$. Hence:
 
 $$
-\Phi( \mathbf{x_r})= \frac{q_e}{4\pi (c \Delta t)^2 \| \mathbf{c}+\mathbf{v_e} \|}
-( \mathbf{c}+\mathbf{v_e}-\mathbf{v_r} ) \hat{c}(t_o).
+\Delta t=\frac{r(t,t_o)}{\| \mathbf{c}(t_o)+\mathbf{v_e}(t_o)\|}
 $$
+
+Therefore the corpuscle density at $\mathbf{x_r(t)}$ is:
+
+$$
+\rho( \mathbf{x_r},t,t_o)= \frac{q_e \| \mathbf{c}(t_o)+\mathbf{v_e}(t_o) \|}{4\pi c^2 r^2(t,t_o)} ;
+$$
+
+The corpuscle vectorial flow is $\Phi = \rho v$ .Hence:
+
+$$
+\Phi( \mathbf{x_r},t,t_o)= \frac{q_e}{4\pi (c \Delta t)^2 \| \mathbf{c}(t_o)+\mathbf{v_e}(t_o) \|}
+( \mathbf{c}(t_o)+\mathbf{v_e}(t_o)-\mathbf{v_r}(t) )
+$$ or $$
+\Phi( \mathbf{x_r},t,t_o)= \frac{q_e \| \mathbf{c}(t_o)+\mathbf{v_e}(t_o) \|}{4\pi c^2 r^2(t,t_o)} 
+( \mathbf{c}(t_o)+\mathbf{v_e}(t_o)-\mathbf{v_r}(t) )
+$$
+
+The next step is to compute the total number of corpuscles absorbed by
+$\mathbf{P_r}$. I will assume that the number of absorbed corpuscles at
+a given time is proportional to the flow and the particle cross area
+$\mathbf{A}=A \hat{o_e}$; where $\hat{o_e}$ is the orientation of the
+interacting corpuscles at emission from $\mathbf{P_e}$ . The total of
+absorbed corpuscles is:
+
+$$
+Abs(\mathbf{x_r},t,t_o)=\Phi( \mathbf{x_r},t,t_o) \cdot \mathbf{A} (1-e^{-\mu \delta t});  
+$$
+
+where $\delta t$ is the time required by the flow to cross
+$\mathbf{P_r}$.
+
+I will assume that the crossing time is:
+
+$$
+\delta t=\frac{r_p}{\| \mathbf{c}(t_o)+\mathbf{v_e}(t_o)-\mathbf{v_r}(t) \|};
+$$
+
+where $r_p$ is the particle radius. For very small $r_p$ the total
+absorbed is:
+
+$$
+Abs(\mathbf{x_r},t,t_o)=\frac{\Phi( \mathbf{x_r},t,t_o) \cdot \mathbf{A} \mu r_p}{\| \mathbf{c}(t_o)+\mathbf{v_e}(t_o)-\mathbf{v_r}(t) \|}.
+$$
+
+The absorbed particles causes a change in the particle momentum in
+direction of the corpuscle orientation:
+
+$$
+\frac{d\mathbf{mv_r}(t)}{dt} \propto  Abs(\mathbf{x_r},t,t_o) \left( \frac{(\mathbf{c}(t_o)+\mathbf{v_e}(t_o)-\mathbf{v_r}(t))}{\| \mathbf{c}(t_o)+\mathbf{v_e}(t_o)-\mathbf{v_r}(t) \|} \cdot \hat{o_e}(t_o) \right) \hat{o_e}(t_o);
+$$
+
+From the above equations we arrive to the final action formula:
+
+$$
+ \frac{d\mathbf{mv_r}(t)}{dt} \propto A r_p \frac{q_e \mu_r}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c^2}  \left( \frac{\hat{o_e} \cdot ( \mathbf{c} + \mathbf{v_e} - \mathbf{v_r} )}{ \|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{o_e},
+$$
+
+I'll assume that the area is proportional to the square of the particle
+radius ($A \propto r_p^2$); therefore:
+
+$$
+ \frac{d\mathbf{mv_r}(t)}{dt} \propto {r_p}^3 \frac{q_e \mu_r}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c^2}  \left( \frac{\hat{o_e} \cdot ( \mathbf{c} + \mathbf{v_e} - \mathbf{v_r} )}{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{o_e}
+$$
+
+Dimensional Analysis
+
+$r^2: m^2$
+
+${r_p}^3: m^3$
+
+$q_e: p/s$
+
+$\mu_r: 1/s$
+
+$v:(m/s)$
+
+$c: (m/s)$ $$
+ (p/s) = {m}^3 \frac{(p/s)(1/s)}{m^2} \frac{m/s}{{(m/s)}^2}
+$$
+
+The action is proportional to the number of absorbed corpuscles per
+second.
 
 ## Electrostatic Force
 
