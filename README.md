@@ -219,7 +219,9 @@ by an unbalanced external force."
 
 The momentum transferred and the absorbed should be in equilibrium.
 
-$$ \frac{d (m \mathbf{v_r}(t))}{dt}_{in}=\frac{d (m \mathbf{v_r}(t))}{dt}_{ext} \therefore \frac{d (m \mathbf{v_r}(t))}{dt}_{ext} = -\frac{d (m \mathbf{v_r}(t))}{dt}_{in} $$
+$$ 
+\frac{d (m \mathbf{v_r}(t))}{dt}_{in}=\frac{d (m \mathbf{v_r}(t))}{dt}_{ext} \therefore \frac{d (m \mathbf{v_r}(t))}{dt}_{ext} = -\frac{d (m \mathbf{v_r}(t))}{dt}_{in} 
+$$
 
 Here we derive the Newton's second law. First I'll assume that the
 absorbing particle is finite and composed by two absorbing/emitting
@@ -235,8 +237,10 @@ between the two particle elements.
 The internal change of momentum of the dual element particle is:
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt}_{in} \propto  \frac{\rho_u r_p^6 \mu^2}{256 \pi L^2} \left[ \frac{(c + a{ \Delta_L t})}{c} - \frac{(c - a{ \Delta_L t})}{c} \right]\hat{\mathbf{o}}_e;
-$$ Substituting we get:
+\frac{d (m \mathbf{v_r}(t))}{dt}_{in} \propto  \frac{\rho_u r_p^6 \mu^2}{256 \pi L^2} \left[ \frac{(c + a{ \Delta_L t})}{c} - \frac{(c - a{ \Delta_L t})}{c} \right]\hat{\mathbf{o}}_e.
+$$
+
+Substituting we get:
 
 $$
 \frac{d (m \mathbf{v_r}(t))}{dt}_{in} \propto  -\frac{\rho_u r_p^6 \mu^2}{256 \pi L} \left[ \frac{2a}{c^2} \right]\hat{\mathbf{o}}_e.
