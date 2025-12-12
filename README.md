@@ -65,123 +65,130 @@ velocity based on the corpuscles' density, velocity, and orientation:
 -   For $\mathbf{p^-}$ , the action opposes the absorbed corpuscle’s
     orientation.
 
-## Corpuscle Absorption Model
+# Corpuscular Action Model for Particle–Particle Interaction
 
-Here I develop the action model of an receiver particle acting on
-corpuscles emitted by an independent particle. The basic model of
-particle-particle interaction is based on an universe filled with
-corpuscles and any particle that emits and absorbs corpuscles at a $q$
-rate of corpuscles per second. An emitting particle sends the corpuscles
-at the speed of light and any receiver particle absorb corpuscles at a
-$\mu$ rate of particles per second as long as the emitting corpuscle
-flow is inside the particle.
+I develop a mechanistic action model describing the interaction between
+a receiver particle and corpuscles emitted by an independent emitting
+particle. The model is grounded in a corpuscular paradigm, wherein the
+universe is permeated by discrete corpuscles propagated at the speed of
+light. Particles emit and absorb these corpuscles at characteristic
+rates, mediating momentum transfer analogous to a radiative exchange
+process.
 
-The coordinate system is centered at the observer. This system will be
-used to describe how the corpuscle-particle interaction changes the
-receiver velocity from the observer point of view. The model development
-starts by assuming that there is a single moving emitting particle
-$\mathbf{p_e}$ and a single moving receiver particle $\mathbf{P_r}$. At
-emission time $t_o$ the emitting particle is at $\mathbf{x_e}(t_o)$
-moving with a relative velocity $\mathbf{v_e}(t_o)$ and emitting
-isotropic $q_e$ light speed corpuscles. At absorption time,
-$\mathbf{P_r}$ is at $\mathbf{x_r}(t)$ and moving at $\mathbf{v_r}(t)$.
+## Model Foundations
 
-The density of corpuscles at the receiver is:
+The interaction framework posits that emitting particles radiate
+corpuscles isotropically at a rate of $q$ corpuscles per second, with
+propagation occurring at the vacuum speed of light $c$. Receiver
+particles absorb incident corpuscles at a rate parameterised by $\mu$
+(dimensions of inverse time), contingent upon the corpuscular flux
+intersecting the receiver.
 
-$$
-\rho( \mathbf{x_r,t,t_o})= \frac{q_e}{4\pi (c \Delta t)^2 \| \mathbf{c}(t_o)+\mathbf{v_e}(t_o) \|};
-$$
+Observations are conducted in a coordinate system centred on a
+stationary observer, from whose frame the velocity evolution of the
+receiver particle is described.
 
-where $\Delta t$ is the time interval it took the corpuscle to reach the
-receiver. The corpuscle will travel the distance
-$r(t,t_o)=\| \mathbf{X_r}(t)-\mathbf{X_e}(t_o)\|$ at the Galilean speed
-$v_c(t_o)=\| \mathbf{c}(t_o)+\mathbf{v_e}(t_o)\|$. Hence:
+The system under consideration comprises a single emitting particle
+$\mathbf{p_e}$ and a single receiver particle $\mathbf{P_r}$, both
+potentially in motion. At emission time $t_o$, the emitter occupies
+position $\mathbf{x_e}(t_o)$ with velocity $\mathbf{v_e}(t_o)$,
+radiating at rate $q_e$. At absorption time $t$, the receiver is at
+$\mathbf{x_r}(t)$ with velocity $\mathbf{v_r}(t)$.
 
-$$
-\Delta t=\frac{r(t,t_o)}{\| \mathbf{c}(t_o)+\mathbf{v_e}(t_o)\|}
-$$
+## Corpuscular Density and Flux
 
-Therefore the corpuscle density at $\mathbf{x_r(t)}$ is:
+The number density of corpuscles at the receiver position is
 
 $$
-\rho( \mathbf{x_r},t,t_o)= \frac{q_e \| \mathbf{c}(t_o)+\mathbf{v_e}(t_o) \|}{4\pi c^2 r^2(t,t_o)} ;
+\rho(\mathbf{x_r}, t, t_o) = \frac{q_e}{4\pi (c \Delta t)^2 \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|},
 $$
 
-The corpuscle vectorial flow is $\Phi = \rho v$ .Hence:
+where $\Delta t$ is the propagation duration, and $\mathbf{c}(t_o)$ is
+the light-speed directional vector from emitter to receiver in the
+observer frame. The separation distance is
+$r(t, t_o) = \|\mathbf{x_r}(t) - \mathbf{x_e}(t_o)\|$, yielding an
+effective propagation speed $\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|$.
+Thus,
 
 $$
-\Phi( \mathbf{x_r},t,t_o)= \frac{q_e}{4\pi (c \Delta t)^2 \| \mathbf{c}(t_o)+\mathbf{v_e}(t_o) \|}
-( \mathbf{c}(t_o)+\mathbf{v_e}(t_o)-\mathbf{v_r}(t) )
-$$ or $$
-\Phi( \mathbf{x_r},t,t_o)= \frac{q_e \| \mathbf{c}(t_o)+\mathbf{v_e}(t_o) \|}{4\pi c^2 r^2(t,t_o)} 
-( \mathbf{c}(t_o)+\mathbf{v_e}(t_o)-\mathbf{v_r}(t) )
+\Delta t = \frac{r(t, t_o)}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|}.
 $$
 
-The next step is to compute the total number of corpuscles absorbed by
-$\mathbf{P_r}$. I will assume that the number of absorbed corpuscles at
-a given time is proportional to the flow and the particle cross area
-$\mathbf{A}=A \hat{o_e}$; where $\hat{o_e}$ is the orientation of the
-interacting corpuscles at emission from $\mathbf{P_e}$ . The total of
-absorbed corpuscles is:
+Substitution provides the density
 
 $$
-Abs(\mathbf{x_r},t,t_o)=\Phi( \mathbf{x_r},t,t_o) \cdot \mathbf{A} (1-e^{-\mu \delta t});  
+\rho(\mathbf{x_r}, t, t_o) = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|}{4\pi c^2 r^2(t, t_o)}.
 $$
 
-where $\delta t$ is the time required by the flow to cross
-$\mathbf{P_r}$.
-
-I will assume that the crossing time is:
+The vectorial flux relative to the moving receiver is
 
 $$
-\delta t=\frac{r_p}{\| \mathbf{c}(t_o)+\mathbf{v_e}(t_o)-\mathbf{v_r}(t) \|};
+\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) = \rho \, [\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|}{4\pi c^2 r^2(t, t_o)} \, [\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)].
 $$
 
-where $r_p$ is the particle radius. For very small $r_p$ the total
-absorbed is:
+## Absorption Rate
+
+Absorption is modelled as proportional to the incident flux, the
+receiver's effective cross-sectional area
+$\mathbf{A} = A \hat{\mathbf{o}}_e$ (where $\hat{\mathbf{o}}_e$ defines
+the corpuscle orientation at emission), and absorption efficiency. The
+absorbed corpuscle count per event is
 
 $$
-Abs(\mathbf{x_r},t,t_o)=\frac{\Phi( \mathbf{x_r},t,t_o) \cdot \mathbf{A} \mu r_p}{\| \mathbf{c}(t_o)+\mathbf{v_e}(t_o)-\mathbf{v_r}(t) \|}.
+\text{Abs}(\mathbf{x_r}, t, t_o) = [\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) \cdot \mathbf{A}] \, (1 - e^{-\mu \delta t}),
 $$
 
-The absorbed particles causes a change in the particle momentum in
-direction of the corpuscle orientation:
+with transit time across the receiver
 
 $$
-\frac{d\mathbf{mv_r}(t)}{dt} \propto  Abs(\mathbf{x_r},t,t_o) \left( \frac{(\mathbf{c}(t_o)+\mathbf{v_e}(t_o)-\mathbf{v_r}(t))}{\| \mathbf{c}(t_o)+\mathbf{v_e}(t_o)-\mathbf{v_r}(t) \|} \cdot \hat{o_e}(t_o) \right) \hat{o_e}(t_o);
+\delta t = \frac{r_p}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|},
 $$
 
-From the above equations we arrive to the final action formula:
+and $r_p$ the receiver radius. For $r_p \to 0$ ($\mu \delta t \ll 1$),
+this approximates to
 
 $$
- \frac{d\mathbf{mv_r}(t)}{dt} \propto A r_p \frac{q_e \mu_r}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c^2}  \left( \frac{\hat{o_e} \cdot ( \mathbf{c} + \mathbf{v_e} - \mathbf{v_r} )}{ \|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{o_e},
+\text{Abs}(\mathbf{x_r}, t, t_o) = \frac{[\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) \cdot \mathbf{A}] \, \mu r_p}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|}.
 $$
 
-I'll assume that the area is proportional to the square of the particle
-radius ($A \propto r_p^2$); therefore:
+## Momentum Transfer and Action
+
+Corpuscle absorption imparts momentum along the incident orientation.
+The rate of change of receiver momentum satisfies
 
 $$
- \frac{d\mathbf{mv_r}(t)}{dt} \propto {r_p}^3 \frac{q_e \mu_r}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c^2}  \left( \frac{\hat{o_e} \cdot ( \mathbf{c} + \mathbf{v_e} - \mathbf{v_r} )}{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{o_e}
+\frac{d (m \mathbf{v_r}(t))}{dt} \propto \text{Abs}(\mathbf{x_r}, t, t_o) \left( \frac{[\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] \cdot \hat{\mathbf{o}}_e(t_o)}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|} \right) \hat{\mathbf{o}}_e(t_o).
 $$
 
-Dimensional Analysis
+Consolidating terms yields the action expression
 
-$r^2: m^2$
-
-${r_p}^3: m^3$
-
-$q_e: p/s$
-
-$\mu_r: 1/s$
-
-$v:(m/s)$
-
-$c: (m/s)$ $$
- (p/s) = {m}^3 \frac{(p/s)(1/s)}{m^2} \frac{m/s}{{(m/s)}^2}
+$$
+\frac{d (m \mathbf{v_r}(t))}{dt} \propto A r_p \frac{q_e \mu_r}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c^2} \left( \frac{\hat{\mathbf{o}}_e \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})}{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{\mathbf{o}}_e,
 $$
 
-The action is proportional to the number of absorbed corpuscles per
-second.
+where arguments $(t, t_o)$ are implied for brevity.
+
+Assuming geometric scaling $A \propto r_p^2$, the action becomes
+
+$$
+\frac{d (m \mathbf{v_r}(t))}{dt} \propto r_p^3 \frac{q_e \mu_r}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c^2} \left( \frac{\hat{\mathbf{o}}_e \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})}{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{\mathbf{o}}_e.
+$$
+
+## Dimensional Consistency
+
+-   Distance terms: $r^2$ [m²], $r_p^3$ [m³]
+-   Rates: $q_e$ [corpuscles s⁻¹], $\mu_r$ [s⁻¹]
+-   Velocities: $c, v$ [m s⁻¹]
+
+The rate of corpuscle absorption (corpuscles s⁻¹) conforms dimensionally
+to
+
+$$
+\text{corpuscles s}^{-1} \sim \text{m}^3 \cdot \frac{(\text{corpuscles s}^{-1}) \cdot (\text{s}^{-1})}{\text{m}^2} \cdot \frac{\text{m s}^{-1}}{(\text{m s}^{-1})^2},
+$$
+
+confirming that the derived action is proportional to the absorption
+rate per unit time.
 
 ## Electrostatic Force
 
