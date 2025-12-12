@@ -215,9 +215,11 @@ where:
     its origin by the emitting particle.
 
 -   $r$ is the distance traveled by the corpuscle form the emission
-    origin to it absorption. i.e., $$ 
-    r=\| \mathbf{x_2}(t)-\mathbf{x_1}(t_o) \| 
-    $$
+    origin to it absorption:
+
+$$
+    r=\| \mathbf{x_2}(t)-\mathbf{x_1}(t_o) \|.
+$$
 
 This force generalizes Coulomb’s law by incorporating velocity-dependent
 effects.
@@ -246,10 +248,10 @@ a current in a loop.
 
 **Gravity** arises as a net attractive force between **neutral composite
 particles** (e.g., atoms with a positively charged nucleus and a
-negatively charged shell). The slight difference in stocastic velocity
+negatively charged shell). The slight difference in stochastic velocity
 distributions between positive and negative charges results in an
 Expected small attraction. The equations of interaction are derived in
-the GravityForce/SteadySate folder
+the GravityForce/Steady-sate folder
 
 ## Galactic Rotation Curves
 
