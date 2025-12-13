@@ -277,9 +277,13 @@ corpuscular interactions per second squared per cubic meter
 
 ## Electrostatic Force
 
-The derived model can be described as a net electric force: $$
+The derived model can be described as a net electric force: 
+
+$$
 \mathbf{f_2}=\frac{d (m \mathbf{v_r}(t))}{dt}
-$$of the particle absorbing corpuscles $q_2$ (Absorbing) of an emitting
+$$
+
+of the particle absorbing corpuscles $q_2$ (Absorbing) of an emitting
 charge $q_1$ (Emitting) and (e.g., electron charges $e$ separated by
 distance $r$ (at emitting-absorbing) is:
 
