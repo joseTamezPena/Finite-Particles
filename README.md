@@ -193,9 +193,7 @@ $$
 
 ## Rate of emission-absorption
 
-The internal energy equation $E_{in}$ can be used to estimate the rate of corpuscles 
-absorbed-emitted at any given time by real particles. 
-I'll assume the electron charge $e = 1.602176634 \times 10^{-19}$ C, and radius $r_e=10^{-20}$ m
+The internal energy equation $E_{in}$ can be used to estimate the rate of corpuscles absorbed-emitted at any given time by real particles. I'll assume the electron charge $e = 1.602176634 \times 10^{-19}$ C, and radius $r_e=10^{-20}$ m
 
 $$
 \rho_u r_p^6 \mu^2 \propto \frac{q^2}{\epsilon_o} \therefore \rho_u \mu^2 \propto \frac{e^2}{r_e^6 \epsilon_o} = 2.307 \times 10^{32} \text{ m}^{-3}\text{s}^{-2}
