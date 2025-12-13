@@ -51,7 +51,7 @@ Observations are conducted in a coordinate system centred on a stationary observ
 The system under consideration comprises a single emitting particle $\mathbf{p_e}$ and a single receiver particle $\mathbf{P_r}$, both potentially in motion. At emission time $t_o$, the emitter occupies position $\mathbf{x_e}(t_o)$ with velocity $\mathbf{v_e}(t_o)$, radiating at rate:
 
 $$
-q_e \propto r^3_p\rho_u\mu_e;
+q_e = r^3_p\rho_u\mu_e;
 $$
 
 where $\rho_u$ is the universal vacuum corpuscle density, $\mu_e$ the emission rate, and $r_p$ the particle radius. At absorption time $t$, the receiver is at $\mathbf{x_r}(t)$ with velocity $\mathbf{v_r}(t)$.
@@ -107,13 +107,13 @@ $$
 Corpuscle absorption imparts $\mathbf{c}$ momentum per absorption along the incident orientation. The rate of change of receiver momentum satisfies
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt} \propto \text{Abs}(\mathbf{x_r}, t, t_o) \left( \frac{[\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] \cdot \mathbf{c}(t_o)}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|} \right) \hat{\mathbf{o}}_e(t_o).
+\frac{d (m \mathbf{v_r}(t))}{dt} = \text{Abs}(\mathbf{x_r}, t, t_o) \left( \frac{[\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] \cdot \mathbf{c}(t_o)}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|} \right) \hat{\mathbf{o}}_e(t_o).
 $$
 
 Consolidating terms yields the action expression
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt} \propto A r_p \frac{q_e \mu}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c} \left( \frac{\hat{\mathbf{o}}_e \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})}{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{\mathbf{o}}_e,
+\frac{d (m \mathbf{v_r}(t))}{dt} = A r_p \frac{q_e \mu}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c} \left( \frac{\hat{\mathbf{o}}_e \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})}{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{\mathbf{o}}_e,
 $$
 
 where arguments $(t, t_o)$ are implied for brevity.
@@ -121,7 +121,7 @@ where arguments $(t, t_o)$ are implied for brevity.
 Assuming geometric scaling $A \propto r_p^2$, and that the two particles are identical with $\mu_e=\mu$, the action becomes
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt} \propto r_p^6 \frac{\rho_u \mu^2}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c} \left( \frac{\hat{\mathbf{o}}_e \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})}{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{\mathbf{o}}_e.
+\frac{d (m \mathbf{v_r}(t))}{dt} = r_p^6 \frac{\rho_u \mu^2}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c} \left( \frac{\hat{\mathbf{o}}_e \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})}{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{\mathbf{o}}_e.
 $$
 
 ## Dimensional Consistency
@@ -131,13 +131,13 @@ $$
 -   Velocities: $c, v$ [m s⁻¹]
 -   Densities: [corpuscles m⁻³]
 
-The rate of corpuscle absorption (corpuscles s⁻¹) conforms dimensionally to
+The rate of moment change conforms dimensionally to:
 
 $$
 \text{corpuscles m s}^{-2} \sim \text{m}^6 \cdot \frac{(\text{corpuscles m}^{-3}) \cdot (\text{s}^{-2})}{\text{m}^2} \cdot \frac{\text{m s}^{-1}}{(\text{m s}^{-1})},
 $$
 
-confirming that the derived action is proportional to the particle acceleration.
+confirming that the derived action is proportional to the acceleration.
 
 ## Newton's First Law
 
@@ -164,13 +164,13 @@ Here we derive the Newton's second law. First I'll assume that the absorbing par
 The internal change of momentum of the dual element particle is:
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt}_{in} \propto  \frac{\rho_u r_p^6 \mu^2}{256 \pi L^2} \left[ \frac{(c + a{ \Delta_L t})}{c} - \frac{(c - a{ \Delta_L t})}{c} \right]\hat{\mathbf{o}}_e.
+\frac{d (m \mathbf{v_r}(t))}{dt}_{in} =  \frac{\rho_u r_p^6 \mu^2}{256 \pi L^2} \left[ \frac{(c + a{ \Delta_L t})}{c} - \frac{(c - a{ \Delta_L t})}{c} \right]\hat{\mathbf{o}}_e.
 $$
 
 Substituting we get:
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt}_{in} \propto  -\frac{\rho_u r_p^6 \mu^2}{256 \pi L} \left[ \frac{2a}{c^2} \right]\hat{\mathbf{o}}_e.
+\frac{d (m \mathbf{v_r}(t))}{dt}_{in} =  -\frac{\rho_u r_p^6 \mu^2}{256 \pi L} \left[ \frac{2a}{c^2} \right]\hat{\mathbf{o}}_e.
 $$
 
 Therefore:
@@ -179,16 +179,18 @@ $$
 \frac{d (m \mathbf{v_r}(t))}{dt}_{ext} =  \frac{\rho_u r_p^6 \mu^2}{128 \pi L} \left[ \frac{1}{c^2} \right] a \hat{\mathbf{o}}_e.
 $$
 
-A close inspection of the equation it resembles: $F=ma$. And
+A close inspection of the equation it Newtown's Second law: $F=ma$.
+
+A second observation is that we can write $q=r_p^3 \mu$ and $\rho_u$ as $1/\epsilon_0$. Hence the first terms of the internal momentum is the internal energy:
 
 $$
-E_{in} \propto \frac{\rho_u r_p^6 \mu^2}{128 \pi L}=\frac{q^2}{16 \pi \epsilon_o L}
+E_{in} = \frac{\rho_u r_p^6 \mu^2}{128 \pi L} = \frac{q^2}{128 \pi \epsilon_o L}.
 $$
 
-is the internal stored electrostatic energy by the two charged elements with $q/2$ charge separated by a distance $L$. Hence the inertial mass is:
+A fraction of the stored electrostatic energy by the two charged elements with $q$ charge separated by a distance $L$. Hence the inertial mass is:
 
 $$
- m \propto \frac{E_{in}}{c^2}.
+ m = \frac{E_{in}}{c^2}.
 $$
 
 ## Rate of emission-absorption
@@ -196,7 +198,7 @@ $$
 The internal energy equation $E_{in}$ can be used to estimate the rate of corpuscles absorbed-emitted at any given time by real particles. I'll assume the electron charge $e = 1.602176634 \times 10^{-19}$ C, and radius $r_e=10^{-20}$ m
 
 $$
-\rho_u r_p^6 \mu^2 \propto \frac{q^2}{\epsilon_o} \therefore \rho_u \mu^2 \propto \frac{e^2}{r_e^6 \epsilon_o} = 2.307 \times 10^{32} \text{ m}^{-3}\text{s}^{-2}
+\rho_u r_p^6 \mu^2 = \frac{q^2}{\epsilon_o} \therefore \rho_u \mu^2 = \frac{e^2}{r_e^6 \epsilon_o} = 2.307 \times 10^{32} \text{ m}^{-3}\text{s}^{-2}
 $$
 
 This implies that an electron on average has $2.307 \times 10^{32}$ corpuscular interactions per second squared per cubic meter
