@@ -179,7 +179,7 @@ $$
 \frac{d (m \mathbf{v_r}(t))}{dt}_{ext} =  \frac{\rho_u r_p^6 \mu^2}{128 \pi L} \left[ \frac{1}{c^2} \right] a \hat{\mathbf{o}}_e.
 $$
 
-A close inspection of the equation it Newtown's Second law: $F=ma$.
+A close inspection of the equation it reveals that it is Newton's Second law: $F=ma$, for charged finite particles.
 
 A second observation is that we can write $q=r_p^3 \mu$ and $\rho_u$ as $1/\epsilon_0$. Hence the first terms of the internal momentum is the internal energy:
 
@@ -193,15 +193,17 @@ $$
  m = \frac{E_{in}}{c^2}.
 $$
 
+The intertia and particle mass are a direct consequence of the corpuscular model.
+
 ## Rate of emission-absorption
 
 The internal energy equation $E_{in}$ can be used to estimate the rate of corpuscles absorbed-emitted at any given time by real particles. I'll assume the electron charge $e = 1.602176634 \times 10^{-19}$ C, and radius $r_e=10^{-20}$ m
 
 $$
-\rho_u r_p^6 \mu^2 = \frac{q^2}{\epsilon_o} \therefore \rho_u \mu^2 = \frac{e^2}{r_e^6 \epsilon_o} = 2.307 \times 10^{32} \text{ m}^{-3}\text{s}^{-2}
+\rho_u r_p^6 \mu^2 = \frac{q^2}{\epsilon_o} \therefore \rho_u \mu^2 = \frac{e^2}{r_e^6 \epsilon_o} = 2.307 \times 10^{32} \text{ m}^{-3}\text{s}^{-2}.
 $$
 
-This implies that an electron on average has $2.307 \times 10^{32}$ corpuscular interactions per second squared per cubic meter
+This implies that an electron on average has $2.307 \times 10^{32}$ corpuscular interactions per second squared per cubic meter.
 
 ## Electrostatic Force
 
