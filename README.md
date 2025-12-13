@@ -188,7 +188,7 @@ $$
 is the internal stored electrostatic energy by the two charged elements with $q/2$ charge separated by a distance $L$. Hence the inertial mass is:
 
 $$
-m \propto E_{in}c^2.
+E_{in} \propto m c^2.
 $$
 
 ## Rate of emission-absorption
