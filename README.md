@@ -207,15 +207,16 @@ This implies that an electron on average has $2.307 \times 10^{32}$ corpuscular 
 
 ## Electrostatic Force
 
-The derived model can be described as a net electric force:
+The derived model can be described as a net force of two charged particles
 
 $$
-\mathbf{f_2}=\frac{d (m \mathbf{v_r}(t))}{dt}
+\mathbf{F}=\frac{d (m \mathbf{v_r}(t))}{dt}
 $$
 
 of the particle absorbing corpuscles $q_2$ (Absorbing) of an emitting charge $q_1$ (Emitting) and (e.g., electron charges $e$ separated by distance $r$ (at emitting-absorbing) is:
 
-$$ \mathbf{f_2} = \frac{k q_1 q_2}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_1}\|}{\|c\|}  \left( \frac{\mathbf{c} \cdot ( \mathbf{c} + \mathbf{v_1} - \mathbf{v_2} )}{\|\mathbf{c}\| \|\mathbf{c} + \mathbf{v_1} - \mathbf{v_2}\|} \right)^2 \hat{o_1},$$
+$$ \mathbf{F} = \frac{k q_1 q_2}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_1}\|}{\|c\|}  \left( \frac{\mathbf{c} \cdot ( \mathbf{c} + \mathbf{v_1} - \mathbf{v_2} )}{\|\mathbf{c}\| \|\mathbf{c} + \mathbf{v_1} - \mathbf{v_2}\|} \right)^2 \hat{o_1},
+$$
 
 where:
 
@@ -235,7 +236,13 @@ $$
     r=\| \mathbf{x_2}(t)-\mathbf{x_1}(t_o) \|.
 $$
 
-This force generalizes Coulomb’s law by incorporating velocity-dependent effects.
+This force is equivalent to the Total Lorentz force of two moving charged particles.
+
+When the two particles are stationary:
+
+$$ \mathbf{F} = \frac{k q_1 q_2}{4 \pi r^2} \hat{o_1}, $$
+
+The is the standard Coulomb's law.
 
 ## Magnetic Force
 
