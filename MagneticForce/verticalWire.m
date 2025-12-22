@@ -1,4 +1,5 @@
 %[text] # A single vertical wire with current
+clear;
 
 syms  q  real 
 syms t c epsilon0 mu0 real positive
@@ -54,8 +55,7 @@ eq_2 = dot(cv,cv)-c^2==0 %[output:0dd89255]
 c_x = simplify(ccx(2)), c_y = simplify(ccy(2)),tt = simplify(tt(2)) %[output:53386cb5] %[output:2c6ee76c] %[output:5970a22c]
 cvec=[c_x,c_y,0];
 %%
-simplify(subs(cvec,[x,y,v_y],[1,-1,0])) %[output:5763abb0]
-simplify(subs(cvec,[x,y,v_y],[1,0,-0.01*c])) %[output:039885b1]
+
 %%
 %[text] ## The Force
 %[text] 
@@ -63,13 +63,13 @@ k_e = q^2/(4*pi*epsilon0);
 v_rel1 = cvec + v_w;
 v_rel2 = v_rel1 - vp;
 ov = cvec/c;
-v_rel1m = sqrt(dot(v_rel1,v_rel1));
-v_rel2m = sqrt(dot(v_rel2,v_rel2));
-p1 = v_rel1m/c;
-p2 = (1.0/(dot(ov,v_rel2/v_rel2m)*dot(ov,v_rel1/v_rel1m)));
+v_rel1m = dot(v_rel1,v_rel1);
+v_rel2m = dot(v_rel2,v_rel2);
+p1 = v_rel2m;
+p2 = (ov/dot(cvec,v_rel2));
 R = r_p-r_w;
 R2 = dot(R,R);
-F_a = simplify(p1*p2/R2*ov);
+F_a = simplify(p1*p2/R2);
 simplify(subs(F_a,[v_y,y,x],[0,0,x])) %[output:32a8f242]
 simplify(subs(F_a,[v_y,y,x],[0,0,-x])) %[output:0112436b]
 
@@ -83,21 +83,21 @@ simplify(subs(F_nt,[y,vp_y],[0,0])) %[output:839ce010]
 syms L real positive
 
 Ft_n = int(F_nt,y,-L,L);
-Ft_nInf = simplify(limit(Ft_n,L,Inf))
+Ft_nInf = simplify(limit(Ft_n,L,Inf)) %[output:925c70d4]
 %%
 %[text] ## Integrating the current
 % Define the velocity vector of the moving charge
 F_ct = simplify(taylor(F_a,v_y,0,order=2));
 F_ct = simplify(taylor(F_ct,[vp_x,vp_y],[0,0],order=2));
 simplify(subs(F_a,[y,vp_y],[0,0]));
-simplify(subs(F_ct,[y,vp_y],[0,0]))
+simplify(subs(F_ct,[y,vp_y],[0,0])) %[output:4dadc0f9]
 Ft_c = int(F_ct,y,-L,L);
 %%
 %Set L to Infinity
-Ft_cInf = simplify(limit(Ft_c,L,Inf))
+Ft_cInf = simplify(limit(Ft_c,L,Inf)) %[output:80498cde]
 %%
 %[text] ## The net force
-F_atot = k_e*simplify(Ft_cInf - Ft_nInf)
+F_atot = k_e*simplify(Ft_cInf - Ft_nInf) %[output:0e9aeb4a]
 
 
 %[appendix]{"version":"1.0"}
@@ -120,21 +120,27 @@ F_atot = k_e*simplify(Ft_cInf - Ft_nInf)
 %[output:5970a22c]
 %   data: {"dataType":"symbolic","outputData":{"name":"tt","value":"\\frac{v_y \\,y+\\sqrt{c^2 \\,y^2 +c^2 \\,x^2 -{v_y }^2 \\,x^2 }}{c^2 -{v_y }^2 }"}}
 %---
-%[output:5763abb0]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{\\sqrt{2}\\,c}{2} & \\frac{\\sqrt{2}\\,c}{2} & 0\n\\end{array}\\right)"}}
-%---
-%[output:039885b1]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{3\\,\\sqrt{1111}\\,c}{100} & \\frac{c}{100} & 0\n\\end{array}\\right)"}}
-%---
 %[output:32a8f242]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{\\sqrt{c^2 +{{\\textrm{vp}}_y }^2 -2\\,c\\,{\\textrm{vp}}_x +{{\\textrm{vp}}_x }^2 }}{x^2 \\,{\\left(c-{\\textrm{vp}}_x \\right)}} & 0 & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{c^2 +{{\\textrm{vp}}_y }^2 -2\\,c\\,{\\textrm{vp}}_x +{{\\textrm{vp}}_x }^2 }{c\\,x^2 \\,{\\left(c-{\\textrm{vp}}_x \\right)}} & 0 & 0\n\\end{array}\\right)"}}
 %---
 %[output:0112436b]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{\\sqrt{c^2 +{{\\textrm{vp}}_y }^2 +2\\,c\\,{\\textrm{vp}}_x +{{\\textrm{vp}}_x }^2 }}{x^2 \\,{\\left(c+{\\textrm{vp}}_x \\right)}} & 0 & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{c^2 +{{\\textrm{vp}}_y }^2 +2\\,c\\,{\\textrm{vp}}_x +{{\\textrm{vp}}_x }^2 }{c\\,x^2 \\,{\\left(c+{\\textrm{vp}}_x \\right)}} & 0 & 0\n\\end{array}\\right)"}}
 %---
 %[output:2cdd2279]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{1}{x^2 } & 0 & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{c-{\\textrm{vp}}_x }{c\\,x^2 } & 0 & 0\n\\end{array}\\right)"}}
 %---
 %[output:839ce010]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{1}{x^2 } & 0 & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{c-{\\textrm{vp}}_x }{c\\,x^2 } & 0 & 0\n\\end{array}\\right)"}}
+%---
+%[output:925c70d4]
+%   data: {"dataType":"symbolic","outputData":{"name":"Ft_nInf","value":"\\left(\\begin{array}{ccc}\n\\frac{2\\,c-\\frac{\\pi \\,{\\textrm{vp}}_x }{2}}{c\\,x} & -\\frac{\\pi \\,{\\textrm{vp}}_y }{2\\,c\\,x} & 0\n\\end{array}\\right)"}}
+%---
+%[output:4dadc0f9]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{c-{\\textrm{vp}}_x }{c\\,x^2 } & -\\frac{v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{c^2 \\,x^2 } & 0\n\\end{array}\\right)"}}
+%---
+%[output:80498cde]
+%   data: {"dataType":"symbolic","outputData":{"name":"Ft_cInf","value":"\\left(\\begin{array}{ccc}\n-\\frac{-4\\,c^2 +4\\,v_y \\,{\\textrm{vp}}_y +\\pi \\,c\\,{\\textrm{vp}}_x }{2\\,c^2 \\,x} & \\frac{-\\frac{\\pi \\,c\\,{\\textrm{vp}}_y }{2}+2\\,v_y \\,{\\textrm{vp}}_x }{c^2 \\,x} & 0\n\\end{array}\\right)"}}
+%---
+%[output:0e9aeb4a]
+%   data: {"dataType":"symbolic","outputData":{"name":"F_atot","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,c^2 \\,\\varepsilon_0 \\,x\\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{2\\,c^2 \\,\\varepsilon_0 \\,x\\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
