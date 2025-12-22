@@ -94,10 +94,10 @@ ft_magnetic = simplify(q * cross(vp, B),'IgnoreAnalyticConstraints',true,'Criter
 ft_magnetic = taylor(ft_magnetic,[v_x,v_y],[0,0],order=2);
 ft_magnetic = simplify(taylor(ft_magnetic,[vp_x,vp_y],[0,0],order=2),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
 ft_magnetic = simplify(subs(ft_magnetic,[v_x,y],[0,0])) %[output:0882f2c3]
-%%
 %[text] ## The corpuscle force
 %[text] 
-%[text] $&dollar&;&dollar&; \n\\mathbf{F} = \\frac{k q\_1 q\_2}{4 \\pi r^2} \\frac{\\|\\mathbf{c} + \\mathbf{v\_1}\\|}{\\|c\\|}  \\left( \\frac{\\mathbf{c} \\cdot ( \\mathbf{c} + \\mathbf{v\_1} - \\mathbf{v\_2} )}{\\|\\mathbf{c}\\| \\|\\mathbf{c} + \\mathbf{v\_1} - \\mathbf{v\_2}\\|} \\right)^2 \\hat{o\_1}, \n&dollar&;&dollar&;$
+%[text] The corpuscle force is:
+%[text] $&dollar&;&dollar&; \n\\mathbf{F} = \\frac{k q\_1 q\_2}{4 \\pi r^2} \\left( \\frac{\\|\\mathbf{c} + \\mathbf{v\_1}- \\mathbf{v\_2}\\|^2}{\\mathbf{c} \\cdot ( \\mathbf{c} + \\mathbf{v\_1} - \\mathbf{v\_2} )} \\right)  \\hat{o\_1}, \n&dollar&;&dollar&;$
 %[text] 
 k= q^2/(4*pi*epsilon0);
 assumeAlso(c^2 - v_y^2>0)
@@ -109,55 +109,35 @@ R2 = dot(r_p,r_p);
 
 ov = simplify(cvec/sqrt(dot(cvec,cvec)));
 
-
-cv2 = cvec;
-
-vs = cv2+v;
+vs = cvec+v;
 rvel= vs-vp;
 
 p4=simplify(subs(ov,[v_x,y],[0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
 
-vsmag = dot(vs,vs);
 rvelm = dot(rvel,rvel);
 pvec2 = dot(pvec,pvec);
 
-eforce = simplify(subs(k/pvec2*p4*(dot(p4,rvel/sqrt(rvelm))^2),[v_x,v_y,y],[0,0,0]));
+eforce = simplify(subs((k/pvec2)*(rvelm/dot(cvec,rvel))*p4,[v_x,v_y,y],[0,0,0]));
 eforce = taylor(eforce,[vp_x,vp_y],[0,0],order=2) %[output:1d20e58e]
 
-p1=simplify(subs((sqrt(vsmag)/c),[v_x,y],[0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-p2=simplify(subs((dot(p4,rvel/sqrt(rvelm))^2),[v_x,y],[0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-p3=simplify(subs((k/R2),[v_x,y],[0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-
-F_c = simplify(p1*p2*p3*p4,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-
-FT_c = taylor(F_c,v_y,0,order=2);
-FT_c = taylor(FT_c,[vp_x,vp_y],[0,0],order=2) %[output:4bf374a5]
-
 %%
-%% Second Option
 
-%p2=simplify(2-subs(1.0/dot(ov,rvel/sqrt(rvelm))^2,[v_x,y],[0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-dotp = simplify(dot(p4,rvel/sqrt(rvelm)));
-%p2=simplify(subs(1.0/dotp,[v_x,y],[0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+dotp = simplify(subs(dot(cvec,rvel),[v_x,y],[0,0]));
+p1= simplify(subs(k/R2,[v_x,y],[0,0]));
+p2=simplify(subs(rvelm/dotp,[v_x,y],[0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
 
-p2=simplify(subs(sqrt(rvelm/vsmag)/dotp,[v_x,y],[0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-%p2a=simplify(subs(1.0/dot(vs/sqrt(vsmag),rvel/sqrt(rvelm)),[v_x,y],[0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-%p2=simplify(p2*p2a,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100)
 
-simplify(taylor(subs(p4,[v_x,y],[0,0]),[vp_x,vp_y],[0,0],order=2)) %[output:0e15a269]
-simplify(taylor(subs(rvel,[v_x,y],[0,0]),[vp_x,vp_y],[0,0],order=2)) %[output:0663d88f]
-p2s = simplify(taylor(p2,v_y,0,order=2));
-simplify(taylor(p2s,[vp_x,vp_y],[0,0],order=2)) %[output:92768fa2]
-
-F2_c = simplify(p1*p2*p3*p4,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+F2_c = simplify(p1*p2*p4,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
 
 F2T_c = taylor(F2_c,v_y,0,order=2);
-F2T_c = simplify(taylor(F2T_c,[vp_x,vp_y],[0,0],order=2)-eforce) %[output:4a5087e7]
+
+% The net magnetic Force due to corpuscles
+F2T_c = simplify(taylor(F2T_c,[vp_x,vp_y],[0,0],order=2)-eforce) %[output:17012985]
 
 
 %%
-
-Ft_neutral,ft_magnetic %[output:17012985] %[output:059e7f34]
+% The Lorentz magnetic forces
+Ft_neutral,ft_magnetic %[output:059e7f34] %[output:59b278cc]
 
 %[appendix]{"version":"1.0"}
 %---
@@ -219,26 +199,14 @@ Ft_neutral,ft_magnetic %[output:17012985] %[output:059e7f34]
 %   data: {"dataType":"symbolic","outputData":{"name":"ft_magnetic","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
 %[output:1d20e58e]
-%   data: {"dataType":"symbolic","outputData":{"name":"eforce","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 }{4\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
-%---
-%[output:4bf374a5]
-%   data: {"dataType":"symbolic","outputData":{"name":"FT_c","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 }{4\\,\\varepsilon_0 \\,x^2 \\,\\pi }+\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y }{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
-%---
-%[output:0e15a269]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{\\sqrt{c^2 -{v_y }^2 }}{c} & -\\frac{v_y }{c} & 0\n\\end{array}\\right)"}}
-%---
-%[output:0663d88f]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\sqrt{c^2 -{v_y }^2 }-{\\textrm{vp}}_x  & -{\\textrm{vp}}_y  & 0\n\\end{array}\\right)"}}
-%---
-%[output:92768fa2]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"-\\frac{-c^2 +v_y \\,{\\textrm{vp}}_y +c\\,{\\textrm{vp}}_x }{c^2 }"}}
-%---
-%[output:4a5087e7]
-%   data: {"dataType":"symbolic","outputData":{"name":"F2T_c","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,{\\left(v_y \\,{\\textrm{vp}}_y +c\\,{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"eforce","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 }{4\\,\\varepsilon_0 \\,x^2 \\,\\pi }-\\frac{q^2 \\,{\\textrm{vp}}_x }{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
 %---
 %[output:17012985]
-%   data: {"dataType":"symbolic","outputData":{"name":"Ft_neutral","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"F2T_c","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
 %[output:059e7f34]
+%   data: {"dataType":"symbolic","outputData":{"name":"Ft_neutral","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:59b278cc]
 %   data: {"dataType":"symbolic","outputData":{"name":"ft_magnetic","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---

@@ -97,7 +97,7 @@ Fnt_c = int(Fn_ct,y,-L,L);
 Fnt_cInf = simplify(limit(Fnt_c,L,Inf)) %[output:2187b570]
 %%
 %[text] ## Integrating the current
-% Define the velocity vector of the moving charge
+
 F_ct = simplify(taylor(F_a,v_y,0,order=2));
 F_ct = simplify(taylor(F_ct,[vp_x,vp_y],[0,0],order=2));
 Ft_c = int(F_ct,y,-L,L);
@@ -106,7 +106,9 @@ Ft_c = int(F_ct,y,-L,L);
 Ft_cInf = simplify(limit(Ft_c,L,Inf)) %[output:33008a39]
 %%
 %[text] ## The net force
+% The corpuscular force
 F_atot = simplify(Ft_cInf - Ft_nInf) %[output:72f17789]
+%The Lorentz force
 sol=[-(q^2*v_y*vp_y)/(2*epsilon0*x*sym(pi)), +(q^2*v_y*vp_x)/(2*epsilon0*x*sym(pi)), sym(0)] %[output:767a0fa9]
 
 %[appendix]{"version":"1.0"}
