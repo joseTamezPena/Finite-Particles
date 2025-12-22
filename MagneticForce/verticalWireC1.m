@@ -68,93 +68,13 @@ R2 = dot(R,R);
 v_rel1 = cvec + v_w;
 v_rel2 = v_rel1 - vp;
 ov = cvec;
-v_rel1m = sqrt(dot(v_rel1,v_rel1));
-v_rel2m = sqrt(dot(v_rel2,v_rel2));
-
-%p1 = v_rel1m;
-%p2 = dot(ov,v_rel2/v_rel2m)*dot(ov,v_rel2/v_rel2m);
-%p3 = 1;
-
-%p2 = dot(ov,v_rel2/v_rel2m)*dot(v_rel1/v_rel1m,v_rel2/v_rel2m);
-%p2 = dot(ov,v_rel2/v_rel2m);
-%p3 = dot(ov,v_rel2/v_rel2m)-dot(ov,v_rel1/v_rel1m)/2;
-%p3 = dot(ov,v_rel1/v_rel1m);
-%p3 = v_rel1m;
-%p3 = (dot(ov,v_rel2/v_rel2m)+v_rel1m)/2;
-%p3 = (dot(ov,v_rel2/v_rel2m)+dot(ov,v_rel1/v_rel1m))/2;
-%p3 = dot(ov,v_rel2/v_rel2m)*v_rel2m;
-%p3 = v_rel2m;
-%p3 = v_rel2m/v_rel1m;
-%p3 = dot(ov,v_rel2/v_rel2m)/v_rel1m;
-
-%p2 = dot(ov,v_rel2/v_rel2m);
-%p3 = v_rel1m/v_rel2m;
-
-% Worong sign m-force
-%p1 = v_rel1m;
-%p2 = dot(ov,v_rel2/v_rel2m);
-%p3 = (v_rel1m/v_rel2m);
+v_rel1m = dot(v_rel1,v_rel1);
+v_rel2m = dot(v_rel2,v_rel2);
 
 
-
-
-
-%F_a = simplify((1.0-(p1*p2*p3-1.0))*ov/R2);
-
-%p1 = v_rel1m/v_rel2m;
-%p2 = dot(ov,v_rel2);
-%p3 = v_rel1m/v_rel2m;
-%F_a = simplify((2.0-p1*p2*p3)*ov/R2);
-
-%vr2 = cvec-vp;
-%vr2m = sqrt(dot(vr2,vr2));
-%P0 = dot(ov,vr2/vr2m)^2;
-%p1 = v_rel1m/v_rel2m;
-%p2 = dot(ov,v_rel2);
-%p3 = v_rel1m/v_rel2m;
-%F_a = simplify((2*P0-p1*p2*p3)*ov/R2);
-
-%p1 = v_rel1m;
-%p2 = (v_rel2m/dot(ov,v_rel2/v_rel2m))^2;
-%p2 = (1.0/v_rel2m)^2;
-%p2 = (1.0/dot(ov,v_rel2/v_rel2m)^2);
-%p2 = (v_rel2m+v_rel2m/dot(ov,v_rel2/v_rel2m))^2;
-%F_a = simplify(p1*p2*ov/R2);
-
-
-%vr2 = cvec-vp;
-%vr2m = sqrt(dot(vr2,vr2));
-%P0 = dot(ov,vr2/vr2m)^2;
-%p2 = dot(ov,v_rel2/v_rel2m)^2;
-%F_a = simplify(v_rel1m*(2*P0-p2)*ov/R2);
-
-
-%vr2 = cvec-vp;
-%vr2m = sqrt(dot(vr2,vr2));
-%P0 = 1/dot(ov,v_rel2/v_rel2m)^(3/2);
-%p2 = dot(v_rel1/v_rel1m,v_rel2/v_rel2m)^(3/2);
-%p2 = dot(ov,v_rel1/v_rel1m)^(3/2);
-%F_a = simplify(v_rel1m*(P0*p2)*ov/R2);
-
-p1 = v_rel1m;
-p2 = 1.0/(v_rel2m/dot(ov,v_rel2/v_rel2m));
-%p2 = (1.0/v_rel2m)^2;
-%p2 = (1.0/dot(ov,v_rel2/v_rel2m)^2);
-%p2 = (v_rel2m+v_rel2m/dot(ov,v_rel2/v_rel2m))^2;
-%F_a = simplify(p1*p2*ov/R2);
-
-%p4=simplify(ov,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-%p1=simplify(v_rel1m,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-%p2=simplify(1.0/dot(p4,v_rel2/v_rel2m)^(3/2),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-%p3=simplify(k_e/R2,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-%F_a = simplify(p1*p2*p3*p4,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-
-p4=simplify(ov,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-p1=simplify(v_rel1m,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-dotp = dot(p4,v_rel2/v_rel2m);
-p2=simplify((v_rel2m/v_rel1m)/dotp,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-p3=simplify(k_e/R2,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-F_a = simplify(p1*p2*p3*p4,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+p1 = simplify(v_rel2m/R2,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+p2 = simplify(ov/dot(cvec,v_rel2),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+F_a = k_e*simplify(p1*p2,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
 
 
 %%
