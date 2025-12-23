@@ -107,13 +107,13 @@ $$
 Corpuscle absorption imparts $\mathbf{c}$ momentum per absorption along the incident orientation. The rate of change of receiver momentum satisfies
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt} = \text{Abs}(\mathbf{x_r}, t, t_o) \left( \frac{[\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] \cdot \mathbf{c}(t_o)}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|} \right) \hat{\mathbf{o}}_e(t_o).
+\frac{d (m \mathbf{v_r}(t))}{dt} = \text{Abs}(\mathbf{x_r}, t, t_o) \left( \frac{c \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|^2}{\|\mathbf{c}+\mathbf{v_e}\|[\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] \cdot \mathbf{c}(t_o)} \right) \hat{\mathbf{o}}_e(t_o).
 $$
 
 Consolidating terms yields the action expression
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt} = A r_p \frac{q_e \mu}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c} \left( \frac{\hat{\mathbf{o}}_e \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})}{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{\mathbf{o}}_e,
+\frac{d (m \mathbf{v_r}(t))}{dt} = A r_p \frac{q_e \mu}{4 \pi r^2}  \left( \frac{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|^2}{\mathbf{c_e} \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})} \right) \hat{\mathbf{o}}_e,
 $$
 
 where arguments $(t, t_o)$ are implied for brevity.
@@ -121,7 +121,7 @@ where arguments $(t, t_o)$ are implied for brevity.
 Assuming geometric scaling $A \propto r_p^2$, and that the two particles are identical with $\mu_e=\mu$, the action becomes
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt} = r_p^6 \frac{\rho_u \mu^2}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_e}\|}{c} \left( \frac{\hat{\mathbf{o}}_e \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})}{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|} \right)^2 \hat{\mathbf{o}}_e.
+\frac{d (m \mathbf{v_r}(t))}{dt} = r_p^6 \frac{\rho_u \mu^2}{4 \pi r^2} \left( \frac{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|^2}{\mathbf{c_e} \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})} \right) \hat{\mathbf{o}}_e.
 $$
 
 ## Dimensional Consistency
@@ -215,7 +215,7 @@ $$
 
 of the particle absorbing corpuscles $q_2$ (Absorbing) of an emitting charge $q_1$ (Emitting) and (e.g., electron charges $e$ separated by distance $r$ (at emitting-absorbing) is:
 
-$$ \mathbf{F} = \frac{k q_1 q_2}{4 \pi r^2} \frac{\|\mathbf{c} + \mathbf{v_1}\|}{\|c\|}  \left( \frac{\mathbf{c} \cdot ( \mathbf{c} + \mathbf{v_1} - \mathbf{v_2} )}{\|\mathbf{c}\| \|\mathbf{c} + \mathbf{v_1} - \mathbf{v_2}\|} \right)^2 \hat{o_1},
+$$ \mathbf{F} = \frac{k q_1 q_2}{4 \pi r^2} \left( \frac{\|\mathbf{c} + \mathbf{v_1} - \mathbf{v_2}\|^2}{\mathbf{c_1} \cdot (\mathbf{c} + \mathbf{v_1} - \mathbf{v_2})} \right) \hat{\mathbf{o}}_1,
 $$
 
 where:
