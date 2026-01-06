@@ -65,11 +65,24 @@ v_rel2 = v_rel1 - vp;
 ov = cvec/c;
 v_rel1m = dot(v_rel1,v_rel1);
 v_rel2m = dot(v_rel2,v_rel2);
-p1 = v_rel2m;
-p2 = (ov/dot(cvec,v_rel2));
 R = r_p-r_w;
 R2 = dot(R,R);
-F_a = simplify(p1*p2/R2);
+
+%--- Working
+%p1 = v_rel2m;
+%p2 = (ov/dot(cvec,v_rel2));
+
+
+p1= simplify(ov/R2);
+p2 = (sqrt(v_rel1m)/(c^2))*(c*sqrt(v_rel2m)/(sqrt(v_rel1m)*dot(ov,v_rel2/sqrt(v_rel2m))));
+
+
+F_a = simplify(p1*p2,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+
+
+
+
+
 simplify(subs(F_a,[v_y,y,x],[0,0,x])) %[output:32a8f242]
 simplify(subs(F_a,[v_y,y,x],[0,0,-x])) %[output:0112436b]
 

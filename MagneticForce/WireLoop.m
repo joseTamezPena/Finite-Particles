@@ -66,7 +66,7 @@ angles = [0,pi/2,pi,7*pi/4];
 plotrange=[0,2*pi];
 posx=subs(rt_w,r,1);
 
-figure(1) %[output:27ea08d5]
+figure(1)
 fplot(posx(1),plotrange) %[output:27ea08d5]
 hold on %[output:27ea08d5]
 posv=subs(vt_w,v_o,1);
@@ -85,11 +85,10 @@ R2 = r^2;
 v_rel1 = cvec + vt_w;
 v_rel2 = v_rel1 - vp;
 ov = cvec/c;
-v_rel1m = dot(v_rel1,v_rel1);
 v_rel2m = dot(v_rel2,v_rel2);
 
-p1 = simplify(v_rel2m/R2,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-p2 = simplify(ov/dot(cvec,v_rel2),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+p1 = simplify(ov/R2,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+p2 = simplify(v_rel2m/dot(cvec,v_rel2),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
 F_a = simplify(p1*p2,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
 
 

@@ -108,36 +108,177 @@ assumeAlso(c^2*y^2 - v_x^2*y^2 + c^2*x^2 >0)
 R2 = dot(r_p,r_p);
 
 ov = simplify(cvec/sqrt(dot(cvec,cvec)));
-
+simplify(sqrt(dot(cvec,cvec))) %[output:1d20e58e]
 vs = cvec+v;
-rvel= vs-vp;
-
+rvel = vs-vp;
+%rvel2 = cvec-v+vp;
 p4=simplify(subs(ov,[v_x,y],[0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
 
 rvelm = dot(rvel,rvel);
+%rvelm2 = sqrt(dot(rvel,rvel)*dot(rvel2,rvel2));
+%rvelm2 = dot(rvel,rvel2);
 pvec2 = dot(pvec,pvec);
 
-eforce = simplify(subs((k/pvec2)*(rvelm/dot(cvec,rvel))*p4,[v_x,v_y,y],[0,0,0]));
-eforce = taylor(eforce,[vp_x,vp_y],[0,0],order=2) %[output:1d20e58e]
+%eforce = simplify(subs((k/pvec2)*(rvelm/dot(cvec,rvel))*p4,[v_x,v_y,y],[0,0,0]));
+%eforce = simplify(subs((k/pvec2)*(rvelm/dot(cvec,rvel))*p4,[v_x,v_y,y],[0,0,0]));
+
 
 %%
 
 dotp = simplify(subs(dot(cvec,rvel),[v_x,y],[0,0]));
 p1= simplify(subs(k/R2,[v_x,y],[0,0]));
-p2=simplify(subs(rvelm/dotp,[v_x,y],[0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+%p2=simplify(subs(rvelm/dotp,[v_x,y],[0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+
+%p2 = (sqrt(dot(vs,vs)*rvelm)/c^2)*dot(ov,rvel/sqrt(rvelm));
+%p2 = (sqrt(dot(vs,vs))/c^2)*dot(ov,rvel);
+
+%p2 = (sqrt(dot(vs,vs))/c^2)/dot(ov,rvel/sqrt(rvelm));
+%p2 = (sqrt(dot(vs,vs))*rvelm/c^2)/dot(ov,rvel);
+%p2 = (sqrt(dot(vs,vs)*rvelm)/c^2)*(dot(ov,rvel/sqrt(rvelm)));
+
+%p2 = (sqrt(dot(vs,vs))/c^2)*(sqrt(rvelm)/dot(ov,rvel/sqrt(rvelm)));
+%p2 = (sqrt(dot(vs,vs))/c^2)*(sqrt(rvelm))/dot(ov,rvel/sqrt(rvelm));
+
+%p2 = (sqrt(dot(vs,vs))/c^2)*(c/dot(ov,rvel/sqrt(rvelm)));
+
+%p2 = (sqrt(dot(vs,vs))/c^2)*(c*sqrt(rvelm)/(sqrt(dot(vs,vs))*dot(ov,rvel/sqrt(rvelm))));
+%p2 = (1/c)*(rvelm)/(1*dot(ov,rvel));
+%p2 = rvelm/(dot(cvec,rvel));
+
+vsmag = dot(vs,vs);
+%dpm2 = dot(ov,rvel/sqrt(rvelm));
+%p2 = (sqrt(vsmag)/c^2)*(c*(sqrt(2.0-dpm2^2)));
+%p2 = (sqrt(vsmag)/c^2)*(c/dpm2);
+%p2 = (sqrt(vsmag)/c^2)*(c*(1.0-sqrt(rvelm/c^2*(1.0-dpm2^2))));
+%p2 = (sqrt(vsmag)/c^2)*(sqrt(rvelm)*dpm2+c/dpm2);
+%p2 = (sqrt(vsmag)/c^2)*(sqrt(rvelm)*dpm2+c/dpm2);
+
+rvel2A = cvec + v - vp;
+rvel2B =  v - vp;
+dpm2Ab = dot(ov,rvel2A/sqrt(dot(rvel2A,rvel2A)));
+%dpm2B = dot(ov,rvel2B/sqrt(dot(rvel2A,rvel2A)));
+dpm2A = dot(ov,rvel2A/c);
+dpm2B = dot(ov,rvel2B/c);
+
+%p2 = (sqrt(vsmag)/c^2)*(c/dpm2A-sqrt(rvelm)*dpm2B);
+%p2 = (sqrt(vsmag)/c^2)*(c/dpm2A+c*dpm2B^2);
+%p2 = (sqrt(vsmag)/c^2)*(c/dpm2A-c*dpm2B^2);
+%p2 = (sqrt(vsmag)/c^2)*(sqrt(rvelm)*sqrt(1-dpm2B^2) + c/dpm2A);
+
+%p2 = (sqrt(vsmag)/c^2)*(sqrt(rvelm)*(1-dpm2B^2) + c/dpm2A);
+%p2 = (sqrt(vsmag)/c^2)*(sqrt(rvelm)*(1-dpm2B) + c/dpm2A)/2;
+%p2 = (sqrt(vsmag)/c^2)*(sqrt(rvelm)*(1-dpm2B^2)/dpm2A);
+%p2 = (sqrt(vsmag)/c^2)*(c*(1-dpm2B^2)/dpm2A);
+%p2 = (sqrt(vsmag)/c^2)*(sqrt(rvelm)*sqrt(1-dpm2B^2)/dpm2A);
+%p2 = (sqrt(vsmag)/c^2)*(c*sqrt(1-dpm2B^2)/dpm2A);
+%p2 = (sqrt(vsmag)/c^2)*(c/(sqrt(1-dpm2B^2)*dpm2A));
+%p2 = (sqrt(vsmag)/c^2)*(c/((1.0-dpm2B)*dpm2A));
+%p2 = (sqrt(vsmag)/c^2)*(c*((1.0-dpm2B)*dpm2A));
+%p2 = (sqrt(vsmag)/c^2)*(sqrt(rvelm)*((1.0-dpm2B)*dpm2A));
+%p2 = (sqrt(vsmag)/c^2)*(sqrt(rvelm)*sqrt((1.0-dpm2B)*dpm2A));
+%p2 = (sqrt(vsmag)/c^2)*(sqrt(rvelm)*dpm2A/(1.0-dpm2B));
+%p2 = (sqrt(vsmag)/c^2)*(c*dpm2A/(1.0-dpm2B^2));
+%p2 = (sqrt(vsmag)/c^2)*(sqrt(rvelm)*dpm2A/(1.0-dpm2B^2));
+%p2 = (sqrt(vsmag)/c^2)*(c*(1+rvelm/c^2-dpm2A-dpm2B));
+%p2 = (sqrt(vsmag)/c^2)*(c*(1+rvelm/c^2-2*dpm2A+dpm2Ab));
+%p2 = (sqrt(vsmag)/c^2)*(c*(rvelm/c^2-dpm2A+dpm2Ab));
+%p2 = (sqrt(vsmag)/c^2)*(c*(rvelm/c^2-(dpm2A-dpm2Ab)));
+%p2 = (sqrt(vsmag)/c^2)*(c*(1+rvelm/c^2-(2*dpm2A-dpm2Ab)));
+
+%%%Basics
+p2a = simplify(sqrt(vsmag)/c^2,'Criterion','preferReal','Steps',100); % For source at release
+cmag = sqrt(rvelm); % courpuscle speed
+rveln = rvel/cmag; % courpuscle unitary vector
+rvelc = rvel/c; % courpuscle unitary vector
+
+%p2 = simplify(p2a*(cmag*dot(rveln,ov)));  % 
+E=[(q^2*(c - vp_x))/(4*c*epsilon0*x^2*sym(pi)), sym(0), sym(0)], M=[(q^2*v_y*vp_y)/(4*c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y*(c - vp_x))/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:1159026d] %[output:845fa55b]
+%p2 = simplify(p2a*(cmag*dot(rvelc,ov)));  % 
+E=[(q^2*(c - 2*vp_x))/(4*c*epsilon0*x^2*sym(pi)), sym(0), sym(0)], M=[(q^2*v_y*vp_y)/(4*c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y*(c - 2*vp_x))/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:59919252] %[output:51f75ea1]
+%p2 = simplify(p2a*(cmag*dot(rveln,ov)^2));  % 
+E=[(q^2*(c - vp_x))/(4*c*epsilon0*x^2*sym(pi)), sym(0), sym(0)], M=[(q^2*v_y*vp_y)/(2*c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y*(c - vp_x))/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:98c1e34d] %[output:97015b7f]
+%p2 = simplify(p2a*(c+cmag*(dot(rveln,ov)^2)-c*dot(rveln,ov)));  % 
+
+E=[(q^2*(c - vp_x))/(4*c*epsilon0*x^2*sym(pi)), sym(0), sym(0)],M=[(q^2*v_y*vp_y)/(4*c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y*(c - vp_x))/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:32b99ba7] %[output:0087b570]
+
+%p2 = p2a*(c/dot(rveln,ov));  % E Correct
+[-(q^2*v_y*vp_y)/(4*c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y)/(4*c*epsilon0*x^2*sym(pi)), sym(0)] %[output:9b9b7244]
+%p2 = simplify(p2a*(c*dot(rvelc,ov))); 
+
+%p2 = p2a*(c*(1.0-dot(rveln,ov)^2));  %E:zero
+
+[-(q^2*v_y*vp_y)/(2*c^2*epsilon0*x^2*sym(pi)), sym(0), sym(0)] %[output:69438c05]
+
+%p2 = p2a*(cmag*(1.0-dot(rveln,ov)^2)); % E zero
+[-(q^2*v_y*vp_y)/(2*c^2*epsilon0*x^2*sym(pi)), sym(0), sym(0)] %[output:776a6350]
+
+%p2 = p2a*(c*sqrt(1.0-dot(rveln,ov)^2)); % 
+E=[(q^2*vp_y)/(4*c*epsilon0*x^2*sym(pi)), sym(0), sym(0)], M=[-(q^2*v_y)/(4*c*epsilon0*x^2*sym(pi)), -(q^2*v_y*vp_y)/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:50e3dd2b] %[output:18a51b53]
+
+%p2 = p2a*(cmag*sqrt(1.0-dot(rveln,ov)^2)); % 
+E= [(q^2*vp_y)/(4*c*epsilon0*x^2*sym(pi)), sym(0), sym(0)],M=[-(q^2*v_y*(c - vp_x))/(4*c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y*vp_y)/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:1fea46a5] %[output:71316228]
+
+%p2 = p2a*(cmag*(1.0-sqrt(1.0-dot(rveln,ov)^2)));  % E=[-(q^2*(- c + vp_y + vp_x))/(4*c*epsilon0*x^2*sym(pi)), sym(0), sym(0)]
+[(q^2*v_y*(c - vp_x))/(4*c^2*epsilon0*x^2*sym(pi)), (q^2*v_y*(- c + vp_y + vp_x))/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:5d4e5245]
+%p2 = p2a*(c/(1.0-sqrt(1.0-dot(rveln,ov)^2))); %E=[(q^2*(c + vp_y))/(4*c*epsilon0*x^2*sym(pi)), sym(0), sym(0)]
+
+[-(q^2*v_y*(c + 2*vp_y))/(4*c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y*(c + vp_y))/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:3680d1ce]
+
+%p2 = p2a*(c/dot(rveln,ov)^2); 
+[-(q^2*v_y*vp_y)/(2*c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y)/(4*c*epsilon0*x^2*sym(pi)), sym(0)] %[output:683ad454]
+
+%p2 = p2a*(c*dot(rveln,ov)^2);
+[(q^2*v_y*vp_y)/(2*c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y)/(4*c*epsilon0*x^2*sym(pi)), sym(0)] %[output:97133356]
+%p2 = simplify(p2a*(cmag*dot(rveln,ov))); % E incorrect [(q^2*(c - vp_x))/(4*c*epsilon0*x^2*sym(pi)), sym(0), sym(0)]
+[(q^2*v_y*vp_y)/(4*c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y*(c - vp_x))/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:76d15c9e]
+
+%p2 = simplify(p2a*(2*c/dot(rveln,ov)-cmag*dot(rveln,ov)^2));
+[-(q^2*v_y*vp_y)/(c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y*(c + vp_x))/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:7ecb224a]
+
+%p2 = simplify(c*p2a*(1/dot(rveln,ov)-(1.0-dot(rveln,ov)^2))); % E:correct
+[(q^2*v_y*vp_y)/(4*c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y)/(4*c*epsilon0*x^2*sym(pi)), sym(0)] %[output:7be48f7d]
+%p2 = simplify(c*p2a*(1/dot(rveln,ov)^2-(1.0-dot(rveln,ov)^2))); % E:correct
+[sym(0), -(q^2*v_y)/(4*c*epsilon0*x^2*sym(pi)), sym(0)] %[output:456e8fef]
+
+%p2 = simplify(c*p2a*(1/dot(rveln,ov)^2+(1.0-dot(rveln,ov)^2))); % E correct
+[-(q^2*v_y*vp_y)/(c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y)/(4*c*epsilon0*x^2*sym(pi)), sym(0)] %[output:3e9c4320]
+
+%p2 = simplify(cmag*p2a*(1/dot(rveln,ov)^2+(1.0-dot(rveln,ov)^2))); % E incorrect
+[-(q^2*v_y*vp_y)/(c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y*(c - vp_x))/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:32a51d0c]
+
+%p2 = simplify(cmag*p2a*(1/dot(rveln,ov)+(1.0-dot(rveln,ov)))); % E incorrect 
+[-(q^2*v_y*vp_y)/(2*c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y*(c - vp_x))/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:98b69f41]
+
+%p2 = simplify(cmag*p2a*(1/dot(rveln,ov)+sqrt(1.0-dot(rveln,ov)^2))); % E incorrect 
+[-(q^2*v_y*(c + vp_y - vp_x))/(4*c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y*(c + vp_y - vp_x))/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:9f2254e5]
+
+%p2 = simplify(cmag*p2a*(dot(rveln,ov)^2-(1.0-dot(rveln,ov)^2))); % E
+%incorrect
+[(q^2*v_y*vp_y)/(c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y*(c - vp_x))/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:5929b06a]
+
+%p2 = simplify(c*p2a*(1.0/dot(rveln,ov)+sqrt(1.0-dot(rveln,ov)^2))); 
+[-(q^2*v_y*(c + vp_y))/(4*c^2*epsilon0*x^2*sym(pi)), -(q^2*v_y*(c + vp_y))/(4*c^2*epsilon0*x^2*sym(pi)), sym(0)] %[output:1796efed]
+%p2 = simplify(p2a*(c/dot(rveln,ov))) ;%-c*(1.0-dot(rveln,ov)^2))); 
+%p2 = simplify(p2a*(-cmag*dot(rvelc,ov)+2*cmag*dot(rveln,ov))); 
+p2 = simplify(p2a*(c/dot(rveln,ov)+cmag*dot(rvelc,ov)-cmag*dot(rveln,ov))); 
 
 
-F2_c = simplify(p1*p2*p4,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+p2= simplify(subs(p2,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100);
 
-F2T_c = taylor(F2_c,v_y,0,order=2);
+eforce = simplify(subs((k/pvec2)*p2*p4,[v_x,v_y,y],[0,0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+eforce = simplify(taylor(eforce,[vp_x,vp_y],[0,0],order=2)) %[output:40ad077f]
+
+%F2_c = simplify(p1*p2*p4,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+F2_c = simplify(p1*p2*p4,'Criterion','preferReal','Steps',100);
+F2T_c = simplify(taylor(F2_c,v_y,0,order=2),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
 
 % The net magnetic Force due to corpuscles
-F2T_c = simplify(taylor(F2T_c,[vp_x,vp_y],[0,0],order=2)-eforce) %[output:17012985]
+F2T_c = simplify(taylor(F2T_c,[vp_x,vp_y],[0,0],order=2)-eforce) %[output:0758925b]
 
 
 %%
 % The Lorentz magnetic forces
-Ft_neutral,ft_magnetic %[output:059e7f34] %[output:59b278cc]
+Ft_neutral,ft_magnetic %[output:169b257a] %[output:757d2aa4]
 
 %[appendix]{"version":"1.0"}
 %---
@@ -199,14 +340,104 @@ Ft_neutral,ft_magnetic %[output:059e7f34] %[output:59b278cc]
 %   data: {"dataType":"symbolic","outputData":{"name":"ft_magnetic","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
 %[output:1d20e58e]
-%   data: {"dataType":"symbolic","outputData":{"name":"eforce","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 }{4\\,\\varepsilon_0 \\,x^2 \\,\\pi }-\\frac{q^2 \\,{\\textrm{vp}}_x }{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"c"}}
 %---
-%[output:17012985]
+%[output:1159026d]
+%   data: {"dataType":"symbolic","outputData":{"name":"E","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
+%---
+%[output:845fa55b]
+%   data: {"dataType":"symbolic","outputData":{"name":"M","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:59919252]
+%   data: {"dataType":"symbolic","outputData":{"name":"E","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,{\\left(c-2\\,{\\textrm{vp}}_x \\right)}}{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
+%---
+%[output:51f75ea1]
+%   data: {"dataType":"symbolic","outputData":{"name":"M","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-2\\,{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:98c1e34d]
+%   data: {"dataType":"symbolic","outputData":{"name":"E","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
+%---
+%[output:97015b7f]
+%   data: {"dataType":"symbolic","outputData":{"name":"M","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:32b99ba7]
+%   data: {"dataType":"symbolic","outputData":{"name":"E","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
+%---
+%[output:0087b570]
+%   data: {"dataType":"symbolic","outputData":{"name":"M","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:9b9b7244]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y }{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:69438c05]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
+%---
+%[output:776a6350]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
+%---
+%[output:50e3dd2b]
+%   data: {"dataType":"symbolic","outputData":{"name":"E","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,{\\textrm{vp}}_y }{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
+%---
+%[output:18a51b53]
+%   data: {"dataType":"symbolic","outputData":{"name":"M","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y }{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:1fea46a5]
+%   data: {"dataType":"symbolic","outputData":{"name":"E","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,{\\textrm{vp}}_y }{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
+%---
+%[output:71316228]
+%   data: {"dataType":"symbolic","outputData":{"name":"M","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:5d4e5245]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & \\frac{q^2 \\,v_y \\,{\\left(-c+{\\textrm{vp}}_y +{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:3680d1ce]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\left(c+2\\,{\\textrm{vp}}_y \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c+{\\textrm{vp}}_y \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:683ad454]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y }{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:97133356]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y }{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:76d15c9e]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:7ecb224a]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c+{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:7be48f7d]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y }{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:456e8fef]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n0 & -\\frac{q^2 \\,v_y }{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:3e9c4320]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y }{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:32a51d0c]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:98b69f41]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:9f2254e5]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\left(c+{\\textrm{vp}}_y -{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c+{\\textrm{vp}}_y -{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:5929b06a]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:1796efed]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\left(c+{\\textrm{vp}}_y \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c+{\\textrm{vp}}_y \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%---
+%[output:40ad077f]
+%   data: {"dataType":"symbolic","outputData":{"name":"eforce","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
+%---
+%[output:0758925b]
 %   data: {"dataType":"symbolic","outputData":{"name":"F2T_c","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
-%[output:059e7f34]
+%[output:169b257a]
 %   data: {"dataType":"symbolic","outputData":{"name":"Ft_neutral","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
-%[output:59b278cc]
+%[output:757d2aa4]
 %   data: {"dataType":"symbolic","outputData":{"name":"ft_magnetic","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---

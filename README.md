@@ -134,7 +134,7 @@ $$
 The rate of moment change conforms dimensionally to:
 
 $$
-\text{corpuscles m s}^{-2} \sim \text{m}^6 \cdot \frac{(\text{corpuscles m}^{-3}) \cdot (\text{s}^{-2})}{\text{m}^2} \cdot \frac{\text{m s}^{-1}}{(\text{m s}^{-1})},
+\text{corpuscles m s}^{-2} \sim \text{m}^6 \cdot \frac{(\text{corpuscles m}^{-3}) \cdot (\text{s}^{-2})}{\text{m}^2} \cdot \left( \frac{\text{m s}^{-1}}{(\text{m s}^{-1})} \right)^2,
 $$
 
 confirming that the derived action is proportional to the acceleration.
