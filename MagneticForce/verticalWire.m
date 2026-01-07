@@ -55,7 +55,8 @@ eq_2 = dot(cv,cv)-c^2==0 %[output:0dd89255]
 c_x = simplify(ccx(2)), c_y = simplify(ccy(2)),tt = simplify(tt(2)) %[output:53386cb5] %[output:2c6ee76c] %[output:5970a22c]
 cvec=[c_x,c_y,0];
 %%
-
+subs(cvec,[y,x],[0,1]) %[output:771f98c2]
+vpa(subs(cvec,[y,x,v_y,c],[0,10,-0.01,1])) %[output:30db109a]
 %%
 %[text] ## The Force
 %[text] 
@@ -69,48 +70,50 @@ R = r_p-r_w;
 R2 = dot(R,R);
 
 %--- Working
-%p1 = v_rel2m;
-%p2 = (ov/dot(cvec,v_rel2));
+p1 = v_rel2m/R2;
+p2 = (ov/dot(cvec,v_rel2));
 
 
-p1= simplify(ov/R2);
-p2 = (sqrt(v_rel1m)/(c^2))*(c*sqrt(v_rel2m)/(sqrt(v_rel1m)*dot(ov,v_rel2/sqrt(v_rel2m))));
+%p1= simplify(ov/R2);
+%p2 = (sqrt(v_rel1m)/(c^2))*v_rel2m/dot(ov,v_rel2);
+%p2 = (sqrt(v_rel1m)/(c^2))*c/(dot(ov,v_rel2/sqrt(v_rel2m))^(3/2));
 
 
-F_a = simplify(p1*p2,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-
-
+F_a = simplify(p1*p2,'Criterion','preferReal','Steps',100);
 
 
 
 simplify(subs(F_a,[v_y,y,x],[0,0,x])) %[output:32a8f242]
 simplify(subs(F_a,[v_y,y,x],[0,0,-x])) %[output:0112436b]
+simplify(subs(F_a,[y,vp_x],[0,0])) %[output:2cdd2279]
 
 %%
 %[text] ## Integrate the static charges
 F_n = simplify(subs(F_a,v_y,0));
-F_nt = taylor(F_n,[vp_x,vp_y],[0,0],order=2);
-simplify(subs(F_a,[v_y,y,vp_y],[0,0,0])) %[output:2cdd2279]
-simplify(subs(F_nt,[y,vp_y],[0,0])) %[output:839ce010]
+F_nt = simplify(taylor(F_n,[vp_x,vp_y],[0,0],order=2));
+simplify(subs(F_a,[v_y,y,vp_y],[0,0,0])) %[output:839ce010]
+simplify(subs(F_nt,[y,vp_y],[0,0])) %[output:925c70d4]
 %%
 syms L real positive
 
 Ft_n = int(F_nt,y,-L,L);
-Ft_nInf = simplify(limit(Ft_n,L,Inf)) %[output:925c70d4]
+Ft_nInf = simplify(limit(Ft_n,L,Inf)) %[output:7ec6e82d]
 %%
 %[text] ## Integrating the current
 % Define the velocity vector of the moving charge
 F_ct = simplify(taylor(F_a,v_y,0,order=2));
 F_ct = simplify(taylor(F_ct,[vp_x,vp_y],[0,0],order=2));
-simplify(subs(F_a,[y,vp_y],[0,0]));
-simplify(subs(F_ct,[y,vp_y],[0,0])) %[output:4dadc0f9]
+simplify(subs(F_a,[y,vp_x],[0,0])) %[output:312094e1]
+simplify(subs(F_ct,y,0)) %[output:0e9aeb4a]
+sol1=[-(- c^2 + v_y*vp_y + c*vp_x)/(c^2*x^2), -(v_y*(c - vp_x))/(c^2*x^2), sym(0)] %[output:355f8f8c]
+
 Ft_c = int(F_ct,y,-L,L);
 %%
 %Set L to Infinity
-Ft_cInf = simplify(limit(Ft_c,L,Inf)) %[output:80498cde]
+Ft_cInf = simplify(limit(Ft_c,L,Inf)) %[output:600813bb]
 %%
 %[text] ## The net force
-F_atot = k_e*simplify(Ft_cInf - Ft_nInf) %[output:0e9aeb4a]
+F_atot = k_e*simplify(Ft_cInf - Ft_nInf) %[output:5539bf83]
 
 
 %[appendix]{"version":"1.0"}
@@ -133,6 +136,12 @@ F_atot = k_e*simplify(Ft_cInf - Ft_nInf) %[output:0e9aeb4a]
 %[output:5970a22c]
 %   data: {"dataType":"symbolic","outputData":{"name":"tt","value":"\\frac{v_y \\,y+\\sqrt{c^2 \\,y^2 +c^2 \\,x^2 -{v_y }^2 \\,x^2 }}{c^2 -{v_y }^2 }"}}
 %---
+%[output:771f98c2]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\sqrt{c^2 -{v_y }^2 } & -v_y  & 0\n\\end{array}\\right)"}}
+%---
+%[output:30db109a]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n0.99994999874993749609347654199058 & 0.01 & 0\n\\end{array}\\right)"}}
+%---
 %[output:32a8f242]
 %   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{c^2 +{{\\textrm{vp}}_y }^2 -2\\,c\\,{\\textrm{vp}}_x +{{\\textrm{vp}}_x }^2 }{c\\,x^2 \\,{\\left(c-{\\textrm{vp}}_x \\right)}} & 0 & 0\n\\end{array}\\right)"}}
 %---
@@ -140,20 +149,29 @@ F_atot = k_e*simplify(Ft_cInf - Ft_nInf) %[output:0e9aeb4a]
 %   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{c^2 +{{\\textrm{vp}}_y }^2 +2\\,c\\,{\\textrm{vp}}_x +{{\\textrm{vp}}_x }^2 }{c\\,x^2 \\,{\\left(c+{\\textrm{vp}}_x \\right)}} & 0 & 0\n\\end{array}\\right)"}}
 %---
 %[output:2cdd2279]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{c-{\\textrm{vp}}_x }{c\\,x^2 } & 0 & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{\\sqrt{c^2 -{v_y }^2 }\\,{\\left(c^2 -{v_y }^2 +{{\\textrm{vp}}_y }^2 \\right)}}{c\\,x^2 \\,{\\left(c^2 -{v_y }^2 +v_y \\,{\\textrm{vp}}_y \\right)}} & -\\frac{v_y \\,{\\left(c^2 -{v_y }^2 +{{\\textrm{vp}}_y }^2 \\right)}}{c\\,x^2 \\,{\\left(c^2 -{v_y }^2 +v_y \\,{\\textrm{vp}}_y \\right)}} & 0\n\\end{array}\\right)"}}
 %---
 %[output:839ce010]
 %   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{c-{\\textrm{vp}}_x }{c\\,x^2 } & 0 & 0\n\\end{array}\\right)"}}
 %---
 %[output:925c70d4]
-%   data: {"dataType":"symbolic","outputData":{"name":"Ft_nInf","value":"\\left(\\begin{array}{ccc}\n\\frac{2\\,c-\\frac{\\pi \\,{\\textrm{vp}}_x }{2}}{c\\,x} & -\\frac{\\pi \\,{\\textrm{vp}}_y }{2\\,c\\,x} & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{c-{\\textrm{vp}}_x }{c\\,x^2 } & 0 & 0\n\\end{array}\\right)"}}
 %---
-%[output:4dadc0f9]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{c-{\\textrm{vp}}_x }{c\\,x^2 } & -\\frac{v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{c^2 \\,x^2 } & 0\n\\end{array}\\right)"}}
+%[output:7ec6e82d]
+%   data: {"dataType":"symbolic","outputData":{"name":"Ft_nInf","value":"\\left(\\begin{array}{ccc}\n\\frac{4\\,c-\\pi \\,{\\textrm{vp}}_x }{2\\,c\\,x} & -\\frac{\\pi \\,{\\textrm{vp}}_y }{2\\,c\\,x} & 0\n\\end{array}\\right)"}}
 %---
-%[output:80498cde]
-%   data: {"dataType":"symbolic","outputData":{"name":"Ft_cInf","value":"\\left(\\begin{array}{ccc}\n-\\frac{-4\\,c^2 +4\\,v_y \\,{\\textrm{vp}}_y +\\pi \\,c\\,{\\textrm{vp}}_x }{2\\,c^2 \\,x} & \\frac{-\\frac{\\pi \\,c\\,{\\textrm{vp}}_y }{2}+2\\,v_y \\,{\\textrm{vp}}_x }{c^2 \\,x} & 0\n\\end{array}\\right)"}}
+%[output:312094e1]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{\\sqrt{c^2 -{v_y }^2 }\\,{\\left(c^2 -{v_y }^2 +{{\\textrm{vp}}_y }^2 \\right)}}{c\\,x^2 \\,{\\left(c^2 -{v_y }^2 +v_y \\,{\\textrm{vp}}_y \\right)}} & -\\frac{v_y \\,{\\left(c^2 -{v_y }^2 +{{\\textrm{vp}}_y }^2 \\right)}}{c\\,x^2 \\,{\\left(c^2 -{v_y }^2 +v_y \\,{\\textrm{vp}}_y \\right)}} & 0\n\\end{array}\\right)"}}
 %---
 %[output:0e9aeb4a]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{-c^2 +v_y \\,{\\textrm{vp}}_y +c\\,{\\textrm{vp}}_x }{c^2 \\,x^2 } & -\\frac{v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{c^2 \\,x^2 } & 0\n\\end{array}\\right)"}}
+%---
+%[output:355f8f8c]
+%   data: {"dataType":"symbolic","outputData":{"name":"sol1","value":"\\left(\\begin{array}{ccc}\n-\\frac{-c^2 +v_y \\,{\\textrm{vp}}_y +c\\,{\\textrm{vp}}_x }{c^2 \\,x^2 } & -\\frac{v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{c^2 \\,x^2 } & 0\n\\end{array}\\right)"}}
+%---
+%[output:600813bb]
+%   data: {"dataType":"symbolic","outputData":{"name":"Ft_cInf","value":"\\left(\\begin{array}{ccc}\n-\\frac{-4\\,c^2 +4\\,v_y \\,{\\textrm{vp}}_y +\\pi \\,c\\,{\\textrm{vp}}_x }{2\\,c^2 \\,x} & \\frac{-\\frac{\\pi \\,c\\,{\\textrm{vp}}_y }{2}+2\\,v_y \\,{\\textrm{vp}}_x }{c^2 \\,x} & 0\n\\end{array}\\right)"}}
+%---
+%[output:5539bf83]
 %   data: {"dataType":"symbolic","outputData":{"name":"F_atot","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,c^2 \\,\\varepsilon_0 \\,x\\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{2\\,c^2 \\,\\varepsilon_0 \\,x\\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
