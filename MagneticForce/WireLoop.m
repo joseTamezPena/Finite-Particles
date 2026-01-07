@@ -66,7 +66,7 @@ angles = [0,pi/2,pi,7*pi/4];
 plotrange=[0,2*pi];
 posx=subs(rt_w,r,1);
 
-figure(1)
+figure(1) %[output:27ea08d5]
 fplot(posx(1),plotrange) %[output:27ea08d5]
 hold on %[output:27ea08d5]
 posv=subs(vt_w,v_o,1);

@@ -72,16 +72,10 @@ v_rel1m = dot(v_rel1,v_rel1);
 v_rel2m = simplify(dot(v_rel2,v_rel2),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
 
 
-p1= simplify(1/R2);
+p1= simplify(ov/R2);
+p2 = v_rel2m/dot(cvec,v_rel2);
 
-
-p2 = simplify(sqrt(v_rel1m)/(1^2),'Criterion','preferReal','Steps',100); % For source at release
-cmag = sqrt(v_rel2m); % courpuscle speed
-rveln = v_rel2/cmag; % courpuscle unitary vector
-%p3 = cmag/dot(ov,rveln);
-p3 = v_rel2m/dot(cvec,v_rel2)/p2;
-
-F_a = k_e*simplify(p1*p2*p3*ov,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+F_a = k_e*simplify(p1*p2,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
 
 
 %%
