@@ -113,69 +113,38 @@ ov = simplify(cvec/sqrt(dot(cvec,cvec)));
 
 vs = cvec+v;
 rvel = vs-vp;
-vprel = v-vp;
+
 % Dot products
+rvels = dot(vs,vs);
 rvelm2 = dot(rvel,rvel);
 pvec2 = dot(pvec,pvec);
-rvels = dot(vs,vs);
 
 
+% Assume at y=0 v_x=0, and v_y=0
 
-% Assume at y=0 and v_x=0
-cprod = simplify(subs(cross(cvec,rvel),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100);
-mcprod = simplify(dot(cprod,cprod)/c^2,'Criterion','preferReal','Steps',100);
-
-vr_sta2 = simplify(subs(dot(vprel,vprel)/c^2,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); %Speed
-s_sta2 = simplify(subs(rvels,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); %Speed^2 
-c_sta2 = simplify(subs(rvelm2,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); %Speed^2 
-cmag = simplify(subs(sqrt(rvelm2),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); %Speed 
-vsmag = simplify(subs(sqrt(rvels),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); %Speed 
-dpmp_r = simplify(subs(dot(cvec,rvel),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); %raw product
-dpmp_n = simplify(subs(dot(ov,rvel/cmag),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); %Cosine
+s_sta2 = simplify(subs(rvels,[v_x,v_y,y],[0,0,0]),'Criterion','preferReal','Steps',100); %Speed 
+c_sta2 = simplify(subs(rvelm2,[v_x,v_y,y],[0,0,0]),'Criterion','preferReal','Steps',100); %Speed 
+cmag = simplify(subs(sqrt(rvelm2),[v_x,v_y,y],[0,0,0]),'Criterion','preferReal','Steps',100); %Speed 
+dpmp_r = simplify(subs(dot(cvec,rvel),[v_x,v_y,y],[0,0,0]),'Criterion','preferReal','Steps',100); %raw product
+dpmp_n = simplify(subs(dot(ov,rvel/cmag),[v_x,v_y,y],[0,0,0]),'Criterion','preferReal','Steps',100); %Cosine
 
 %% Action Factors
-p1 = simplify(subs(k/R2,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % distance factor
-%p2 = simplify(subs(cmag/(c*dpmp_n),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % source velocity correction
-%p2 = simplify(dpmp_n^2,'Criterion','preferReal','Steps',100); % source velocity correction
-
-%p2 = simplify(((s_sta2/c^2)/c_sta2),'Criterion','preferReal','Steps',100); % density and velocity correction
-%p3 = simplify(c^2*(cmag/c)^2,'Criterion','preferReal','Steps',100); % Adjust
-p2 = simplify(s_sta2/c^2,'Criterion','preferReal','Steps',100); % density and velocity correction
-%p3 = simplify(1 + c*(1-dpmp_n^2)/2,'Criterion','preferReal','Steps',100); % density and velocity correction
-%p3 = simplify(1 + vsmag*(1-dpmp_n^2)/2,'Criterion','preferReal','Steps',100); % density and velocity correction
-%p3 = simplify(1 + vr_sta2*dpmp_n,'Criterion','preferReal','Steps',100); % density and velocity correction
-%p3 = simplify(1 + vr_sta2,'Criterion','preferReal','Steps',100); % density and velocity correction
-%p3 = simplify(1 + vr_sta2,'Criterion','preferReal','Steps',100); % density and velocity correction
-%p3 = simplify(1.0/dpmp_n^2,'Criterion','preferReal','Steps',100); % density and velocity correction
-%p3 = simplify((1 + (1-dpmp_n^2)/2),'Criterion','preferReal','Steps',100); % density and velocity correction
-p3 = simplify((1 + vr_sta2/2),'Criterion','preferReal','Steps',100); % density and velocity correction
+p1 = simplify(subs(k/R2,[v_x,v_y,y],[0,0,0]),'Criterion','preferReal','Steps',100); % distance factor
+p2 = simplify(((s_sta2/c^2)/c_sta2),'Criterion','preferReal','Steps',100); % density and velocity correction
+p3 = simplify(c^2*(cmag/c)^2,'Criterion','preferReal','Steps',100); % source velocity correction
 %% Direction
-ov0 = simplify(subs(ov,[v_x,y],[0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100); % The action orientation
-p4 = subs(dot(vprel,ov0)*vprel/c^2,[v_x,y],[0,0]);
+ov0 = simplify(subs(ov,[v_x,v_y,y],[0,0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100); % The action orientation
 
-eforce = simplify(subs(p1*p2*p3*ov0,[v_x,v_y,y],[0,0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
-eforce = simplify(taylor(eforce,[vp_x,vp_y],[0,0],order=2)) %[output:04397e75]
 
-F2_c = simplify(p1*p2*(p3*ov0-p4),'Criterion','preferReal','Steps',100);
-F2T_c = simplify(taylor(F2_c,v_y,0,order=2),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+F2_c = simplify(p1*p2*p3*ov0,'Criterion','preferReal','Steps',100);
 
 % The net Force due to corpuscles
-F2T_net = simplify(taylor(F2T_c,[vp_x,vp_y],[0,0],order=2)) %[output:547a6275]
-% The net magnetic Force due to corpuscles
-F2T_m=simplify(F2T_net-eforce) %[output:5945671f]
-%%
-dp1 = subs(dot(vp,ov0)*v - dot(vp,v)*ov0,v_x,0);
-dp1 = simplify(taylor(dp1,v_y,0,order=2));
-simplify(taylor(dp1,[vp_x,vp_y],[0,0],order=2)) %[output:83d5a5f3]
-dp1 = subs(dot(vprel,ov0)*ov0,[v_x,y],[0,0]);
-dp1 = simplify(taylor(dp1,v_y,0,order=2));
-simplify(taylor(dp1,[vp_x,vp_y],[0,0],order=2)) %[output:90e5bbbe]
-dp1 = subs(dot(vprel,ov0)*vprel,[v_x,y],[0,0]);
-dp1 = simplify(taylor(dp1,v_y,0,order=2));
-simplify(taylor(dp1,[vp_x,vp_y],[0,0],order=2)) %[output:89d54791]
+F2T_net = simplify(taylor(F2_c,[vp_x,vp_y],[0,0],order=4)) %[output:4652fad5]
+
+
 %%
 % The Lorentz magnetic forces
-Ft_neutral,ft_magnetic %[output:3b00d62f] %[output:131b399b]
+Ft_neutral,ft_magnetic %[output:6951f47e] %[output:08ff04bf]
 
 %[appendix]{"version":"1.0"}
 %---
@@ -236,27 +205,12 @@ Ft_neutral,ft_magnetic %[output:3b00d62f] %[output:131b399b]
 %[output:922d6e6a]
 %   data: {"dataType":"symbolic","outputData":{"name":"ft_magnetic","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
-%[output:04397e75]
-%   data: {"dataType":"symbolic","outputData":{"name":"eforce","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 }{4\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
+%[output:4652fad5]
+%   data: {"dataType":"symbolic","outputData":{"name":"F2T_net","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 }{4\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
 %---
-%[output:547a6275]
-%   data: {"dataType":"symbolic","outputData":{"name":"F2T_net","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,{\\left(-c^2 +v_y \\,{\\textrm{vp}}_y \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
-%---
-%[output:5945671f]
-%   data: {"dataType":"symbolic","outputData":{"name":"F2T_m","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
-%---
-%[output:83d5a5f3]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-v_y \\,{\\textrm{vp}}_y  & v_y \\,{\\textrm{vp}}_x  & 0\n\\end{array}\\right)"}}
-%---
-%[output:90e5bbbe]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{v_y \\,{\\textrm{vp}}_y }{c}-{\\textrm{vp}}_x  & \\frac{v_y \\,{\\textrm{vp}}_x }{c} & 0\n\\end{array}\\right)"}}
-%---
-%[output:89d54791]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n0 & -v_y \\,{\\textrm{vp}}_x  & 0\n\\end{array}\\right)"}}
-%---
-%[output:3b00d62f]
+%[output:6951f47e]
 %   data: {"dataType":"symbolic","outputData":{"name":"Ft_neutral","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
-%[output:131b399b]
+%[output:08ff04bf]
 %   data: {"dataType":"symbolic","outputData":{"name":"ft_magnetic","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
