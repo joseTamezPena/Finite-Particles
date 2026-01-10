@@ -79,6 +79,7 @@ R2 = dot(R,R);
 vr_sta2 = simplify(dot(vprel,vprel)/c^2,'Criterion','preferReal','Steps',100); %Speed
 cmag = simplify(sqrt(v_rel2m),'Criterion','preferReal','Steps',100); %Speed 
 dpmp_n = simplify(dot(ov,v_rel2/cmag),'Criterion','preferReal','Steps',100); %Cosine
+wfact =sqrt(dot(v_w/c,ov)^2);
 
 p1 = simplify(1/R2,'Criterion','preferReal','Steps',100); % distance factor
 p2 = simplify(v_rel1m/c^2,'Criterion','preferReal','Steps',100); % density and velocity correction

@@ -97,14 +97,15 @@ v_rel2m = dot(v_rel2,v_rel2);
 vr_sta2 = simplify(dot(vprel,vprel)/c^2,'Criterion','preferReal','Steps',100); %Speed
 cmag = simplify(sqrt(v_rel2m),'Criterion','preferReal','Steps',100); %Speed 
 dpmp_n = simplify(dot(ov,v_rel2/cmag),'Criterion','preferReal','Steps',100); %Cosine
+wfact =sqrt(dot(vt_w/c,ov)^2);
 
 p1 = simplify(1/R2,'Criterion','preferReal','Steps',100); % distance factor
 p2 = simplify(v_rel1m/c^2,'Criterion','preferReal','Steps',100); % density and velocity correction
-p3 = simplify((1 + vr_sta2/2),'Criterion','preferReal','Steps',100); % density and velocity correction
-p4 = simplify(dot(vprel,ov)*vprel/c^2,'Criterion','preferReal','Steps',100);
+p3 = simplify(sqrt(1 - vr_sta2)+wfact,'Criterion','preferReal','Steps',100); % density and velocity correction
+p4 = simplify((dot(vp,ov)*vt_w - 2*dot(vp,vt_w)*ov)/c^2,'Criterion','preferReal','Steps',100);
 
 
-F_a = simplify(p1*p2*(p3*ov-p4),'Criterion','preferReal','Steps',100);
+F_a = simplify(p1*p2*(p3*ov+p4),'Criterion','preferReal','Steps',100);
 
 
 %%

@@ -137,15 +137,20 @@ vsmag = simplify(subs(sqrt(rvels),[v_x,y],[0,0]),'Criterion','preferReal','Steps
 dpmp_r = simplify(subs(dot(cvec,rvel),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); %raw product
 dpmp_n = simplify(subs(dot(ov,rvel/cmag),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); %Cosine
 dotrel_c = simplify(subs(dot(vprel/c,ov),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); %Cosine;
+fact =sqrt(dot(v/c,ov)^2);
 
-%% Action Factors
+%% Distance Factors
 p1 = simplify(subs(k/R2,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % distance factor
 p2 = simplify(s_sta2/c^2,'Criterion','preferReal','Steps',100); % density and velocity correction
+
 %% Action Direction in velocity vector
+
 ov0 = simplify(subs(ov,[v_x,y],[0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100); % The action orientation
-%% Action direction in relative velocity
-p3 = simplify(sqrt(1-vr_sta2),'Criterion','preferReal','Steps',100); % density and velocity correction
-%p4 = subs(dotrel_c*vprel/c,[v_x,y],[0,0]);
+
+%% Action Omegas 
+
+p3 = simplify(subs(sqrt(1-vr_sta2) + fact,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % density and velocity correction
+%p3 = simplify(subs(dpmp_n + fact,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % density and velocity correction
 p4 = simplify(subs((dot(vp,ov0)*v - 2*dot(vp,v)*ov0)/c^2,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100);
 
 st_force = simplify(subs(p1*p2*p3*ov0,[v_x,v_y,y],[0,0,0]),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);

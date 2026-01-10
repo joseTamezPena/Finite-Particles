@@ -68,14 +68,24 @@ R2 = dot(R,R);
 v_rel1 = cvec + v_w;
 v_rel2 = v_rel1 - vp;
 ov = cvec;
+vprel = v_w-vp;
 v_rel1m = dot(v_rel1,v_rel1);
 v_rel2m = simplify(dot(v_rel2,v_rel2),'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+vr_sta2 = simplify(dot(vprel,vprel),'Criterion','preferReal','Steps',100); %Speed
+
+% Mag correct static not
+%p1= simplify(ov/R2);
+%p2 = v_rel2m/dot(cvec,v_rel2);
+%F_a = k_e*simplify(p1*p2,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
+%===============
+
+p1 = simplify(1/R2,'Criterion','preferReal','Steps',100); % distance factor
+p2 = simplify(v_rel1m,'Criterion','preferReal','Steps',100); % density and velocity correction
+p3 = simplify(sqrt(1 - vr_sta2) + sqrt(dot(v_w,ov)^2),'Criterion','preferReal','Steps',100); % density and velocity correction
+p4 = simplify((dot(vp,ov)*v_w - 2*dot(vp,v_w)*ov),'Criterion','preferReal','Steps',100);
+F_a = k_e*simplify(p1*p2*(p3*ov+p4),'Criterion','preferReal','Steps',100);
 
 
-p1= simplify(ov/R2);
-p2 = v_rel2m/dot(cvec,v_rel2);
-
-F_a = k_e*simplify(p1*p2,'IgnoreAnalyticConstraints',true,'Criterion','preferReal','Steps',100);
 
 
 %%
@@ -86,16 +96,16 @@ F_nt = taylor(F_n,[vp_x,vp_y],[0,0],order=2);
 syms L real positive
 
 Ft_n = int(F_nt,y,-L,L);
-Ft_nInf = simplify(limit(Ft_n,L,Inf)) %[output:88dede9a]
+Ft_nInf = simplify(limit(Ft_n,L,Inf)) %[output:3c236c2f]
 %%
 %[text] ## Net forces
 netf = simplify(F_a-F_n);
 
 Fn_ct = simplify(taylor(netf,[vp_x,vp_y],[0,0],order=2));
 Fn_ct = simplify(taylor(Fn_ct,v_y,0,order=2));
-subs(Fn_ct,y,0) %[output:1a81c246]
+subs(Fn_ct,y,0) %[output:6221a8f3]
 Fnt_c = int(Fn_ct,y,-L,L);
-Fnt_cInf = simplify(limit(Fnt_c,L,Inf)) %[output:51ca2f0e]
+Fnt_cInf = simplify(limit(Fnt_c,L,Inf)) %[output:66c8e420]
 %%
 %[text] ## Integrating the current
 
@@ -104,13 +114,13 @@ F_ct = simplify(taylor(F_ct,[vp_x,vp_y],[0,0],order=2));
 Ft_c = int(F_ct,y,-L,L);
 %%
 %Set L to Infinity
-Ft_cInf = simplify(limit(Ft_c,L,Inf)) %[output:87c0fec2]
+Ft_cInf = simplify(limit(Ft_c,L,Inf)) %[output:978c0cf3]
 %%
 %[text] ## The net force
 % The corpuscular force
-F_atot = simplify(Ft_cInf - Ft_nInf) %[output:5041e04a]
+F_atot = simplify(Ft_cInf - Ft_nInf) %[output:47cc75a3]
 %The Lorentz force
-sol=[-(q^2*v_y*vp_y)/(2*epsilon0*x*sym(pi)), +(q^2*v_y*vp_x)/(2*epsilon0*x*sym(pi)), sym(0)] %[output:3ccd42cf]
+sol=[-(q^2*v_y*vp_y)/(2*epsilon0*x*sym(pi)), +(q^2*v_y*vp_x)/(2*epsilon0*x*sym(pi)), sym(0)] %[output:07190343]
 
 %[appendix]{"version":"1.0"}
 %---
@@ -138,21 +148,21 @@ sol=[-(q^2*v_y*vp_y)/(2*epsilon0*x*sym(pi)), +(q^2*v_y*vp_x)/(2*epsilon0*x*sym(p
 %[output:1610fcc1]
 %   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{3\\,\\sqrt{11}}{10} & -\\frac{1}{10} & 0\n\\end{array}\\right)"}}
 %---
-%[output:88dede9a]
-%   data: {"dataType":"symbolic","outputData":{"name":"Ft_nInf","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,{\\left(-4+\\pi \\,{\\textrm{vp}}_x \\right)}}{8\\,\\varepsilon_0 \\,x\\,\\pi } & -\\frac{q^2 \\,{\\textrm{vp}}_y }{8\\,\\varepsilon_0 \\,x} & 0\n\\end{array}\\right)"}}
+%[output:3c236c2f]
+%   data: {"dataType":"symbolic","outputData":{"name":"Ft_nInf","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 }{2\\,\\varepsilon_0 \\,x\\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
 %---
-%[output:1a81c246]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,\\varepsilon_0 \\,x^2 \\,\\pi } & \\frac{q^2 \\,v_y \\,{\\left(-x^3 +{\\textrm{vp}}_x \\,x^3 \\right)}}{4\\,\\varepsilon_0 \\,x^5 \\,\\pi } & 0\n\\end{array}\\right)"}}
+%[output:6221a8f3]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,\\varepsilon_0 \\,x^2 \\,\\pi } & \\frac{q^2 \\,v_y \\,{\\left(-x^2 +{\\textrm{vp}}_x \\,x^2 \\right)}}{4\\,\\varepsilon_0 \\,x^4 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
-%[output:51ca2f0e]
+%[output:66c8e420]
 %   data: {"dataType":"symbolic","outputData":{"name":"Fnt_cInf","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,\\varepsilon_0 \\,x\\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{2\\,\\varepsilon_0 \\,x\\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
-%[output:87c0fec2]
-%   data: {"dataType":"symbolic","outputData":{"name":"Ft_cInf","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,{\\left(-4+4\\,v_y \\,{\\textrm{vp}}_y +\\pi \\,{\\textrm{vp}}_x \\right)}}{8\\,\\varepsilon_0 \\,x\\,\\pi } & -\\frac{q^2 \\,{\\left(\\pi \\,{\\textrm{vp}}_y -4\\,v_y \\,{\\textrm{vp}}_x \\right)}}{8\\,\\varepsilon_0 \\,x\\,\\pi } & 0\n\\end{array}\\right)"}}
+%[output:978c0cf3]
+%   data: {"dataType":"symbolic","outputData":{"name":"Ft_cInf","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,{\\left(-1+v_y \\,{\\textrm{vp}}_y \\right)}}{2\\,\\varepsilon_0 \\,x\\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{2\\,\\varepsilon_0 \\,x\\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
-%[output:5041e04a]
+%[output:47cc75a3]
 %   data: {"dataType":"symbolic","outputData":{"name":"F_atot","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,\\varepsilon_0 \\,x\\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{2\\,\\varepsilon_0 \\,x\\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
-%[output:3ccd42cf]
+%[output:07190343]
 %   data: {"dataType":"symbolic","outputData":{"name":"sol","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,\\varepsilon_0 \\,x\\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{2\\,\\varepsilon_0 \\,x\\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
