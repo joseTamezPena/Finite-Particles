@@ -82,13 +82,13 @@ dpmp_n = simplify(dot(ov,v_rel2/cmag),'Criterion','preferReal','Steps',100); %Co
 
 p1 = simplify(1/R2,'Criterion','preferReal','Steps',100); % distance factor
 p2 = simplify(v_rel1m/c^2,'Criterion','preferReal','Steps',100); % density and velocity correction
-%p3 = simplify((1 + (1-dpmp_n^2)/2),'Criterion','preferReal','Steps',100); % density and velocity correction
-%p3 = simplify((1 + (c/cmag)^2*vr_sta2/2),'Criterion','preferReal','Steps',100); % density and velocity correction
-p3 = simplify((1 + vr_sta2/2),'Criterion','preferReal','Steps',100); % density and velocity correction
-p4 = simplify(dot(vprel,ov)*vprel/c^2,'Criterion','preferReal','Steps',100);
+%p3 = simplify(sqrt(1 - vr_sta2),'Criterion','preferReal','Steps',100); % density and velocity correction
+%p3 = simplify(sqrt(dot(v_w/c,ov)^2),'Criterion','preferReal','Steps',100); % density and velocity correction
+p3 = simplify(sqrt(1 - vr_sta2) + sqrt(dot(v_w/c,ov)^2),'Criterion','preferReal','Steps',100); % density and velocity correction
+p4 = simplify((dot(vp,ov)*v_w - 2*dot(vp,v_w)*ov)/c^2,'Criterion','preferReal','Steps',100);
 
 
-F_a = simplify(p1*p2*(p3*ov-p4),'Criterion','preferReal','Steps',100);
+F_a = simplify(p1*p2*(p3*ov+p4),'Criterion','preferReal','Steps',100);
 %F_a = simplify(p1*p2*p3*ov,'Criterion','preferReal','Steps',100);
 
 %simplify(subs(F_a,[v_y,y,x],[0,0,x]))
@@ -98,25 +98,27 @@ F_a = simplify(p1*p2*(p3*ov-p4),'Criterion','preferReal','Steps',100);
 %%
 %[text] ## Integrate the static charges
 F_n = simplify(subs(F_a,v_y,0));
-F_nt = simplify(taylor(F_n,[vp_x,vp_y],[0,0],order=2));
-simplify(subs(F_a,[v_y,y,vp_y],[0,0,0])) %[output:52b6cafb]
-simplify(subs(F_nt,[y,vp_y],[0,0])) %[output:9d364d1c]
+F_nt = simplify(taylor(F_n,vp_x,0,order=2));
+F_nt = simplify(taylor(F_nt,vp_y,0,order=2));
+simplify(subs(F_a,[v_y,y,vp_y],[0,0,0])) %[output:4cafb9da]
+simplify(subs(F_nt,[y,vp_y],[0,0])) %[output:2ee64e3a]
 syms L real positive
 
 Ft_n = int(F_nt,y,-L,L);
-Ft_nInf = simplify(limit(Ft_n,L,Inf)) %[output:0c429830]
+Ft_nInf = simplify(limit(Ft_n,L,Inf)) %[output:216f8a1a]
 %%
 %[text] ## Integrating the current
 % Define the velocity vector of the moving charge
 F_ct = simplify(taylor(F_a,v_y,0,order=2));
-F_ct = simplify(taylor(F_ct,[vp_x,vp_y],[0,0],order=2));
+F_ct = simplify(taylor(F_ct,vp_x,0,order=2));
+F_ct = simplify(taylor(F_ct,vp_y,0,order=2));
 
 
 Ft_c = int(F_ct,y,-L,L);
 %Set L to Infinity
-Ft_cInf = simplify(limit(Ft_c,L,Inf)) %[output:825c264d]
+Ft_cInf = simplify(limit(Ft_c,L,Inf)) %[output:534060a4]
 %[text] ## The net force
-F_atot = k_e*simplify(Ft_cInf - Ft_nInf) %[output:0d56a3ae]
+F_atot = k_e*simplify(Ft_cInf - Ft_nInf) %[output:469f2588]
 
 
 %[appendix]{"version":"1.0"}
@@ -145,18 +147,18 @@ F_atot = k_e*simplify(Ft_cInf - Ft_nInf) %[output:0d56a3ae]
 %[output:30db109a]
 %   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n0.99994999874993749609347654199058 & 0.01 & 0\n\\end{array}\\right)"}}
 %---
-%[output:52b6cafb]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{2\\,c^2 -{{\\textrm{vp}}_x }^2 }{2\\,c^2 \\,x^2 } & 0 & 0\n\\end{array}\\right)"}}
+%[output:4cafb9da]
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{\\sqrt{c^2 -{{\\textrm{vp}}_x }^2 }}{c\\,x^2 } & 0 & 0\n\\end{array}\\right)"}}
 %---
-%[output:9d364d1c]
+%[output:2ee64e3a]
 %   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{1}{x^2 } & 0 & 0\n\\end{array}\\right)"}}
 %---
-%[output:0c429830]
+%[output:216f8a1a]
 %   data: {"dataType":"symbolic","outputData":{"name":"Ft_nInf","value":"\\left(\\begin{array}{ccc}\n\\frac{2}{x} & 0 & 0\n\\end{array}\\right)"}}
 %---
-%[output:825c264d]
-%   data: {"dataType":"symbolic","outputData":{"name":"Ft_cInf","value":"\\left(\\begin{array}{ccc}\n-\\frac{2\\,{\\left(-c^2 +v_y \\,{\\textrm{vp}}_y \\right)}}{c^2 \\,x} & \\frac{v_y \\,{\\left(\\pi \\,c+4\\,{\\textrm{vp}}_x \\right)}}{2\\,c^2 \\,x} & 0\n\\end{array}\\right)"}}
+%[output:534060a4]
+%   data: {"dataType":"symbolic","outputData":{"name":"Ft_cInf","value":"\\left(\\begin{array}{ccc}\n-\\frac{2\\,{\\left(-c^2 +v_y \\,{\\textrm{vp}}_y \\right)}}{c^2 \\,x} & \\frac{2\\,v_y \\,{\\textrm{vp}}_x }{c^2 \\,x} & 0\n\\end{array}\\right)"}}
 %---
-%[output:0d56a3ae]
-%   data: {"dataType":"symbolic","outputData":{"name":"F_atot","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,c^2 \\,\\varepsilon_0 \\,x\\,\\pi } & \\frac{q^2 \\,v_y \\,{\\left(\\pi \\,c+4\\,{\\textrm{vp}}_x \\right)}}{8\\,c^2 \\,\\varepsilon_0 \\,x\\,\\pi } & 0\n\\end{array}\\right)"}}
+%[output:469f2588]
+%   data: {"dataType":"symbolic","outputData":{"name":"F_atot","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,c^2 \\,\\varepsilon_0 \\,x\\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{2\\,c^2 \\,\\varepsilon_0 \\,x\\,\\pi } & 0\n\\end{array}\\right)"}}
 %---

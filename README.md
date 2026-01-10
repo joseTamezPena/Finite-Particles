@@ -51,7 +51,7 @@ Observations are conducted in a coordinate system centred on a stationary observ
 The system under consideration comprises a single emitting particle $\mathbf{p_e}$ and a single receiver particle $\mathbf{P_r}$, both potentially in motion. At emission time $t_o$, the emitter occupies position $\mathbf{x_e}(t_o)$ with velocity $\mathbf{v_e}(t_o)$, radiating at rate:
 
 $$
-q_e = r^3_p\rho_u\mu_e;
+q_e = \frac{4}{3} \pi r^3_p\rho_u\mu_e;
 $$
 
 where $\rho_u$ is the universal vacuum corpuscle density, $\mu_e$ the emission rate, and $r_p$ the particle radius. At absorption time $t$, the receiver is at $\mathbf{x_r}(t)$ with velocity $\mathbf{v_r}(t)$.
@@ -61,10 +61,10 @@ where $\rho_u$ is the universal vacuum corpuscle density, $\mu_e$ the emission r
 The number density of corpuscles at the receiver position is
 
 $$
-\rho(\mathbf{x_r}, t, t_o) = \frac{q_e}{4\pi (c \Delta t)^2 \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|},
+\rho(\mathbf{x_r}, t, t_o) = \frac{q_e}{4\pi (c \Delta t)^2 \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)-\mathbf{v_r}(t)\|},
 $$
 
-where $\Delta t$ is the propagation duration, and $\mathbf{c}(t_o)$ is the light-speed directional vector from emitter to receiver in the observer frame. The separation distance is $r(t, t_o) = \|\mathbf{x_r}(t) - \mathbf{x_e}(t_o)\|$, yielding an effective propagation speed $\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|$. Thus,
+where $\Delta t$ is the propagation duration, and $\mathbf{c}(t_o)$ is the light-speed directional vector from emitter to receiver in the observer frame. The emission-reception separation distance is $r(t, t_o) = \|\mathbf{x_r}(t) - \mathbf{x_e}(t_o)\|$, yielding an effective propagation speed $\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|$. Thus,
 
 $$
 \Delta t = \frac{r(t, t_o)}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|}.
@@ -73,33 +73,43 @@ $$
 Substitution provides the density
 
 $$
-\rho(\mathbf{x_r}, t, t_o) = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|}{4\pi c^2 r^2(t, t_o)}.
+\rho(\mathbf{x_r}, t, t_o) = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t_o)\|}.
 $$
 
 The vectorial flux relative to the moving receiver is
 
 $$
-\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) = \rho \, [\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|}{4\pi c^2 r^2(t, t_o)} \, [\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)].
+\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) = \rho \, [\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)} \, .
 $$
 
 ## Absorption Rate
 
-Absorption is modeled as proportional to the incident flux, the receiver's effective cross-sectional area $\mathbf{A} = A \hat{\mathbf{o}}_e$ (where $\hat{\mathbf{o}}_e$ defines the corpuscle orientation at emission), and absorption efficiency. The absorbed corpuscle count per event is
+Absorption is modeled as proportional to the incident flux, the receiver's effective cross-sectional area $\mathbf{A} = A \hat{\mathbf{o}}_e$ (where $\hat{\mathbf{o}}_e$ defines the corpuscle orientation at emission), and absorption efficiency. The flux across the receiver is:
 
 $$
-\text{Abs}(\mathbf{x_r}, t, t_o) = [\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) \cdot \mathbf{A}] \, (1 - e^{-\mu \delta t}),
+\boldsymbol{\Phi}(t) = [\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) \cdot \mathbf{A}] \, (e^{-\mu t}),
 $$
 
-with transit time across the receiver
+where $\mu$ is the corpuscle absorption rate. I define $\delta t$ as the required time to cross the receiver of length $r_p$. i.e.,
+
+$$ 
+\delta t = \frac{r_p}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|}. $$
+
+Hence, each particle at a specific $\hat{r}$ section is absorbing emitted particles at a rate:
 
 $$
-\delta t = \frac{r_p}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|},
+Ar(\hat{r}) = \mathbf{A} \mu e^{-\mu \hat{r}/(\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|)}.
+$$
+Integrating all the absorbed particles across the receiver volume yields the rate of absorption per unit of time:
+
+$$
+Ar(\mathbf{x_r},t,t_o)=\mathbf{A} \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\| \mu [ 1- e^{-\mu r_p/(\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|)}]
 $$
 
-and $r_p$ the receiver radius. For $r_p \to 0$ ($\delta t \approx 0$), this approximates to
+Considering the emission flux and that $r_p$ , the receiver radius, is very small. The total number of absorbed corpuscles per second by the receiver approximates to:
 
 $$
-\text{Abs}(\mathbf{x_r}, t, t_o) = \frac{[\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) \cdot \mathbf{A}] \, \mu r_p}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|}.
+Abs(\mathbf{x_r}, t, t_o) = [\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) \cdot \mathbf{A}] \, \mu r_p.
 $$
 
 ## Momentum Transfer and Action
@@ -107,13 +117,15 @@ $$
 Corpuscle absorption imparts $\mathbf{c}$ momentum per absorption along the incident orientation. The rate of change of receiver momentum satisfies
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt} = \text{Abs}(\mathbf{x_r}, t, t_o) \left( \frac{c \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|^2}{\|\mathbf{c}+\mathbf{v_e}\|[\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] \cdot \mathbf{c}(t_o)} \right) \hat{\mathbf{o}}_e(t_o).
+\frac{d (m \mathbf{v_r}(t))}{dt} = Abs(\mathbf{x_r}, t, t_o)  \Theta  \hat{\mathbf{o}}_e(t_o),
 $$
+
+where $\Theta$ is a momentum coupling factor.
 
 Consolidating terms yields the action expression
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt} = A r_p \frac{q_e \mu}{4 \pi r^2}  \left( \frac{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|^2}{\mathbf{c_e} \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})} \right) \hat{\mathbf{o}}_e,
+\frac{d (m \mathbf{v_r}(t))}{dt} = A r_p \frac{q_e \mu }{4 \pi r^2}  \Theta  \hat{\mathbf{o}}_e,
 $$
 
 where arguments $(t, t_o)$ are implied for brevity.
@@ -121,7 +133,7 @@ where arguments $(t, t_o)$ are implied for brevity.
 Assuming geometric scaling $A \propto r_p^2$, and that the two particles are identical with $\mu_e=\mu$, the action becomes
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt} = r_p^6 \frac{\rho_u \mu^2}{4 \pi r^2} \left( \frac{\|\mathbf{c} + \mathbf{v_e} - \mathbf{v_r}\|^2}{\mathbf{c_e} \cdot (\mathbf{c} + \mathbf{v_e} - \mathbf{v_r})} \right) \hat{\mathbf{o}}_e.
+\frac{d (m \mathbf{v_r}(t))}{dt} = r_p^6 \frac{\rho_u \mu^2 \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o) }\Theta  \hat{\mathbf{o}}_e.
 $$
 
 ## Dimensional Consistency
@@ -134,7 +146,7 @@ $$
 The rate of moment change conforms dimensionally to:
 
 $$
-\text{corpuscles m s}^{-2} \sim \text{m}^6 \cdot \frac{(\text{corpuscles m}^{-3}) \cdot (\text{s}^{-2})}{\text{m}^2} \cdot \left( \frac{\text{m s}^{-1}}{(\text{m s}^{-1})} \right)^2,
+\text{corpuscles m s}^{-2} \sim \text{m}^6 \cdot \frac{(\text{corpuscles m}^{-3}) \cdot (\text{s}^{-2}) }{\text{m}^2},
 $$
 
 confirming that the derived action is proportional to the acceleration.
