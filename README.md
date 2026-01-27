@@ -58,10 +58,10 @@ where $\rho_u$ is the universal vacuum corpuscle density, $\mu_e$ the emission r
 
 ## Corpuscular Density and Flux
 
-The number density of corpuscles at the receiver position is
+The relative velocity density of corpuscles at the receiver position is
 
 $$
-\rho(\mathbf{x_r}, t, t_o) = \frac{q_e}{4\pi (c \Delta t)^2 \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)-\mathbf{v_r}(t)\|},
+\rho(\mathbf{x_r}, t, t_o) = \frac{q_e}{4\pi (c \Delta t)^2 [\mathbf{c}(t_o) + \mathbf{v_e}(t_o)-\mathbf{v_r}(t)] \cdot c(t_o)/c},
 $$
 
 where $\Delta t$ is the propagation duration, and $\mathbf{c}(t_o)$ is the light-speed directional vector from emitter to receiver in the observer frame. The emission-reception separation distance is $r(t, t_o) = \|\mathbf{x_r}(t) - \mathbf{x_e}(t_o)\|$, yielding an effective propagation speed $\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|$. Thus,
@@ -73,13 +73,13 @@ $$
 Substitution provides the density
 
 $$
-\rho(\mathbf{x_r}, t, t_o) = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t_o)\|}.
+\rho(\mathbf{x_r}, t, t_o) = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)[\mathbf{c}(t_o) + \mathbf{v_e}(t_o)-\mathbf{v_r}(t)] \cdot c(t_o)/c}.
 $$
 
 The vectorial flux relative to the moving receiver is
 
 $$
-\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) = \rho \, [\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)} \, .
+\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) = \rho \, [\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o) \cos (\theta)}  \, .
 $$
 
 ## Absorption Rate
@@ -98,114 +98,72 @@ $$
 Hence, each particle at a specific $\hat{r}$ section is absorbing emitted particles at a rate:
 
 $$
-Ar(\hat{r}) = \mathbf{A} \mu e^{-\mu \hat{r}/(\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|)}.
-$$
-Integrating all the absorbed particles across the receiver volume yields the rate of absorption per unit of time:
+Ar(\hat{r}) = \mathbf{A} \mu e^{-\mu \hat{r}/(\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|) } / (\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|) \delta r.
+$$ Integrating all the absorbed particles across the receiver volume yields the rate of absorption per unit of time:
 
 $$
-Ar(\mathbf{x_r},t,t_o)=\mathbf{A} \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\| \mu [ 1- e^{-\mu r_p/(\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|)}]
+Ar(\mathbf{x_r},t,t_o)=\mathbf{A} [ 1- e^{-\mu r_p/(\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|)}]
 $$
 
 Considering the emission flux and that $r_p$ , the receiver radius, is very small. The total number of absorbed corpuscles per second by the receiver approximates to:
 
 $$
-Abs(\mathbf{x_r}, t, t_o) = [\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) \cdot \mathbf{A}] \, \mu r_p.
+Abs(\mathbf{x_r}, t, t_o) = \frac{[\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) \cdot \mathbf{A}]}{(\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|)}  \, \mu r_p.
 $$
 
-## Momentum Transfer and Action
-
-Corpuscle absorption imparts $\mathbf{c}$ momentum per absorption along the incident orientation. The rate of change of receiver momentum satisfies
-
-$$
-\frac{d (m \mathbf{v_r}(t))}{dt} = Abs(\mathbf{x_r}, t, t_o)  \Theta  \hat{\mathbf{o}}_e(t_o),
-$$
-
-where $\Theta$ is a momentum coupling factor.
-
-Consolidating terms yields the action expression
-
-$$
-\frac{d (m \mathbf{v_r}(t))}{dt} = A r_p \frac{q_e \mu }{4 \pi r^2}  \Theta  \hat{\mathbf{o}}_e,
-$$
-
-where arguments $(t, t_o)$ are implied for brevity.
-
-Assuming geometric scaling $A \propto r_p^2$, and that the two particles are identical with $\mu_e=\mu$, the action becomes
-
-$$
-\frac{d (m \mathbf{v_r}(t))}{dt} = r_p^6 \frac{\rho_u \mu^2 \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o) }\Theta  \hat{\mathbf{o}}_e.
-$$
-
-## Dimensional Consistency
-
--   Distance terms: $r^2$ [m²], $r_p^3$ [m³]
--   Rates: $q_e$ [corpuscles s⁻¹], $\mu_r$ [s⁻¹]
--   Velocities: $c, v$ [m s⁻¹]
--   Densities: [corpuscles m⁻³]
-
-The rate of moment change conforms dimensionally to:
-
-$$
-\text{corpuscles m s}^{-2} \sim \text{m}^6 \cdot \frac{(\text{corpuscles m}^{-3}) \cdot (\text{s}^{-2}) }{\text{m}^2},
-$$
-
-confirming that the derived action is proportional to the acceleration.
+The Abs equation computes the number of absorbed corpuscles per unit of time. We are assuming that each absorbed corpuscle contributes to a change in position in direction of the corpuscle. Hence, the total number of absorbed per charge will change its momentum.
 
 ## Newton's First Law
 
-In the absence of a external corpuscle, $q_e=0$, the momentum equation reduces to:
+In the absence of a external corpuscles, $q_e=0$, the absorption is zero, hence:
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt} = 0
+Abs(\mathbf{x_r}, t, t_o) \cdot \hat{l} = 0
 $$
 
-In other words there is no change in the momentum. i.e.
+In other words there is no change in the particle momentum
 
 "An object at rest stays at rest, and an object in motion stays in motion with the same speed and in the same direction, unless acted upon by an unbalanced external force."
 
 ## Newton's Second Law 
 
-The momentum transferred and the absorbed should be in equilibrium.
+The absorbed corpuscles from external sources and the internal absorbed should be in equilibrium.
 
 $$ 
-\frac{d (m \mathbf{v_r}(t))}{dt}_{in}=\frac{d (m \mathbf{v_r}(t))}{dt}_{ext} \therefore \frac{d (m \mathbf{v_r}(t))}{dt}_{ext} = -\frac{d (m \mathbf{v_r}(t))}{dt}_{in} 
+Abs_{int} \cdot \hat{l}=Abs_{ext}\cdot \hat{l}
 $$
 
-Here we derive the Newton's second law. First I'll assume that the absorbing particle is finite and composed by two absorbing/emitting elements separated by a distance $L$ aligned to the external flow of corpuscles. I'll assume that the internal elements have a radius $r_e=r_p/2$ the external force causes an small acceleration of the receiver particle. Therefore the front particle and the back particle at the time of action summation have a small velocity: $v_e=a \Delta_L t$; where $a$ is the instant acceleration due to the external action and $\Delta_L t=L/c$ is the amount of time required to travel the distance between the two particle elements.
+Here we derive the Newton's second law. First I'll assume that the absorbing particle is finite and composed by two absorbing/emitting elements separated by a distance $L$ aligned to the external flow of corpuscles. I'll assume that the internal elements have a radius $r_e=r_p/2$ the external force causes an small acceleration of the receiver particle. Therefore the front particle and the back particle at the time of action summation have a small velocity: $v_e=a \Delta t$; where $a$ is the instant acceleration due to the external action and $\Delta t=L/c$ is the amount of time required to travel the distance between the two particle elements.
 
 The internal change of momentum of the dual element particle is:
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt}_{in} =  \frac{\rho_u r_p^6 \mu^2}{256 \pi L^2} \left[ \frac{(c + a{ \Delta_L t})}{c} - \frac{(c - a{ \Delta_L t})}{c} \right]\hat{\mathbf{o}}_e.
+\frac{q_e \mu \Delta V}{8 \pi} \left( \frac{1}{(c+a\Delta t)(L-1/2 a \Delta t^2)^2} - \frac{1}{(c-a\Delta t)(L+1/2 a \Delta t^2)^2} \right).
 $$
 
 Substituting we get:
 
 $$
-\frac{d (m \mathbf{v_r}(t))}{dt}_{in} =  -\frac{\rho_u r_p^6 \mu^2}{256 \pi L} \left[ \frac{2a}{c^2} \right]\hat{\mathbf{o}}_e.
+\frac{2q \mu \Delta V c}{4 \pi R^2 \|c+v_e-v_r\|\cos (\theta)} \Omega = \frac{q^2}{4 \pi L  c^2}a \hat{\mathbf{o}}_e,
 $$
 
-Therefore:
-
-$$
-\frac{d (m \mathbf{v_r}(t))}{dt}_{ext} =  \frac{\rho_u r_p^6 \mu^2}{128 \pi L} \left[ \frac{1}{c^2} \right] a \hat{\mathbf{o}}_e.
-$$
+where the left hand term is the external force induced by the external charge, and the right terms originates by the internal pull of the accelerated particle.
 
 A close inspection of the equation it reveals that it is Newton's Second law: $F=ma$, for charged finite particles.
 
-A second observation is that we can write $q=r_p^3 \mu$ and $\rho_u$ as $1/\epsilon_0$. Hence the first terms of the internal momentum is the internal energy:
+A second observation is that the first terms of the internal absobtion is equivalent to the eletrostatic energy:
 
 $$
-E_{in} = \frac{\rho_u r_p^6 \mu^2}{128 \pi L} = \frac{q^2}{128 \pi \epsilon_o L}.
+E_{in} = \frac{q^2}{4 \pi \epsilon_o L}.
 $$
 
-A fraction of the stored electrostatic energy by the two charged elements with $q$ charge separated by a distance $L$. Hence the inertial mass is:
+Hence, the inertial mass is:
 
 $$
  m = \frac{E_{in}}{c^2}.
 $$
 
-The intertia and particle mass are a direct consequence of the corpuscular model.
+The inertia and particle mass are a direct consequence of the corpuscular model on finite particles.
 
 ## Rate of emission-absorption
 
