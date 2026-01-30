@@ -88,16 +88,16 @@ p1 = simplify(1/R2,'Criterion','preferReal','Steps',100); % distance factor
 p2 = simplify(v_rel1m/c^2,'Criterion','preferReal','Steps',100); % from source factor
 
 % Works Lorentz=========
-%wfact =sqrt(dot(v_w/c,ov)^2);
-%p3 = simplify(sqrt(1 - vr_sta2) + sqrt(dot(v_w/c,ov)^2),'Criterion','preferReal','Steps',100); % density and velocity correction
-%p4 = simplify((dot(vp,ov)*v_w - 2*dot(vp,v_w)*ov)/c^2,'Criterion','preferReal','Steps',100);
-%F_a = simplify(p1*p2*(p3*ov+p4),'Criterion','preferReal','Steps',100);
+wfact =sqrt(dot(v_w/c,ov)^2);
+p3 = simplify(sqrt(1 - vr_sta2) + sqrt(dot(v_w/c,ov)^2),'Criterion','preferReal','Steps',100); % density and velocity correction
+p4 = simplify((dot(vp,ov)*v_w - 2*dot(vp,v_w)*ov)/c^2,'Criterion','preferReal','Steps',100);
+F_a = simplify(p1*p2*p3*(ov+p4),'Criterion','preferReal','Steps',100);
 %===================
 
 
 %p2 = 1;
-p3 = simplify((c*sqrt(v_rel2m)/(v_rel1m))/dot(v_rel2/sqrt(v_rel2m),ov),'Criterion','preferReal','Steps',100);
-F_a = simplify(p1*p2*p3*ov,'Criterion','preferReal','Steps',100);
+%p3 = simplify((c*sqrt(v_rel2m)/(v_rel1m))/dot(v_rel2/sqrt(v_rel2m),ov),'Criterion','preferReal','Steps',100);
+%F_a = simplify(p1*p2*p3*ov,'Criterion','preferReal','Steps',100);
 
 
 
@@ -115,7 +115,7 @@ syms L real positive
 
 Ft_n = int(F_nt,y,-L,L);
 Ft_nInf = simplify(limit(Ft_n,L,Inf),'Criterion','preferReal','Steps',100) %[output:8e92f737]
-[(4*c - sym(pi)*vp_x)/(2*c*x), -(vp_y*(3*sym(pi)*c + 8*vp_x))/(6*c^2*x), sym(0)] %[output:52fc0629]
+
 
 %%
 %[text] ## Integrating the current
@@ -168,31 +168,28 @@ F_atot = k_e*simplify(Ft_cInf - Ft_nInf,'Criterion','preferReal','Steps',100) %[
 %   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"1.9721108383147129007471175886138"}}
 %---
 %[output:69794517]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{c-{\\textrm{vp}}_x }{c\\,x^2 } & 0 & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{\\sqrt{c^2 -{{\\textrm{vp}}_x }^2 }}{c\\,x^2 } & 0 & 0\n\\end{array}\\right)"}}
 %---
 %[output:08035b3f]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{c-{\\textrm{vp}}_x }{c\\,x^2 } & 0 & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{1}{x^2 } & 0 & 0\n\\end{array}\\right)"}}
 %---
 %[output:8e92f737]
-%   data: {"dataType":"symbolic","outputData":{"name":"Ft_nInf","value":"\\left(\\begin{array}{ccc}\n\\frac{4\\,c-\\pi \\,{\\textrm{vp}}_x }{2\\,c\\,x} & -\\frac{{\\textrm{vp}}_y \\,{\\left(3\\,\\pi \\,c+8\\,{\\textrm{vp}}_x \\right)}}{6\\,c^2 \\,x} & 0\n\\end{array}\\right)"}}
-%---
-%[output:52fc0629]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{4\\,c-\\pi \\,{\\textrm{vp}}_x }{2\\,c\\,x} & -\\frac{{\\textrm{vp}}_y \\,{\\left(3\\,\\pi \\,c+8\\,{\\textrm{vp}}_x \\right)}}{6\\,c^2 \\,x} & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"Ft_nInf","value":"\\left(\\begin{array}{ccc}\n\\frac{2}{x} & 0 & 0\n\\end{array}\\right)"}}
 %---
 %[output:2a5ce6ac]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{-c^2 +v_y \\,{\\textrm{vp}}_y +c\\,{\\textrm{vp}}_x }{c^2 \\,x^2 } & -\\frac{v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{c^2 \\,x^2 } & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{-c^2 +v_y \\,{\\textrm{vp}}_y }{c^2 \\,x^2 } & -\\frac{v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{c^2 \\,x^2 } & 0\n\\end{array}\\right)"}}
 %---
 %[output:9d84fd44]
 %   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,{\\left(-c^2 +v_y \\,{\\textrm{vp}}_y +c\\,{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
 %[output:0e3db015]
-%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{2\\,L^3 +2\\,L\\,x^2 }{x\\,{{\\left(L^2 +x^2 \\right)}}^{3\/2} } & -\\frac{6\\,L\\,c\\,v_y \\,x}{3\\,L^2 \\,c^2 \\,x+3\\,c^2 \\,x^3 } & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n\\frac{2\\,L}{x\\,\\sqrt{L^2 +x^2 }} & -\\frac{2\\,L\\,v_y }{c\\,{\\left(L^2 +x^2 \\right)}} & 0\n\\end{array}\\right)"}}
 %---
 %[output:3c283673]
 %   data: {"dataType":"symbolic","outputData":{"name":"ans","value":"\\left(\\begin{array}{ccc}\n0 & 0 & 0\n\\end{array}\\right)"}}
 %---
 %[output:2e7d4978]
-%   data: {"dataType":"symbolic","outputData":{"name":"Ft_cInf","value":"\\left(\\begin{array}{ccc}\n-\\frac{-4\\,c^2 +4\\,v_y \\,{\\textrm{vp}}_y +\\pi \\,c\\,{\\textrm{vp}}_x }{2\\,c^2 \\,x} & -\\frac{3\\,\\pi \\,c\\,{\\textrm{vp}}_y -12\\,v_y \\,{\\textrm{vp}}_x +8\\,{\\textrm{vp}}_x \\,{\\textrm{vp}}_y }{6\\,c^2 \\,x} & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"Ft_cInf","value":"\\left(\\begin{array}{ccc}\n-\\frac{2\\,{\\left(-c^2 +v_y \\,{\\textrm{vp}}_y \\right)}}{c^2 \\,x} & \\frac{2\\,v_y \\,{\\textrm{vp}}_x }{c^2 \\,x} & 0\n\\end{array}\\right)"}}
 %---
 %[output:14e192bb]
 %   data: {"dataType":"symbolic","outputData":{"name":"F_atot","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{2\\,c^2 \\,\\varepsilon_0 \\,x\\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{2\\,c^2 \\,\\varepsilon_0 \\,x\\,\\pi } & 0\n\\end{array}\\right)"}}
