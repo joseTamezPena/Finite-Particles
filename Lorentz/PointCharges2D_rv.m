@@ -94,7 +94,7 @@ ft_magnetic = simplify(subs(ft_magnetic,[v_x,y],[0,0])) %[output:346cae46]
 %[text] ## The corpuscle force
 %[text] 
 %[text] The corpuscle force is:
-%[text] $&dollar&;&dollar&; \n\\mathbf{F} = \\frac{k q\_1 q\_2}{4 \\pi r^2} \\left( \\frac{\\|\\mathbf{c} + \\mathbf{v\_1}- \\mathbf{v\_2}\\|^2}{\\mathbf{c} \\cdot ( \\mathbf{c} + \\mathbf{v\_1} - \\mathbf{v\_2} )} \\right)  \\hat{o\_1}, \n&dollar&;&dollar&;$
+%[text] $&dollar&;&dollar&; \n\\mathbf{F} = \\frac{k q\_1 q\_2}{4 \\pi r^2}  \\|\\mathbf{c} + \\mathbf{v\_1}\\|  \\hat{o\_1}, \n&dollar&;&dollar&;$
 %[text] 
 %%
 k= q^2/(4*pi*epsilon0);
@@ -113,55 +113,39 @@ assumeAlso(c^2 - vp_y^2 + 2*c*vp_x - vp_x^2 > 0)
 R2 = dot(r_p,r_p);
 
 ov = simplify(cvec/c);
-
 vrel_s = cvec + v;
-rvel = vrel_s - vp;
-vprel = v - vp;
-
+vrel = vrel_s - vp;
 % Dot product
 rvel2_s = dot(vrel_s,vrel_s);
-rvel2 = dot(rvel,rvel);
+rvel2 = dot(vrel,vrel);
 vcurs = sqrt(rvel2_s);
-vcurp = sqrt(rvel2);
-vdelt = (rvel-cvec); % Excess light velocity of arrving courpuscle. i.e. v-vp
+vrelm = sqrt(rvel2);
+costheta = dot(vrel,ov)/vrelm;
 
 % Assume at y=0 and v_x=0
 
-dpmp_r = simplify(subs(dot(cvec,rvel),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); %raw product
-dpmp_n = simplify(subs(dot(ov,rvel/vcurp),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); %raw product
-
-%% Distance Factors
-
 p1 = simplify(subs((1/R2),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Density at propagation surface
-p2 = simplify(subs((rvel2_s/c^2),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Density correction due to velocity
-%p3 = simplify(subs(1.0/dpmp_n,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % density correction due to propagation front
-%p4 = simplify(subs((dot(vp,ov)*v+dot(vp,v/c)*vp)/c^2,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Correction in direction of propagation
-%F2_c = k*simplify(subs(p1*p2*p3*(ov+p4),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100);
+p2 = simplify(subs((vcurs*vrelm/(c^2*costheta)),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Density correction due to velocity
+%p2 = simplify(subs((vcurs/c),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Density correction due to velocity
+%p4 = simplify(subs((dot(vp,ov)*v - dot(vp,v)*ov)/c^2,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Correction in direction of propagation
+p4 = 0;
+F2_c = k*simplify(subs(p1*p2*(ov+p4),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100);
 
-% === Works Imitate Lorenz force===
-vr_sta2 = simplify(subs(dot(vprel,vprel)/c^2,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); %Speed
-fact = simplify(subs(sqrt(dot(v/c,ov)^2),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100);
-p3 = simplify(subs(sqrt(1-vr_sta2) + fact,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % density and velocity correction
-%p3 = simplify(subs(dpmp_n + fact,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % density and velocity correction
-p4 = simplify(subs((dot(vp,ov)*v - 2*dot(vp,v)*ov)/c^2,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100);
-F2_c = k*simplify(subs(p1*p2*p3*(ov+p4),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100);
-%st_force = simplify(subs(p1*p2*(p3*ov0+p4),v_y,0),'Criterion','preferReal','Steps',100)
-%===== 
 
-st_force = simplify(subs(F2_c,v_y,0),'Criterion','preferReal','Steps',100) %[output:9b814028]
+st_force = simplify(subs(F2_c,v_y,0),'Criterion','preferReal','Steps',100) %[output:323ed6a3]
 st_forceT = simplify(taylor(st_force,vp_y,0,order=2));
-st_forceT = simplify(taylor(st_forceT,vp_x,0,order=2)) %[output:20286d52]
+st_forceT = simplify(taylor(st_forceT,vp_x,0,order=2)) %[output:512a04d9]
 % Net force Dynamic - Static
 F2T_net = F2_c - st_force;
 
 
 F2T_mnet = simplify(taylor(F2T_net,v_y,0,order=2),'Criterion','preferReal','Steps',100);
 F2T_mnet = simplify(taylor(F2T_mnet,vp_x,0,order=2),'Criterion','preferReal','Steps',100);
-F2T_mnet = simplify(taylor(F2T_mnet,vp_y,0,order=2),'Criterion','preferReal','Steps',100),Ft_neutral %[output:6ebd5802] %[output:889ce597]
+F2T_mnet = simplify(taylor(F2T_mnet,vp_y,0,order=2),'Criterion','preferReal','Steps',100),Ft_neutral %[output:4e788b7d] %[output:61e4c83d]
 
 %%
 % The Lorentz total force
-ft_magnetic %[output:2228e0b3]
+ft_magnetic
 
 %[appendix]{"version":"1.0"}
 %---
@@ -219,18 +203,15 @@ ft_magnetic %[output:2228e0b3]
 %[output:346cae46]
 %   data: {"dataType":"symbolic","outputData":{"name":"ft_magnetic","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
-%[output:9b814028]
-%   data: {"dataType":"symbolic","outputData":{"name":"st_force","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,\\sqrt{c^2 -{{\\textrm{vp}}_y }^2 -{{\\textrm{vp}}_x }^2 }}{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
+%[output:323ed6a3]
+%   data: {"dataType":"symbolic","outputData":{"name":"st_force","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,{\\left(c^2 +{{\\textrm{vp}}_y }^2 -2\\,c\\,{\\textrm{vp}}_x +{{\\textrm{vp}}_x }^2 \\right)}}{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi \\,{\\left(c-{\\textrm{vp}}_x \\right)}} & 0 & 0\n\\end{array}\\right)"}}
 %---
-%[output:20286d52]
-%   data: {"dataType":"symbolic","outputData":{"name":"st_forceT","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 }{4\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
+%[output:512a04d9]
+%   data: {"dataType":"symbolic","outputData":{"name":"st_forceT","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
 %---
-%[output:6ebd5802]
+%[output:4e788b7d]
 %   data: {"dataType":"symbolic","outputData":{"name":"F2T_mnet","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
-%[output:889ce597]
+%[output:61e4c83d]
 %   data: {"dataType":"symbolic","outputData":{"name":"Ft_neutral","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & -\\frac{q^2 \\,v_y \\,{\\left(c-{\\textrm{vp}}_x \\right)}}{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
-%---
-%[output:2228e0b3]
-%   data: {"dataType":"symbolic","outputData":{"name":"ft_magnetic","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
