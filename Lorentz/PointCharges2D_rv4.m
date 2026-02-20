@@ -94,7 +94,7 @@ ft_magnetic = simplify(subs(ft_magnetic,[v_x,y],[0,0])) %[output:346cae46]
 %[text] ## The corpuscle force
 %[text] 
 %[text] The corpuscle force is:
-%[text] $&dollar&;&dollar&; \n\\mathbf{F} = \\frac{k q\_1 q\_2}{4 \\pi r^2} \\frac{\\|\\mathbf{c} + \\mathbf{v\_1}\\|}{c^3} \\left\[  \\left( c^2  - \\mathbf{v\_1} \\cdot \\mathbf{v\_2}  \\right) \\hat{o\_1} + (\\mathbf{v\_2} \\cdot \\hat{o\_1}) \\mathbf{v\_1}  \\right\]. \n&dollar&;&dollar&;$
+%[text] $&dollar&;&dollar&; \n\\mathbf{F} = \\frac{k q\_1 q\_2}{4 \\pi r^2} \\frac{\\|\\mathbf{c} + \\mathbf{v\_1}\\|^2}{c^3 ((\\mathbf{c} + \\mathbf{v\_1}) \\cdot \\hat{o\_1})  } \\left\[  (\\mathbf{v\_2} \\cdot \\hat{o\_1}) \\mathbf{v\_1} - \\left( \\mathbf{v\_1} \\cdot \\mathbf{v\_2}  \\right) \\hat{o\_1}  \\right\]. \n&dollar&;&dollar&;$
 %[text] 
 %%
 k= q^2/(4*pi*epsilon0);
@@ -126,20 +126,16 @@ rvel2 = dot(vrel,vrel);
 vmag = sqrt(rvel2);
 vrelrm = vmag/sqrt(1.0+dot(vrelr,vrelr));
 
-% Cosine
+% Dot
 
-cosf = dot(vrel,ov)/vmag;
 dots = dot(vrel_s,ov);
 
 % Assume at y=0 and v_x=0
 
 p1 = simplify(subs((1/R2),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Density at propagation surface
-p2 = simplify(subs((rvel2_s/c^2),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Density correction due to velocity
-p3 = c/dots;
+p2 = simplify(subs((rvel2_s/c^2),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Density correction to use source origen of moving charge
+p3 = c/dots; % Density correction due to velocity
 p4 = simplify(subs((dot(vp,ov)*v - dot(vp,v)*ov)/c^2,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Correction in direction of propagation
-%p4 = simplify(subs((dot(vp,ov)*v - dot(vp,v)*ov)/c^2,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Correction in direction of propagation
-%p4 = simplify(subs((dot(vp,ov)*v)/c^2,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Correction in direction of propagation
-%p4 = 0;
 F2_c = k*simplify(subs(p1*p2*p3*(ov+p4),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100);
 
 st_force = simplify(subs(F2_c,v_y,0),'Criterion','preferReal','Steps',100) %[output:9d010d84]
