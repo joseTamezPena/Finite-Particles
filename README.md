@@ -61,7 +61,7 @@ where $\rho_u$ is the universal vacuum corpuscle density, $\mu_e$ the emission r
 The relative velocity density of corpuscles at the receiver position is
 
 $$
-\rho(\mathbf{x_r}, t, t_o) = \frac{q_e}{4\pi (c \Delta t)^2 [\mathbf{c}(t_o) + \mathbf{v_e}(t_o)-\mathbf{v_r}(t)] \cdot c(t_o)/c},
+\rho(\mathbf{x_r}, t, t_o) = \frac{q_e}{4\pi (c \Delta t)^2 [\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot c(t_o)/c},
 $$
 
 where $\Delta t$ is the propagation duration, and $\mathbf{c}(t_o)$ is the light-speed directional vector from emitter to receiver in the observer frame. The emission-reception separation distance is $r(t, t_o) = \|\mathbf{x_r}(t) - \mathbf{x_e}(t_o)\|$, yielding an effective propagation speed $\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|$. Thus,
@@ -73,7 +73,7 @@ $$
 Substitution provides the density
 
 $$
-\rho(\mathbf{x_r}, t, t_o) = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)[\mathbf{c}(t_o) + \mathbf{v_e}(t_o)-\mathbf{v_r}(t)] \cdot c(t_o)/c}.
+\rho(\mathbf{x_r}, t, t_o) = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)[\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot c(t_o)/c}.
 $$
 
 The vectorial flux relative to the moving receiver is
