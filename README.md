@@ -46,7 +46,7 @@ This section describes the mechanistic action model describing the interaction b
 
 The interaction framework posits that emitting particles radiate corpuscles isotropically at a rate of $q$ corpuscles per second, with propagation occurring at the vacuum speed of light $c$. Receiver particles absorb incident corpuscles at a rate parameterised by $\mu$ (dimensions of inverse time), contingent upon the corpuscular flux intersecting the receiver.
 
-Observations are conducted in a coordinate system centred on a stationary observer, from whose frame the velocity evolution of the receiver particle is described.
+Observations are conducted in a coordinate system centered on a stationary observer, from whose frame the velocity evolution of the receiver particle is described.
 
 The system under consideration comprises a single emitting particle $\mathbf{p_e}$ and a single receiver particle $\mathbf{P_r}$, both potentially in motion. At emission time $t_o$, the emitter occupies position $\mathbf{x_e}(t_o)$ with velocity $\mathbf{v_e}(t_o)$, radiating at rate:
 
@@ -79,7 +79,7 @@ $$
 The vectorial flux relative to the moving receiver is
 
 $$
-\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) = \rho \, [\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o) \cos (\theta)}  \, .
+\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) = \rho \, [\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|}{4\pi c^2 r^2(t, t_o) \cos (\theta)} [\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)]  \, .
 $$
 
 ## Absorption Rate
@@ -108,7 +108,7 @@ $$
 Considering the emission flux and that $r_p$ , the receiver radius, is very small. The total number of absorbed corpuscles per second by the receiver approximates to:
 
 $$
-Abs(\mathbf{x_r}, t, t_o) = \frac{[\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) \cdot \mathbf{A}]}{(\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|)}  \, \mu r_p.
+Abs(\mathbf{x_r}, t, t_o) = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|}{4\pi c^2 r^2(t, t_o) \cos (\theta)} \mu r_p.
 $$
 
 The Abs equation computes the number of absorbed corpuscles per unit of time. We are assuming that each absorbed corpuscle contributes to a change in position in direction of the corpuscle. Hence, the total number of absorbed per charge will change its momentum.
@@ -151,7 +151,7 @@ where the left hand term is the external force induced by the external charge, a
 
 A close inspection of the equation it reveals that it is Newton's Second law: $F=ma$, for charged finite particles.
 
-A second observation is that the first terms of the internal absobtion is equivalent to the eletrostatic energy:
+A second observation is that the first terms of the internal absorption is equivalent to the electrostatic energy:
 
 $$
 E_{in} = \frac{q^2}{4 \pi \epsilon_o L}.
