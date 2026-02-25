@@ -4,7 +4,9 @@ This repository is a work in progress and contains the MATLAB scripts of a novel
 
 ## Model Overview
 
-The model assumes a universe filled with **vector corpuscles**—hypothetical entities carrying position, velocity, and orientation—that mediate interactions between finite-sized particles. Each corpuscle is characterized by:
+The model assumes a universe filled with finite-sized **vector corpuscles**—hypothetical entities carrying position, velocity, and orientation—that mediate interactions between finite-sized particles. Each corpuscle is characterized by:
+
+-   **Size**: $l$
 
 -   **Position**: $\mathbf{x_c}$,
 
@@ -58,70 +60,71 @@ where $\rho_u$ is the universal vacuum corpuscle density, $\mu_e$ the emission r
 
 ## Corpuscular Density and Flux
 
-The relative velocity density of corpuscles at the receiver position is
+The relative observer density of corpuscles at the receiver position is
 
 $$
-\rho(\mathbf{x_r}, t, t_o) = \frac{q_e}{4\pi (c \Delta t)^2 [\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot c(t_o)/c},
+\rho(\mathbf{x_r}, t, t_o) = \frac{q_e}{4\pi (c \Delta t)^2 [\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot [\mathbf{c}(t_o)/c]},
 $$
 
-where $\Delta t$ is the propagation duration, and $\mathbf{c}(t_o)$ is the light-speed directional vector from emitter to receiver in the observer frame. The emission-reception separation distance is $r(t, t_o) = \|\mathbf{x_r}(t) - \mathbf{x_e}(t_o)\|$, yielding an effective propagation speed $\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|$. Thus,
+where $\Delta t$ is the courpuscle travel time, and $\mathbf{c}(t_o)$ is the light-speed vector from emitter to receiver in the observer frame. The emission-reception separation distance is $r(t, t_o) = \|\mathbf{x_r}(t) - \mathbf{x_e}(t_o)\|$, and the relative propagation speed is $\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|$. Thus,
 
 $$
 \Delta t = \frac{r(t, t_o)}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|}.
 $$
 
-Substitution provides the density
+Substitution provides the corpuscle density at the reciever
 
 $$
-\rho(\mathbf{x_r}, t, t_o) = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)[\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot c(t_o)/c}.
-$$
-
-The vectorial flux relative to the moving receiver is
-
-$$
-\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) = \rho \, [\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)] = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|}{4\pi c^2 r^2(t, t_o) \cos (\theta)} [\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)]  \, .
+\rho(\mathbf{x_r}, t, t_o) = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)[\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot [\mathbf{c}(t_o)/c]}.
 $$
 
 ## Absorption Rate
 
-Absorption is modeled as proportional to the incident flux, the receiver's effective cross-sectional area $\mathbf{A} = A \hat{\mathbf{o}}_e$ (where $\hat{\mathbf{o}}_e$ defines the corpuscle orientation at emission), and absorption efficiency. The flux across the receiver is:
+The corpuscle absorption rate, $\mathbf{Ar}$, is modeled as proportional to the corpuscle density, the receiver's absorption coefficient $\mu$ in a small volume:
 
 $$
-\boldsymbol{\Phi}(t) = [\boldsymbol{\Phi}(\mathbf{x_r}, t, t_o) \cdot \mathbf{A}] \, (e^{-\mu t}),
+\mathbf{Ar}(\mathbf{x_r}, t)=\mu \rho(\mathbf{x_r}, t, t_o) \Delta_v
 $$
 
-where $\mu$ is the corpuscle absorption rate. I define $\delta t$ as the required time to cross the receiver of length $r_p$. i.e.,
-
-$$ 
-\delta t = \frac{r_p}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|}. $$
-
-Hence, each particle at a specific $\hat{r}$ section is absorbing emitted particles at a rate:
+The flux of corpuscles travel a small distance in a given $dt$. Hence:
 
 $$
-Ar(\hat{r}) = \mathbf{A} \mu e^{-\mu \hat{r}/(\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|) } / (\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|) \delta r.
-$$ Integrating all the absorbed particles across the receiver volume yields the rate of absorption per unit of time:
-
-$$
-Ar(\mathbf{x_r},t,t_o)=\mathbf{A} [ 1- e^{-\mu r_p/(\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o) - \mathbf{v_r}(t)\|)}]
+d\mathbf{Ar}(\mathbf{x_r}, t)=\mu \rho(\mathbf{x_r}, t, t_o) dA [v dt]
 $$
 
-Considering the emission flux and that $r_p$ , the receiver radius, is very small. The total number of absorbed corpuscles per second by the receiver approximates to:
+The total number of absorbed corpuscles per second at a specific point of the receiver approximates to:
 
 $$
-Abs(\mathbf{x_r}, t, t_o) = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|}{4\pi c^2 r^2(t, t_o) \cos (\theta)} \mu r_p.
+\frac{d\mathbf{Ar}(\mathbf{x_r}, t)}{dt}=\mu \rho(\mathbf{x_r}, t, t_o) v dA ;
 $$
 
-The Abs equation computes the number of absorbed corpuscles per unit of time. We are assuming that each absorbed corpuscle contributes to a change in position in direction of the corpuscle. Hence, the total number of absorbed per charge will change its momentum.
+where $v$ is the magnitude of relative velocity of the corpuscles at that point.
+
+## Particle Acceleration
+
+The absorption rate equation computes the number of absorbed corpuscles per unit of time. The model assumes that each corpuscle has a small length and orientation. Therefore, each time an corpuscle is absorbed there is a change in the receiver particle position. The rate of change is:
+
+$$
+\frac{\Delta x(\mathbf{x_r}, t)}{dt} = \frac{d \mathbf{Ar}(\mathbf{x_r}, t)}{dt}\hat{l}= \mu \rho(\mathbf{x_r}, t , t_o) v dA \hat{l}.
+$$
+
+Hence:
+
+$$
+\frac{\Delta x(\mathbf{x_r}, t)}{dt} =  \frac{ \mu q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)[\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot [\mathbf{c}(t_o)/c]} v dA \hat{l}.
+$$
+
+The dimensional analysis yields that the rate of change of a specific location of the the receiver partícle is: m/s\^2. In other words: A corpuscle absortion causes a small acceleration of the receiver particle.
 
 ## Newton's First Law
 
 In the absence of a external corpuscles, $q_e=0$, the absorption is zero, hence:
 
 $$
-Abs(\mathbf{x_r}, t, t_o) \cdot \hat{l} = 0
+\frac{\Delta x(\mathbf{x_r}, t)}{dt} = 0
 $$
 
-In other words there is no change in the particle momentum
+In other words there is no change in the particle observed velocity.
 
 "An object at rest stays at rest, and an object in motion stays in motion with the same speed and in the same direction, unless acted upon by an unbalanced external force."
 
@@ -130,21 +133,27 @@ In other words there is no change in the particle momentum
 The absorbed corpuscles from external sources and the internal absorbed should be in equilibrium.
 
 $$ 
-Abs_{int} \cdot \hat{l}=Abs_{ext}\cdot \hat{l}
+\frac{\Delta x_{ext}(\mathbf{x_r}, t)}{dt}=\frac{\Delta x_{int}(\mathbf{x_r}, t)}{dt}
 $$
 
-Here we derive the Newton's second law. First I'll assume that the absorbing particle is finite and composed by two absorbing/emitting elements separated by a distance $L$ aligned to the external flow of corpuscles. I'll assume that the internal elements have a radius $r_e=r_p/2$ the external force causes an small acceleration of the receiver particle. Therefore the front particle and the back particle at the time of action summation have a small velocity: $v_e=a \Delta t$; where $a$ is the instant acceleration due to the external action and $\Delta t=L/c$ is the amount of time required to travel the distance between the two particle elements.
+Here we derive the Newton's second law. First I'll assume that the absorbing particle is finite and composed by two absorbing/emitting elements separated by a distance $L$ aligned to the external flow of corpuscles. I'll assume that the internal elements have half the particle charge. The external force causes an small acceleration of the receiver particle. Therefore the front particle and the back particle at the time of action summation have a small velocity: $v_e=a \Delta t$; where $a$ is the instant acceleration due to the external action and $\Delta t=L/c$ is the amount of time required to travel the distance between the two particle elements.
 
-The internal change of momentum of the dual element particle is:
+The internal absorption of the dual element particle is:
 
 $$
-\frac{q_e \mu \Delta V}{8 \pi} \left( \frac{1}{(c+a\Delta t)(L-1/2 a \Delta t^2)^2} - \frac{1}{(c-a\Delta t)(L+1/2 a \Delta t^2)^2} \right).
+\frac{\Delta x_{int}(\mathbf{x_r}, t)}{dt} = \frac{q_e \mu c \Delta V  \hat{o_e}}{8 \pi} \left( \frac{1}{(c+a\Delta t)(L-1/2 a \Delta t^2)^2} - \frac{1}{(c-a\Delta t)(L+1/2 a \Delta t^2)^2} \right).
+$$
+
+The external absorption is:
+
+$$
+\frac{\Delta x_{ext}(\mathbf{x_r}, t)}{dt}=\frac{ \mu Q \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)[\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot [\mathbf{c}(t_o)/c]} c \Delta V \hat{o_e}
 $$
 
 Substituting we get:
 
 $$
-\frac{2q \mu \Delta V c}{4 \pi R^2 \|c+v_e-v_r\|\cos (\theta)} \Omega = \frac{q^2}{4 \pi L  c^2}a \hat{\mathbf{o}}_e,
+\frac{\mu Q  \Delta V \|c+v_e\|}{4 \pi c R^2 cos(\theta)} = \frac{q^2}{4 \pi L  c^2}a \hat{\mathbf{o}}_e,
 $$
 
 where the left hand term is the external force induced by the external charge, and the right terms originates by the internal pull of the accelerated particle.
@@ -180,12 +189,12 @@ This implies that an electron on average has $2.307 \times 10^{32}$ corpuscular 
 The derived model can be described as a net force of two charged particles
 
 $$
-\mathbf{F}=\frac{d (m \mathbf{v_r}(t))}{dt}
+\mathbf{F}=\int \frac{\Delta x(\mathbf{x_r}, t)}{dt} dv
 $$
 
 of the particle absorbing corpuscles $q_2$ (Absorbing) of an emitting charge $q_1$ (Emitting) and (e.g., electron charges $e$ separated by distance $r$ (at emitting-absorbing) is:
 
-$$ \mathbf{F} = \frac{k q_1 q_2}{4 \pi r^2} \left( \frac{\|\mathbf{c} + \mathbf{v_1} - \mathbf{v_2}\|^2}{\mathbf{c_1} \cdot (\mathbf{c} + \mathbf{v_1} - \mathbf{v_2})} \right) \hat{\mathbf{o}}_1,
+$$ \mathbf{F} = \frac{k q_1 q_2 c}{4 \pi r^2} \left( \frac{ 1 - \frac{v_e \cdot v_r}{c^2} }{\mathbf{\hat{o}} \cdot (\mathbf{c} + \mathbf{v_e})} \hat{\mathbf{o}} + \frac{(v_r \cdot \hat{o})}{c^2} v_e \right),
 $$
 
 where:
@@ -194,9 +203,9 @@ where:
 
 -   $q$ is positive ($>0$) for $\mathbf{p^+}$ and negative ( $<0$) for $\mathbf{p^-}$
 
--   $\mathbf{v_1}, \mathbf{v_2}$: Velocities of the two particles:
+-   $\mathbf{v_e}, \mathbf{v_r}$: Velocities of the two particles:
 
-    -   $\mathbf{v_1}$ is an emitting particle. $\mathbf{v_2}$ the absorbing particle
+    -   $\mathbf{v_e}$ is an emitting particle. $\mathbf{v_r}$ the absorbing particle
 
 -   $\hat{o_1}$: Unit vector of the corpuscle orientation at the time of its origin by the emitting particle.
 
