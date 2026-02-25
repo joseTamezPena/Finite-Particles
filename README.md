@@ -184,7 +184,7 @@ $$
 
 This implies that an electron on average has $2.307 \times 10^{32}$ corpuscular interactions per second squared per cubic meter.
 
-## Electrostatic Force
+## Electrodynamic Force
 
 The derived model can be described as a net force of two charged particles
 
