@@ -60,7 +60,7 @@ where $\rho_u$ is the universal vacuum corpuscle density, $\mu_e$ the emission r
 
 ## Corpuscular Density
 
-The relative observer density of corpuscles at the receiver position is
+The density of emitted corpuscles at the receiver position is:
 
 $$
 \rho(\mathbf{x_r}, t, t_o) = \frac{q_e}{4\pi (c \Delta t)^2 [\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot [\mathbf{c}(t_o)/c]},
