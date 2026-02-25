@@ -94,7 +94,7 @@ ft_magnetic = simplify(subs(ft_magnetic,[v_x,y],[0,0])) %[output:346cae46]
 %[text] ## The corpuscle force
 %[text] 
 %[text] The corpuscle force is:
-%[text] $&dollar&;&dollar&; \n\\mathbf{F} = \\frac{k q\_1 q\_2}{4 \\pi r^2} \\frac{\\|\\mathbf{c} + \\mathbf{v\_1}\\|^2}{c^3 ((\\mathbf{c} + \\mathbf{v\_1}) \\cdot \\hat{o\_1})  } \\left\[  (\\mathbf{v\_2} \\cdot \\hat{o\_1}) \\mathbf{v\_1} + \\left( c^2-  \\mathbf{v\_1} \\cdot \\mathbf{v\_2}  \\right) \\hat{o\_1}  \\right\]. \n&dollar&;&dollar&;$
+%[text] $&dollar&;&dollar&; \n\\mathbf{F} = \\frac{k q\_1 q\_2}{4 \\pi r^2} \\frac{\\|\\mathbf{c} + \\mathbf{v\_1}\\|^2}{c^2  }\\frac{c}{ (\\mathbf{c} + \\mathbf{v\_1}) \\cdot \\hat{o\_1}  } \\left\[  (\\mathbf{(v\_2}/c) \\cdot \\hat{o\_1}) (\\mathbf{v\_1}/c) + \\left( 1 -  (\\mathbf{v\_1}/c) \\cdot (\\mathbf{v\_2}/c)  \\right)  \\hat{o\_1}  \\right\]. \n&dollar&;&dollar&;$
 %[text] 
 %%
 k= q^2/(4*pi*epsilon0);
@@ -119,18 +119,6 @@ vrelr = (v - vp);
 
 % Vel Magnitud
 rvel2_s = dot(vrel_s,vrel_s);
-vrelm_s = sqrt(rvel2_s);
-
-vrelm2 = dot(vrelr,vrelr);
-vrelm = sqrt(vrelm2);
-
-rvel2 = dot(vrel,vrel);
-vmag = sqrt(rvel2);
-
-% Cos 0
-
-cosp = dot(vrel/vmag,ov);
-coss = dot(vrel_s/vrelm_s,ov);
 
 % Dot
 
@@ -139,10 +127,10 @@ dots = dot(vrel_s,ov);
 % Assume at y=0 and v_x=0
 
 p1 = simplify(subs((1/R2),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Density at propagation surface
-p2 = simplify(subs((rvel2_s/c^2),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Density correction to the use of source origen of moving charge
-p3 = vmag/dots; % Density correction due to velocity of source
-p4 = simplify(subs(-dot((v - vp)/vmag,cvec/c)*ov + dot(vp/c,ov)*v/c,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100);
-F2_c = k*simplify(subs(p1*p2*p3*(ov+p4),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100);
+p2 = simplify(subs((rvel2_s/c^2)*(1/dots),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Density correction to the use of source origen of moving charge
+p3 = c; % Reference Speed. Estimate small volume per unit of time
+p4 = simplify(subs((dot(vp,ov)*v - dot(vp,v)*ov )/c^2,[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Lorentz factors
+F2_c = k*simplify(subs(p1*p2*p3*(ov+p4),[v_x,y],[0,0]),'Criterion','preferReal','Steps',100); % Net
 
 st_force = simplify(subs(F2_c,v_y,0),'Criterion','preferReal','Steps',100) %[output:9e4a35d0]
 st_forceT = simplify(taylor(st_force,vp_y,0,order=2));
@@ -219,7 +207,7 @@ ft_magnetic %[output:733fc36a]
 %   data: {"dataType":"symbolic","outputData":{"name":"ft_magnetic","value":"\\left(\\begin{array}{ccc}\n-\\frac{q^2 \\,v_y \\,{\\textrm{vp}}_y }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & \\frac{q^2 \\,v_y \\,{\\textrm{vp}}_x }{4\\,c^2 \\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0\n\\end{array}\\right)"}}
 %---
 %[output:9e4a35d0]
-%   data: {"dataType":"symbolic","outputData":{"name":"st_force","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 \\,{\\left({\\textrm{vp}}_x +\\sqrt{c^2 +{{\\textrm{vp}}_y }^2 -2\\,c\\,{\\textrm{vp}}_x +{{\\textrm{vp}}_x }^2 }\\right)}}{4\\,c\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
+%   data: {"dataType":"symbolic","outputData":{"name":"st_force","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 }{4\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
 %---
 %[output:7e02f2c3]
 %   data: {"dataType":"symbolic","outputData":{"name":"st_forceT","value":"\\left(\\begin{array}{ccc}\n\\frac{q^2 }{4\\,\\varepsilon_0 \\,x^2 \\,\\pi } & 0 & 0\n\\end{array}\\right)"}}
