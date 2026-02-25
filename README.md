@@ -58,7 +58,7 @@ $$
 
 where $\rho_u$ is the universal vacuum corpuscle density, $\mu_e$ the emission rate, and $r_p$ the particle radius. At absorption time $t$, the receiver is at $\mathbf{x_r}(t)$ with velocity $\mathbf{v_r}(t)$.
 
-## Corpuscular Density and Flux
+## Corpuscular Density
 
 The relative observer density of corpuscles at the receiver position is
 
@@ -194,7 +194,7 @@ $$
 
 of the particle absorbing corpuscles $q_2$ (Absorbing) of an emitting charge $q_1$ (Emitting) and (e.g., electron charges $e$ separated by distance $r$ (at emitting-absorbing) is:
 
-$$ \mathbf{F} = \frac{k q_1 q_2 c}{4 \pi r^2} \left( \frac{ 1 - \frac{v_e \cdot v_r}{c^2} }{\mathbf{\hat{o}} \cdot (\mathbf{c} + \mathbf{v_e})} \hat{\mathbf{o}} + \frac{(v_r \cdot \hat{o})}{c^2} v_e \right),
+$$ \mathbf{F} = \frac{k q_1 q_2 c}{4 \pi r^2 (\mathbf{c} + \mathbf{v_e}) \cdot \mathbf{\hat{o}} } \left( (1 - \frac{v_e \cdot v_r}{c^2} )\hat{\mathbf{o}} + \frac{v_r \cdot \hat{o}}{c^2} v_e \right),
 $$
 
 where:
