@@ -141,19 +141,23 @@ Here we derive the Newton's second law. First I'll assume that the absorbing par
 The internal absorption of the dual element particle is:
 
 $$
-\frac{\Delta x_{int}(\mathbf{x_r}, t)}{dt} = \frac{q_e \mu c \Delta V  \hat{o_e}}{8 \pi} \left( \frac{1}{(c+a\Delta t)(L-1/2 a \Delta t^2)^2} - \frac{1}{(c-a\Delta t)(L+1/2 a \Delta t^2)^2} \right).
+\frac{\Delta x_{int}(\mathbf{x_r}, t)}{dt} = \frac{q_e \mu c \Delta V  \hat{o_e}}{8 \pi} \left( \frac{1}{(c-a\Delta t)(L-\frac{a \Delta t^2}{2})^2} - \frac{1}{(c+a\Delta t)(L+\frac{a \Delta t^2}{2})^2} \right);
 $$
+
+where $\Delta V$ is the small volume: $d A |\hat{l}|$.
 
 The external absorption is:
 
 $$
-\frac{\Delta x_{ext}(\mathbf{x_r}, t)}{dt}=\frac{ \mu Q \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)[\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot [\mathbf{c}(t_o)/c]} c \Delta V \hat{o_e}
+\frac{\Delta x_{ext}(\mathbf{x_r}, t)}{dt}=\frac{ \mu Q \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|}{4\pi r^2 cos(\theta) c} \Delta V \hat{o_e};
 $$
+
+where $cos(\theta)$ = $([\mathbf{c}(t_o) + \mathbf{v_e}(t_o)]/ \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|) \cdot (\mathbf{c}(t_o)/c)$.
 
 Substituting we get:
 
 $$
-\frac{\mu Q  \Delta V \|c+v_e\|}{4 \pi c R^2 cos(\theta)} = \frac{q^2}{4 \pi L  c^2}a \hat{\mathbf{o}}_e,
+\frac{\mu Q  \Delta V \|c+v_e\|}{4 \pi c r^2 cos(\theta)} = \frac{q^2}{2 \pi L  c^2}a \hat{\mathbf{o}}_e,
 $$
 
 where the left hand term is the external force induced by the external charge, and the right terms originates by the internal pull of the accelerated particle.
@@ -169,7 +173,7 @@ $$
 Hence, the inertial mass is:
 
 $$
- m = \frac{E_{in}}{c^2}.
+ m = \frac{2 E_{in}}{c^2}.
 $$
 
 The inertia and particle mass are a direct consequence of the corpuscular model on finite particles.
@@ -186,15 +190,15 @@ This implies that an electron on average has $2.307 \times 10^{32}$ corpuscular 
 
 ## Electrodynamic Force
 
-The derived model can be described as a net force of two charged particles
+The derived model can be described as a net force of two charged particles. The total external force is obtained by integrating all internal interactions:
 
 $$
 \mathbf{F}=\int \frac{\Delta x(\mathbf{x_r}, t)}{dt} dv
 $$
 
-of the particle absorbing corpuscles $q_2$ (Absorbing) of an emitting charge $q_1$ (Emitting) and (e.g., electron charges $e$ separated by distance $r$ (at emitting-absorbing) is:
+of the particle absorbing corpuscles $q_2$ (Absorbing) of an emitting charge $q_1$ (Emitting) and (e.g., electron charges $e$ separated by distance $R$ (at emitting-absorbing) is:
 
-$$ \mathbf{F} = \frac{k q_1 q_2 c}{4 \pi r^2 (\mathbf{c} + \mathbf{v_e}) \cdot \mathbf{\hat{o}} } \left( (1 - \frac{v_e \cdot v_r}{c^2} )\hat{\mathbf{o}} + \frac{v_r \cdot \hat{o}}{c^2} v_e \right),
+$$ \mathbf{F} = \frac{k q_1 q_2 c}{4 \pi R^2 (\mathbf{c} + \mathbf{v_e}) \cdot \mathbf{\hat{o}} } \left( (1 - \frac{v_e \cdot v_r}{c^2} )\hat{\mathbf{o}} + \frac{v_r \cdot \hat{o}}{c^2} v_e \right),
 $$
 
 where:
@@ -209,17 +213,13 @@ where:
 
 -   $\hat{o_1}$: Unit vector of the corpuscle orientation at the time of its origin by the emitting particle.
 
--   $r$ is the distance traveled by the corpuscle form the emission origin to it absorption:
-
-$$
-    r=\| \mathbf{x_2}(t)-\mathbf{x_1}(t_o) \|.
-$$
+-   $R$ is the distance traveled by the light form the emission origin to it absorption: $R=\| c t \|$, and $t$ is the travel time.
 
 This force is equivalent to the Total Lorentz force of two moving charged particles.
 
 When the two particles are stationary:
 
-$$ \mathbf{F} = \frac{k q_1 q_2}{4 \pi r^2} \hat{o_1}, $$
+$$ \mathbf{F_e} = \frac{k q_1 q_2}{4 \pi R^2} \hat{o_1}, $$
 
 The is the standard Coulomb's law.
 
@@ -231,13 +231,18 @@ The presented corpuscular model correctly predict that the **vacuum magnetic per
 
 $\epsilon_0 =\frac{1}{c^2 \mu_0 }$
 
-The evidence is presented in the Magnetic Force folder for a current in a loop yields the exact equation predicted by the Lorentz force of a moving charged particle $Q$ in the center of a circular loop with current $I$ and radius $R$:
+Two moving particles will present the static force plus the following extra force:
 
 $$
-F_m=\left(\begin{array}{ccc}
-0 & -\frac{\textrm{I} Q \mu_0 v }{2 R} & 0
-\end{array}\right)
+\mathbf{F_m} = \frac{k q_1 q_2 \|c+v_e\|/c}{4 \pi c^2 r^2 cos(\theta)} \left( [v_e \cdot v_r] \hat{o} + [v_r \cdot \hat{o}] v_e \right);
 $$
+or
+
+$$
+\mathbf{F_m} = \frac{\mu_o q_1 q_2 \|c+v_e\|/c}{4 \pi r^2 cos(\theta)} \left( [v_e \cdot v_r] \hat{o} + [v_r \cdot \hat{o}] v_e \right)
+$$
+
+i.e. the Biot-Savart equation of two point charges.
 
 ## Gravitational Force
 
