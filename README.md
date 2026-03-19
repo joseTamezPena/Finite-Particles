@@ -60,13 +60,13 @@ where $\rho_u$ is the universal vacuum corpuscle density, $\mu_e$ the emission r
 
 ## Corpuscular Density
 
-The density of emitted corpuscles at the receiver position is:
+The relative density of emitted corpuscles at the receiver position is:
 
 $$
 \rho(\mathbf{x_r}, t, t_o) = \frac{q_e}{4\pi (c \Delta t)^2 [\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot [\mathbf{c}(t_o)/c]},
 $$
 
-where $\Delta t$ is the courpuscle travel time, and $\mathbf{c}(t_o)$ is the light-speed vector from emitter to receiver in the observer frame. The emission-reception separation distance is $r(t, t_o) = \|\mathbf{x_r}(t) - \mathbf{x_e}(t_o)\|$, and the relative propagation speed is $\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|$. Thus,
+where $\Delta t$ is the corpuscle travel time, and $\mathbf{c}(t_o)$ is the light-speed vector from emitter to receiver in the observer frame. The emission-reception separation distance is $r(t, t_o) = \|\mathbf{x_r}(t) - \mathbf{x_e}(t_o)\|$, and the relative propagation speed is $\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|$. Thus,
 
 $$
 \Delta t = \frac{r(t, t_o)}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|}.
@@ -83,7 +83,7 @@ $$
 The corpuscle absorption rate, $\mathbf{Ar}$, is modeled as proportional to the corpuscle density, the receiver's absorption coefficient $\mu$ in a small volume:
 
 $$
-\mathbf{Ar}(\mathbf{x_r}, t)=\mu \rho(\mathbf{x_r}, t, t_o) \Delta_v
+d\mathbf{Ar}(\mathbf{x_r}, t)=\mu \rho(\mathbf{x_r}, t, t_o) \Delta_v
 $$
 
 The flux of corpuscles travel a small distance in a given $dt$. Hence:
@@ -114,7 +114,7 @@ $$
 \frac{\Delta x(\mathbf{x_r}, t)}{dt} =  \frac{ \mu q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)[\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot [\mathbf{c}(t_o)/c]} v dA \hat{l}.
 $$
 
-The dimensional analysis yields that the rate of change of a specific location of the the receiver partícle is: m/s\^2. In other words: A corpuscle absortion causes a small acceleration of the receiver particle.
+The dimensional analysis yields that the rate of change of a specific location of the the receiver particle is: m/s\^2. In other words: A corpuscle absorption causes a small acceleration of the receiver particle.
 
 ## Newton's First Law
 
@@ -188,15 +188,15 @@ $$
 
 This implies that an electron on average has $2.307 \times 10^{32}$ corpuscular interactions per second squared per cubic meter.
 
-## Electrodynamic Force
+## Electrodynamic's Force
 
-The derived model can be described as a net force of two charged particles. The total external force is obtained by integrating all internal interactions:
+The derived model can be described as a net force of two charged particles. The total external force is obtained by integrating all the interactions of the external corpuscle flux and the receiver particle:
 
 $$
-\mathbf{F}=\int \frac{\Delta x(\mathbf{x_r}, t)}{dt} dv
+\mathbf{F}=\int \frac{\Delta x(\mathbf{x_r}, t)}{dt} dv.
 $$
 
-of the particle absorbing corpuscles $q_2$ (Absorbing) of an emitting charge $q_1$ (Emitting) and (e.g., electron charges $e$ separated by distance $R$ (at emitting-absorbing) is:
+The observed force of the particle absorbing corpuscles $q_2$ (Absorbing) of an emitting charge $q_1$ (Emitting) and (e.g., electron charges $e$ separated by distance $R$ (at emitting-absorbing) is:
 
 $$ \mathbf{F} = \frac{k q_1 q_2 c}{4 \pi R^2 (\mathbf{c} + \mathbf{v_e}) \cdot \mathbf{\hat{o}} } \left( (1 - \frac{v_e \cdot v_r}{c^2} )\hat{\mathbf{o}} + \frac{v_r \cdot \hat{o}}{c^2} v_e \right),
 $$
@@ -215,7 +215,7 @@ where:
 
 -   $R$ is the distance traveled by the light form the emission origin to it absorption: $R=\| c t \|$, and $t$ is the travel time.
 
-This force is equivalent to the Total Lorentz force of two moving charged particles.
+This force is equivalent to the total Lorentz force of two moving charged particles.
 
 When the two particles are stationary:
 
@@ -234,15 +234,14 @@ $\epsilon_0 =\frac{1}{c^2 \mu_0 }$
 Two moving particles will present the static force plus the following extra force:
 
 $$
-\mathbf{F_m} = \frac{k q_1 q_2 \|c+v_e\|/c}{4 \pi c^2 r^2 cos(\theta)} \left( [v_e \cdot v_r] \hat{o} + [v_r \cdot \hat{o}] v_e \right);
-$$
-or
+\mathbf{F_m} = \frac{k q_1 q_2 \|c+v_e\|/c}{4 \pi c^2 r^2} \left( [v_e \cdot v_r] \hat{o} + [v_r \cdot \hat{o}] v_e \right);
+$$ or
 
 $$
-\mathbf{F_m} = \frac{\mu_o q_1 q_2 \|c+v_e\|/c}{4 \pi r^2 cos(\theta)} \left( [v_e \cdot v_r] \hat{o} + [v_r \cdot \hat{o}] v_e \right)
+\mathbf{F_m} = \frac{\mu_o q_1 q_2 \|c+v_e\|/c}{4 \pi r^2} \left( [v_e \cdot v_r] \hat{o} + [v_r \cdot \hat{o}] v_e \right)
 $$
 
-i.e. the Biot-Savart equation of two point charges.
+i.e. the Lorentz force from the Biot-Savart equation of two point charges.
 
 ## Gravitational Force
 

@@ -73,8 +73,8 @@ v_rel = cvec + v_w - vp;
 v_relm = simplify(dot(v_rel,v_rel),'Criterion','preferReal','Steps',100);
 
 p1 = simplify(1/R2,'Criterion','preferReal','Steps',100); % distance factor0
-p2 = simplify(v_rel1m/dot(v_rel1,cvec),'Criterion','preferReal','Steps',100); % density and velocity correction
-p3 = 1.0; % Reference Speed
+p2 = simplify(v_rel1m,'Criterion','preferReal','Steps',100); % density and velocity correction
+p3 = 1.0/dot(v_rel1,cvec); % Reference Speed
 p4 = simplify((dot(vp,cvec)*v_w - dot(vp,v_w)*cvec),'Criterion','preferReal','Steps',100);
 F_a = k_e*simplify(p1*p2*p3*(cvec+p4),'Criterion','preferReal','Steps',100);
 
