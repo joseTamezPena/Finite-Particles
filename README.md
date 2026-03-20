@@ -234,11 +234,11 @@ $\epsilon_0 =\frac{1}{c^2 \mu_0 }$
 Two moving particles will present the static force plus the following extra force:
 
 $$
-\mathbf{F_m} = \frac{k q_1 q_2 \|c+v_e\|/c}{4 \pi c^2 r^2} \left( [v_e \cdot v_r] \hat{o} + [v_r \cdot \hat{o}] v_e \right);
+\mathbf{F_m} = \frac{k q_1 q_2 \|c+v_e\|/c}{4 \pi c^2 r^2} \left([v_r \cdot \hat{o}] v_e - [v_e \cdot v_r] \hat{o} \right);
 $$ or
 
 $$
-\mathbf{F_m} = \frac{\mu_o q_1 q_2 \|c+v_e\|/c}{4 \pi r^2} \left( [v_e \cdot v_r] \hat{o} + [v_r \cdot \hat{o}] v_e \right)
+\mathbf{F_m} = \frac{\mu_o q_1 q_2 \|c+v_e\|/c}{4 \pi r^2} \left( [v_r \cdot \hat{o}] v_e -  [v_e \cdot v_r] \hat{o}\right)
 $$
 
 i.e. the Lorentz force from the Biot-Savart equation of two point charges.
