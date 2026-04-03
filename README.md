@@ -4,7 +4,7 @@ This repository is a work in progress and contains the MATLAB scripts of a novel
 
 ## Model Overview
 
-The model assumes a universe filled with finite-sized **vector corpuscles**—hypothetical entities carrying position, velocity, and orientation—that mediate interactions between finite-sized particles. Each corpuscle is characterized by:
+The model assumes a universe filled with finite-sized rotating **vector corpuscles**—hypothetical entities carrying position, velocity, and orientation—that mediate interactions between finite-sized particles. Each corpuscle is characterized by:
 
 -   **Size**: $l$
 
@@ -14,11 +14,13 @@ The model assumes a universe filled with finite-sized **vector corpuscles**—hy
 
 -   **Orientation**: $\mathbf{o_c}$ a unit vector.
 
+-   **Rotation Period**: $T$
+
 The corpuscle velocity follows **Galilean relativity**:
 
 $$ \mathbf{v_c} = \mathbf{v_p} + \mathbf{c},$$
 
-where $\mathbf{v_p}$ is the velocity of the emitting particle, and $\mathbf{c}$ is a vector with magnitude equal to the speed of light $c$. The orientation, $\mathbf{o_c}$, is defined at the moment the corpuscle is emitted by the particle.
+where $\mathbf{v_p}$ is the velocity of the emitting particle, and $\mathbf{c}$ is a vector with magnitude equal to the speed of light $c$. The orientation, $\mathbf{o_c}$, is defined at the moment the corpuscle is emitted by the particle. The rotation period, $T$, is an hypothetical characteristic of a the finite corpuscle that is allays rotating at a constant rate. In out model it is constant and universal for all observers.
 
 ## Finite-Sized Particles
 
@@ -66,13 +68,13 @@ $$
 \rho(\mathbf{x_r}, t, t_o) = \frac{q_e}{4\pi (c \Delta t)^2 [\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot [\mathbf{c}(t_o)/c]},
 $$
 
-where $\Delta t$ is the corpuscle travel time, and $\mathbf{c}(t_o)$ is the light-speed vector from emitter to receiver in the observer frame. The emission-reception separation distance is $r(t, t_o) = \|\mathbf{x_r}(t) - \mathbf{x_e}(t_o)\|$, and the relative propagation speed is $\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|$. Thus,
+where $\Delta t$ is the corpuscle travel time, and $\mathbf{c}(t_o)$ is the light-speed vector from emitter that reached the receiver particle. The emission-reception separation distance is $r(t, t_o) = \|\mathbf{x_r}(t) - \mathbf{x_e}(t_o)\|$, and the relative propagation speed is $\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|$. Thus,
 
 $$
 \Delta t = \frac{r(t, t_o)}{\|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|}.
 $$
 
-Substitution provides the corpuscle density at the reciever
+Substitution provides the corpuscle density at the receiver:
 
 $$
 \rho(\mathbf{x_r}, t, t_o) = \frac{q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)[\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot [\mathbf{c}(t_o)/c]}.
@@ -86,32 +88,26 @@ $$
 d\mathbf{Ar}(\mathbf{x_r}, t)=\mu \rho(\mathbf{x_r}, t, t_o) \Delta_v
 $$
 
-The flux of corpuscles travel a small distance in a given $dt$. Hence:
+The total number of absorbed corpuscles per second at a specific point of the receiver is:
 
 $$
-d\mathbf{Ar}(\mathbf{x_r}, t)=\mu \rho(\mathbf{x_r}, t, t_o) dA [v dt]
+\frac{d\mathbf{Ar}(\mathbf{x_r}, t)}{dt}=\frac{\mu \rho(\mathbf{x_r}, t, t_o) dV}{T} ;
 $$
 
-The total number of absorbed corpuscles per second at a specific point of the receiver approximates to:
-
-$$
-\frac{d\mathbf{Ar}(\mathbf{x_r}, t)}{dt}=\mu \rho(\mathbf{x_r}, t, t_o) v dA ;
-$$
-
-where $v$ is the magnitude of relative velocity of the corpuscles at that point.
+where $T$ is the rotation period of a corpuscle.
 
 ## Particle Acceleration
 
 The absorption rate equation computes the number of absorbed corpuscles per unit of time. The model assumes that each corpuscle has a small length and orientation. Therefore, each time an corpuscle is absorbed there is a change in the receiver particle position. The rate of change is:
 
 $$
-\frac{\Delta x(\mathbf{x_r}, t)}{dt} = \frac{d \mathbf{Ar}(\mathbf{x_r}, t)}{dt}\hat{l}= \mu \rho(\mathbf{x_r}, t , t_o) v dA \hat{l}.
+\frac{\Delta x(\mathbf{x_r}, t)}{dt} = \frac{d \mathbf{Ar}(\mathbf{x_r}, t)}{dt}\hat{l}= \frac{\mu \rho(\mathbf{x_r}, t , t_o) l dV \hat{o}}{T}.
 $$
 
 Hence:
 
 $$
-\frac{\Delta x(\mathbf{x_r}, t)}{dt} =  \frac{ \mu q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o)[\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot [\mathbf{c}(t_o)/c]} v dA \hat{l}.
+\frac{\Delta x(\mathbf{x_r}, t)}{dt} =  \frac{ \mu q_e \|\mathbf{c}(t_o) + \mathbf{v_e}(t_o)\|^2}{4\pi c^2 r^2(t, t_o) [\mathbf{c}(t_o) + \mathbf{v_e}(t_o)] \cdot [\mathbf{c}(t_o)/c]}\frac{l}{T} dV \hat{o}.
 $$
 
 The dimensional analysis yields that the rate of change of a specific location of the the receiver particle is: m/s\^2. In other words: A corpuscle absorption causes a small acceleration of the receiver particle.
@@ -178,16 +174,6 @@ $$
 
 The inertia and particle mass are a direct consequence of the corpuscular model on finite particles.
 
-## Rate of emission-absorption
-
-The internal energy equation $E_{in}$ can be used to estimate the rate of corpuscles absorbed-emitted at any given time by real particles. I'll assume the electron charge $e = 1.602176634 \times 10^{-19}$ C, and radius $r_e=10^{-20}$ m
-
-$$
-\rho_u r_p^6 \mu^2 = \frac{q^2}{\epsilon_o} \therefore \rho_u \mu^2 = \frac{e^2}{r_e^6 \epsilon_o} = 2.307 \times 10^{32} \text{ m}^{-3}\text{s}^{-2}.
-$$
-
-This implies that an electron on average has $2.307 \times 10^{32}$ corpuscular interactions per second squared per cubic meter.
-
 ## Electrodynamic's Force
 
 The derived model can be described as a net force of two charged particles. The total external force is obtained by integrating all the interactions of the external corpuscle flux and the receiver particle:
@@ -235,7 +221,9 @@ Two moving particles will present the static force plus the following extra forc
 
 $$
 \mathbf{F_m} = \frac{k q_1 q_2 \|c+v_e\|/c}{4 \pi c^2 r^2} \left([v_r \cdot \hat{o}] v_e - [v_e \cdot v_r] \hat{o} \right);
-$$ or
+$$
+
+or
 
 $$
 \mathbf{F_m} = \frac{\mu_o q_1 q_2 \|c+v_e\|/c}{4 \pi r^2} \left( [v_r \cdot \hat{o}] v_e -  [v_e \cdot v_r] \hat{o}\right)
